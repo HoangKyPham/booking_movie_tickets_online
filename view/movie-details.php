@@ -11,15 +11,16 @@
     }
 
     h1 {
-        background: #fff;
-        color: #3498db;
-        font-size: 24px;
+        background: #040406;
+        color: #e4d804;
+        font-size: 15px;
         line-height: 25px;
         margin: 10px;
         padding: 2%;
         position: relative;
         text-align: center;
         width: 100px;
+        cursor: pointer;
     }
 
     .action {
@@ -49,12 +50,20 @@
 
     .vitri a {
         text-decoration: none;
-        color: #fff;
+        color: #000;
+        font-weight: 530;
+        font-size: 14px;
     }
 
     .vitri {
         padding: 5px 67px;
-        background-color: #42af33;
+        background-color: #e4d804;
+        font-size: 16px;
+    }
+
+    .vitri:hover {
+        padding: 5px 67px;
+        background-color: #fff;
         font-size: 16px;
     }
 
@@ -65,12 +74,19 @@
     }
 
     .thoigian a {
-        border: 1px solid red;
         padding: 10px 15px;
         background-color: #10171e;
         border: 2px solid #121c26;
         color: #97a5be;
-        text-decoration: none;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .thoigian a:hover {
+        padding: 10px 15px;
+        background-color: #e4d804;
+        border: 2px solid #121c26;
+        color: #040406;
         font-size: 20px;
         font-weight: 600;
     }
@@ -90,17 +106,21 @@
     <!-- movie-details-area -->
     <section class="movie-details-area" data-background="img/bg/movie_details_bg.jpg">
         <div class="container">
+            <?php
+            extract($movie_detail);
+            ?>
             <div class="row align-items-center position-relative">
                 <div class="col-xl-3 col-lg-4">
                     <div class="movie-details-img">
-                        <img src="img/poster/movie_details_img.jpg" alt="">
-                        <a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video"><img src="img/images/play_icon.png" alt=""></a>
+                        <img style="width: 303px; height: 430px;" src="Assets/img/<?php echo $movie_detail['anh']; ?>" alt="">
+                        <a href="<?php echo $movie_detail['trailer']; ?>" class="popup-video"><img src="img/images/play_icon.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-8">
                     <div class="movie-details-content">
                         <h5>New Episodes</h5>
-                        <h2>The Easy <span>Reach</span></h2>
+                        <!-- <h2>The Easy <span>Reach</span></h2> -->
+                        <h2><?php echo $movie_detail['ten_phim'] ?></h2>
                         <div class="banner-meta">
                             <ul>
                                 <li class="quality">
@@ -117,9 +137,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consecetur adipiscing elseddo eiusmod tempor.There are many
-                            variations of passages of lorem
-                            Ipsum available, but the majority have suffered alteration in some injected humour.</p>
+                        <p><?php echo $movie_detail['mo_ta'] ?></p>
                         <div class="movie-details-prime">
                             <ul>
                                 <li class="share"><a href="#"><i class="fas fa-share-alt"></i> Share</a></li>
@@ -136,6 +154,8 @@
                     <a href="img/poster/movie_details_img.jpg" class="download-btn" download="">Download <img src="fonts/download.svg" alt=""></a>
                 </div>
             </div>
+            <?php
+            ?>
         </div>
     </section>
     <!-- movie-details-area-end -->
@@ -213,34 +233,25 @@
             <br>
             <div class="main" style="width: 750px; margin-left: 50px;">
                 <div class="slider slider-nav">
-                    <div>
-                        <h1>Thứ 2<br>
-                            <p style="font-size: 16px;">16/11</p>
-                    </div>
-                    <div>
-                        <h1>Thứ 3<br>
-                            <p style="font-size: 16px;">16/11</p>
-                    </div>
-                    <div>
-                        <h1>Thứ 4<br>
-                            <p style="font-size: 16px;">16/11</p>
-                    </div>
-                    <div>
-                        <h1>Thứ 5<br>
-                            <p style="font-size: 16px;">16/11</p>
-                    </div>
-                    <div>
-                        <h1>Thứ 6<br>
-                            <p style="font-size: 16px;">16/11</p>
-                    </div>
-                    <div>
-                        <h1>Thứ 7<br>
-                            <p style="font-size: 16px;">16/11</p>
-                    </div>
-                    <div>
-                        <h1>CN<br>
-                            <p style="font-size: 16px;">16/11</p>
-                    </div>
+
+                    <?php $ngayHienTai = date('Y-m-d'); // Lấy ngày hiện tại
+                    $soNgayGioiHan = 14; // Giới hạn trong 1 tuần
+
+                    // echo "Ngày và thứ trong 1 tuần kể từ ngày $ngayHienTai:";
+
+                    for ($i = 0; $i < $soNgayGioiHan; $i++) {
+                        $ngayHienTai = date('Y-m-d', strtotime("+$i days"));
+                        $thuHienTai = date('l', strtotime($ngayHienTai));
+
+                        echo '<div>
+                            <h1>' . $thuHienTai . '<br>
+                            <p style="font-size: 14px; height: 10px;">' . $ngayHienTai . '</p>           
+                           </div>';
+
+                        // echo "\nNgày $ngayHienTai là thứ $thuHienTai";
+                    }
+                    ?>
+
                 </div>
                 <div class="slider slider-for">
                     <div>
@@ -248,17 +259,16 @@
                             <div class="info">
                                 <div class="inside">
                                     <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
-                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">dia diem</p>
                                 </div>
                                 <div class="vitri">
                                     <a href=""><i></i>XEM VỊ TRÍ</a>
                                 </div>
-
                             </div>
                             <div class="thoigian">
                                 <ul>
                                     <li class="gio" style="padding: 0 50px">
-                                        <a href="index.php?act=chon_ve">10:10</a>
+                                        <a href="index.php?act=chon_ve">10:20</a>
                                         <a href="">11:20</a>
                                         <a href="">12:35</a>
                                         <a href="">15:00</a>
@@ -427,7 +437,9 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+
                 <br>
                 <div class="slider slider-for">
                     <div>

@@ -84,4 +84,33 @@ function show_Pro_Key($keyw = "") {
 }
 
 
+
+//show phim ra trang chu
+function show_phim_dangchieu(){
+    $sql = "select * from phim where trang_thai_phim='Phim đang chiếu' order by id_phim desc";
+    $result = pdo_query($sql);
+    return $result;
+}
+
+function show_phim_sapchieu(){
+    $sql = "select * from phim where trang_thai_phim='Phim Sắp chiếu' order by id_phim desc";
+    $result = pdo_query($sql);
+    return $result;
+}
+
+function show_phim_vebantruoc(){
+    $sql = "select * from phim where trang_thai_phim='Vé bán trước' order by id_phim desc";
+    $result = pdo_query($sql);
+    return $result;
+}
+
+// chi tiết phim
+function loadone_phim($id_phim){
+$sql = "select * from phim where id_phim=".$id_phim;
+$result=pdo_query_one($sql);
+return $result;
+}
+
+
+
 ?>

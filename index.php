@@ -4,6 +4,12 @@ session_start();
 include "model/pdo.php";
 include "view/header.php";
 include "model/users.php";
+include "model/phim.php";
+
+
+$phim_dangchieu = show_phim_dangchieu();
+$phim_sapchieu = show_phim_sapchieu();
+$phim_vebantruoc = show_phim_vebantruoc();
 
 
 if (isset($_GET['act'])) {
@@ -24,9 +30,16 @@ if (isset($_GET['act'])) {
         case 'events_details':
             include 'view/khuyen-mai-va-su-kien/events_details.php';
             break;
-        case 'movie_details':
-            include 'view/movie-details.php';
-            break;
+            case 'movie_details':
+                if (isset($_GET['id_phim']) && ($_GET['id_phim'] > 0)) {
+                    $movie_detail = loadone_phim($_GET['id_phim']);
+                    include 'view/movie-details.php';
+                } else {
+                    include 'view/home.php';
+                }
+    
+                
+                break;
         case 'chon_ve':
             include 'view/datghe_bongnc/web/chon_ve.php';
             break;
