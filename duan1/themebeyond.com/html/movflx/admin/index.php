@@ -1,0 +1,519 @@
+
+<?php
+ob_start();
+session_start();
+include "../model/pdo.php";
+include "../model/rap.php";
+include "../model/phim.php";
+include "../model/doan.php";
+include "../model/khuyenmai.php";
+include "../model/bangghe.php";
+include "../model/suatchieu.php";
+include "../model/cinema.php";
+include "../model/cinemaroom.php";
+include "../model/zap.php";
+include "../model/movie.php";
+include "../model/khuyen-mai.php";
+// include "../model/comment.php";
+// include "../model/users.php";
+include "header.php";
+//controllers
+// if (isset($_SESSION['user'])) {
+    if (isset($_GET['act'])) {
+        $act = $_GET['act'];
+        switch ($act) {
+                //search
+            case 'search':
+                if (isset($_POST['keyw']) && ($_POST['keyw'] != "")) {
+                    $keyw = $_POST['keyw'];
+                    $result = show_Pro_Key($keyw);
+                } else {
+                    $keyw = "";
+                    $result = show_Pro_Key($keyw);
+                }
+                include 'phim/phimShow.php';
+                break;
+
+            // case 'updateCate':
+            //     if (isset($_GET['id_cate']) && ($_GET['id_cate']) > 0) {
+            //         $cate_id = $_GET['id_cate'];
+            //         $result = query_CateUpdate($cate_id);
+            //     }
+            //     include 'danhmuc/cateUpdate.php';
+            //     break;
+
+            // case 'updateCategory':
+            //     if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+            //         $cate_id = $_POST['cate_id'];
+            //         $cate_name = $_POST['cate_name'];
+            //         update_Cate($cate_id, $cate_name);
+            //     }
+            //     header('Location:index.php?act=show_list_cate');
+            //     include 'danhmuc/cateShowAdd.php';
+            //     break;
+
+            // case 'deleteCate':
+            //     if (isset($_GET['id_cate']) && ($_GET['id_cate']) > 0) {
+            //         $cate_id = $_GET['id_cate'];
+            //         delete_Cate($cate_id);
+            //         header('Location:index.php?act=show_list_cate');
+            //     }
+            //     include 'danhmuc/cateShowAdd.php';
+            //     break;
+
+            // case 'show_list_cate':
+            //     if (isset($_POST['btn_add']) && ($_POST['btn_add'])) {
+            //         $cate_name = $_POST['cate_name'];
+            //         insert_Cate($cate_name);
+            //     }
+            //     $list_statistical = show_list_cate();
+            //     include 'danhmuc/cateShowAdd.php';
+            //     break;
+            // case 'show_thong_ke':
+            //     $list_statistical = show_list_cate();
+            //     include 'home.php';
+            //     break;
+                // San pham 
+
+            case 'showPro':
+                $result = show_Pro();
+                include 'phim/phimShow.php';
+                break;
+            case 'addPro':
+                if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
+                    $ten_phim = $_POST['ten_phim'];
+                    $ngay_phat_hanh = $_POST['ngay_phat_hanh'];
+                    $ngon_ngu = $_POST['ngon_ngu'];
+                    $trailer = $_POST['trailer'];
+                    $thoi_luong = $_POST['thoi_luong'];
+                    $trang_thai = $_POST['trang_thai_phim'];
+                    $mo_ta = $_POST['editor'];
+                    $id_rap = $_POST['id_rap'];
+                    $id_khuyen_mai = $_POST['id_khuyen_mai'];
+                    $name_img = $_FILES['img_phim']['name'];
+                    $tmp_img = $_FILES['img_phim']['tmp_name'];
+
+                    move_uploaded_file($tmp_img, '../Assets/img/' . $name_img);
+                    insert_Pro($ten_phim,$ngay_phat_hanh,$ngon_ngu,$trailer,$thoi_luong,$trang_thai,$mo_ta,$id_rap,$id_khuyen_mai,$name_img);
+                    header('Location: index.php?act=showPro');
+                }
+                include 'phim/phimInsert.php';
+                break;
+
+            case 'update_query_Phim';
+                if (isset($_GET['id_phim']) && ($_GET['id_phim']) > 0) {
+                    $phim_id = $_GET['id_phim'];
+                    $result = query_updatePro($phim_id);
+                    $result_rap=show_rap_update_phim();
+                    $result_khuyenmai=show_khuyen_mai_update_phim();
+                }
+                include 'phim/phimUpdate.php';
+                break;
+            case 'update_Phim':
+                if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                    $id_phim = $_POST['id_phim'];
+                    $ten_phim = $_POST['ten_phim'];
+                    $ngay_phat_hanh = $_POST['ngay_phat_hanh'];
+                    $ngon_ngu = $_POST['ngon_ngu'];
+                    $trailer = $_POST['trailer'];
+                    $thoi_luong = $_POST['thoi_luong'];
+                    $trang_thai = $_POST['trang_thai_phim'];
+                    $mo_ta = $_POST['editor'];
+                    $id_rap = $_POST['id_rap'];
+                    $id_khuyen_mai = $_POST['id_khuyen_mai'];
+
+                    if (isset($_FILES['name_img']['name']) && !empty($_FILES['name_img']['name'])) {
+                        $name_img = $_FILES['name_img']['name'];
+                        $tmp_img = $_FILES['name_img']['tmp_name'];
+                        move_uploaded_file($tmp_img, 'Assets/img/' . $name_img);
+                    } else {
+                        $sql_selected_img = "select anh from phim where id_phim = $id_phim";
+                        $result_img = pdo_query_one($sql_selected_img);
+                        $row_img = $result_img;
+                        $name_img = $row_img['anh'];
+                    }
+                    update_Phim($id_phim,$ten_phim,$ngay_phat_hanh,$ngon_ngu,$trailer,$thoi_luong,$trang_thai,$mo_ta,$id_rap,$id_khuyen_mai,$name_img);
+                }
+                header('Location:index.php?act=showPro');
+                break;
+            case 'delete_Phim';
+                if (isset($_GET['id_phim']) && ($_GET['id_phim']) > 0) {
+                    $phim_id = $_GET['id_phim'];
+                    delete_Phim($phim_id);
+                }
+                header('Location:index.php?act=showPro');
+                break;
+
+                case 'showfood':
+                    $result = show_food();
+                    include 'doan/show.php';
+                    break;
+
+                  case 'addfood':
+                        if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
+                            $ten_do_an = $_POST['ten_do_an'];
+                            $gia = $_POST['gia'];
+                            $so_luong = $_POST['so_luong'];
+                            insert_food($ten_do_an,$gia,$so_luong);
+                            header('Location: index.php?act=showfood');
+                        }
+                        include 'doan/add.php';
+                        break;
+
+                        case 'update_food';
+                        if (isset($_GET['id_do_an']) && ($_GET['id_do_an']) > 0) {
+                            $id_do_an = $_GET['id_do_an'];
+                            $result = query_updatefood($id_do_an);
+                        }
+                        include 'doan/update.php';
+                        break;
+    
+                        case 'updatefood':
+                        if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                            $id_do_an = $_POST['id_do_an'];
+                            $ten_do_an = $_POST['ten_do_an'];
+                            $gia = $_POST['gia'];
+                            $so_luong = $_POST['so_luong'];
+                            update_food($id_do_an ,$ten_do_an,$gia, $so_luong);
+                        }
+                        header('Location:index.php?act=showfood');
+                     break;
+    
+                     case 'delete_food':
+                     if (isset($_GET['id_do_an']) && ($_GET['id_do_an']) > 0) {
+                         $id_do_an = $_GET['id_do_an'];
+                         delete_food($id_do_an);
+                     }
+                     header('Location:index.php?act=showfood');
+                     break;
+
+
+                        
+                 case 'showkm':
+                    $result = show_km();
+                    include 'khuyenmai/show.php';
+                    break;
+
+                    case 'addkm':
+                        if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
+                            $ten_khuyen_mai = $_POST['ten_khuyen_mai'];
+                            $name_img = $_FILES['img']['name'];
+                            $tmp_img = $_FILES['img']['tmp_name'];     
+                            move_uploaded_file($tmp_img, '../Assets/img/' . $name_img);
+                            $chiet_khau = $_POST['chiet_khau'];
+                            $ngay_ap_dung = $_POST['ngay_ap_dung'];
+                            insert_km($ten_khuyen_mai,$name_img,$chiet_khau,$ngay_ap_dung);
+                            header('Location: index.php?act=showkm');
+                        }
+                        include 'khuyenmai/add.php';
+                        break;
+
+                        case 'update_km';
+                        if (isset($_GET['id_khuyen_mai']) && ($_GET['id_khuyen_mai']) > 0) {
+                            $id_khuyen_mai  = $_GET['id_khuyen_mai'];
+                            $result = query_updatekm($id_khuyen_mai);
+                        }
+                        include 'khuyenmai/update.php';
+                        break;
+
+                        
+                    case 'updatekm':
+                        if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                            $id_khuyen_mai = $_POST['id_khuyen_mai'];
+                            $ten_khuyen_mai = $_POST['ten_khuyen_mai'];
+                            $chiet_khau = $_POST['chiet_khau'];
+                            $ngay_ap_dung = $_POST['ngay_ap_dung'];
+                            if (isset($_FILES['name_img']['name']) && !empty($_FILES['name_img']['name'])) {
+                                $name_img = $_FILES['name_img']['name'];
+                                $tmp_img = $_FILES['name_img']['tmp_name'];
+                                move_uploaded_file($tmp_img, 'Assets/img/' . $name_img);
+                            } else {
+                                $sql_selected_img = "select img from khuyen_mai where id_khuyen_mai  = $id_khuyen_mai";
+                                $result_img = pdo_query_one($sql_selected_img);
+                                $row_img = $result_img;
+                                $name_img = $row_img['img'];
+                            }
+                            update_km($id_khuyen_mai ,$ten_khuyen_mai,$name_img,$chiet_khau, $ngay_ap_dung);
+                        }
+                        header('Location:index.php?act=showkm');
+                     break;
+
+                     case 'delete_km':
+                        if (isset($_GET['id_khuyen_mai']) && ($_GET['id_khuyen_mai']) > 0) {
+                            $id_khuyen_mai = $_GET['id_khuyen_mai'];
+                            delete_km($id_khuyen_mai);
+                        }
+                        header('Location:index.php?act=showkm');
+                        break;
+
+
+                        case 'showghe':
+                            $result = show_ghe();
+                            include 'bangghe/show.php';
+                            break;
+
+                         case 'addghe':
+                                if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
+                                    $ten_hang_ghe = $_POST['ten_hang_ghe'];
+                                    $trang_thai = $_POST['trang_thai'];
+                                    $gia = $_POST['gia'];
+                                    $loai_ghe = $_POST['loai_ghe'];
+                                    $id_phong_chieu	= $_POST['id_phong_chieu'];
+                                    insert_ghe($ten_hang_ghe,$trang_thai,$gia,$loai_ghe, $id_phong_chieu);
+                                    header('Location: index.php?act=showghe');
+                                }
+                                include 'bangghe/add.php';
+                                break;
+
+                                case 'update_ghe';
+                                if (isset($_GET['id_ghe']) && ($_GET['id_ghe']) > 0) {
+                                    $id_ghe   = $_GET['id_ghe'];
+                                    $result = query_updateghe($id_ghe);
+                                }
+                                include 'bangghe/update.php';
+                                break;
+
+                                   
+                    case 'updateghe':
+                        if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                            $id_ghe = $_POST['id_ghe'];
+                            $ten_hang_ghe = $_POST['ten_hang_ghe'];
+                            $trang_thai = $_POST['trang_thai'];
+                            $gia = $_POST['gia'];
+                            $loai_ghe = $_POST['loai_ghe'];
+                            update_ghe($id_ghe ,$ten_hang_ghe,$trang_thai,$gia,$loai_ghe);
+                        }
+                        header('Location:index.php?act=showghe');
+                     break;
+
+                     case 'delete_ghe':
+                        if (isset($_GET['id_ghe']) && ($_GET['id_ghe']) > 0) {
+                            $id_ghe = $_GET['id_ghe'];
+                            delete_ghe($id_ghe);
+                        }
+                        header('Location:index.php?act=showghe');
+                        break;
+
+
+
+                        case 'showsc':
+                            $result = show_sc();
+                            include 'suatchieu/show.php';
+                            break;
+    
+                            case 'addsc':
+                                if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
+                                    $ngay_chieu = $_POST['ngay_chieu'];
+                                    $gio_chieu = $_POST['gio_chieu'];
+                                    $id_phim = $_POST['id_phim'];
+                                    insert_sc($ngay_chieu,$gio_chieu,$id_phim);
+                                    header('Location: index.php?act=showsc');
+                                }
+                                include 'suatchieu/add.php';
+                                break;
+    
+                                case 'update_query_sc';
+                                if (isset($_GET['id_suat_chieu']) && ($_GET['id_suat_chieu']) > 0) {
+                                    $id_suat_chieu  = $_GET['id_suat_chieu'];
+                                    $result = query_updatesc($id_suat_chieu);
+                                    $result_phim=show_phim_update_sc();
+                                }
+                                include 'suatchieu/update.php';
+                                break;
+    
+                                case 'update_sc':
+                                    if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                                        $id_suat_chieu = $_POST['id_suat_chieu'];
+                                        $ngay_chieu = $_POST['ngay_chieu'];
+                                        $gio_chieu = $_POST['gio_chieu'];
+                                        $id_phim = $_POST['id_phim'];
+                                     
+                                        update_sc($id_suat_chieu,$ngay_chieu,$gio_chieu,$id_phim);
+                                    }
+                                    header('Location:index.php?act=showsc');
+                                    break;
+    
+                                    case 'delete_sc';
+                                    if (isset($_GET['id_suat_chieu']) && ($_GET['id_suat_chieu']) > 0) {
+                                        $id_suat_chieu = $_GET['id_suat_chieu'];
+                                        delete_sc($id_suat_chieu);
+                                    }
+                                    header('Location:index.php?act=showsc');
+                                    break;
+
+
+
+                            case 'showrap':
+                                $result = show_rap();
+                               include 'rap/show.php';
+                                break;
+
+
+                        case 'addrap':
+                                 if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
+                                 $ten_rap = $_POST['ten_rap'];
+                                 $dia_diem = $_POST['dia_diem'];   
+                                 $name_img = $_FILES['img']['name'];
+                                $tmp_img = $_FILES['img']['tmp_name'];     
+                                move_uploaded_file($tmp_img, '../Assets/img/' . $name_img);                                    
+                                 insert_rap($ten_rap,$dia_diem,$name_img);
+                                 header('Location: index.php?act=showrap');
+                                            }
+                          include 'rap/add.php';
+                           break;
+                           
+                           
+                        case 'update_rap';
+                        if (isset($_GET['id_rap']) && ($_GET['id_rap']) > 0) {
+                            $id_rap = $_GET['id_rap'];
+                            $result = query_updaterap($id_rap);
+                        }
+                        include 'rap/update.php';
+                        break;
+    
+                        case 'updaterap':
+                        if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                            $id_rap = $_POST['id_rap'];
+                            $ten_rap = $_POST['ten_rap'];
+                            $dia_diem = $_POST['dia_diem'];
+                            if (isset($_FILES['name_img']['name']) && !empty($_FILES['name_img']['name'])) {
+                                $name_img = $_FILES['name_img']['name'];
+                                $tmp_img = $_FILES['name_img']['tmp_name'];
+                                move_uploaded_file($tmp_img, 'Assets/img/' . $name_img);
+                            } else {
+                                $sql_selected_img = "select img from rap where id_rap = $id_rap";
+                                $result_img = pdo_query_one($sql_selected_img);
+                                $row_img = $result_img;
+                                $name_img = $row_img['img'];
+                            }
+                            update_rap($id_rap,$ten_rap,$dia_diem,$name_img);
+                        }
+                        header('Location:index.php?act=showrap');
+                     break;
+
+                     case 'delete_rap':
+                        if (isset($_GET['id_rap']) && ($_GET['id_rap']) > 0) {
+                            $id_rap = $_GET['id_rap'];
+                            delete_rap($id_rap);
+                        }
+                        header('Location:index.php?act=showrap');
+                        break;
+
+                        // Phòng chiếu
+                        case 'showpc':
+                            $result = show_pc();
+                           include 'phongchieu/show.php';
+                            break;
+
+                            case 'addpc':
+                                if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
+                                $ten_phong_chieu = $_POST['ten_phong_chieu'];
+                                $loai_phong_chieu = $_POST['loai_phong_chieu'];                                            
+                                $gia = $_POST['gia'];  
+                                $id_rap = $_POST['id_rap'];                                          
+                                insert_pc($ten_phong_chieu,$loai_phong_chieu,$gia,$id_rap);
+                                header('Location: index.php?act=showpc');
+                                           }
+                         include 'phongchieu/add.php';
+                          break;
+
+
+                          case 'update_query_pc';
+                          if (isset($_GET['id_phong_chieu']) && ($_GET['id_phong_chieu']) > 0) {
+                              $id_phong_chieu  = $_GET['id_phong_chieu'];
+                              $result = query_updatepc($id_phong_chieu);
+                              $result_rap=show_rap_update_pc();
+                          }
+                          include 'phongchieu/update.php';
+                          break;
+
+                          case 'update_pc':
+                              if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                                  $id_phong_chieu = $_POST['id_phong_chieu'];
+                                  $ten_phong_chieu = $_POST['ten_phong_chieu'];
+                                  $gia = $_POST['gia'];
+                                  $id_rap = $_POST['id_rap'];
+                               
+                                  update_pc($id_phong_chieu,$ten_phong_chieu,$gia,$id_rap);
+                              }
+                              header('Location:index.php?act=showpc');
+                              break;
+
+
+                              case 'delete_pc':
+                                if (isset($_GET['id_phong_chieu']) && ($_GET['id_phong_chieu']) > 0) {
+                                    $id_phong_chieu = $_GET['id_phong_chieu'];
+                                    delete_pc($id_phong_chieu);
+                                }
+                                header('Location:index.php?act=showpc');
+                                break;
+
+
+
+                //user
+            // case 'log_out':
+            //     session_unset();
+            //     header('Location:../index.php');
+            //     break;
+            // case 'show_list_users':
+            //     $list_users = show_list_users();
+            //     include 'nguoidung/show_taikhoan.php';
+            //     break;
+            // case 'edit_query_user':
+            //     if (isset($_GET['id_user'])) {
+            //         $user_id = $_GET['id_user'];
+            //         $result = edit_query_user($user_id);
+            //     }
+            //     include 'nguoidung/update_taikhoan.php';
+            //     break;
+            // case 'update_User':
+            //     if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+            //         $user_id = $_POST['user_id'];
+            //         $user_name = $_POST['user_name'];
+            //         $pass = $_POST['pass'];
+            //         $email = $_POST['email'];
+            //         update_Users($user_id, $user_name, $pass, $email);
+            //         header('Location:index.php?act=show_list_users');
+            //     }
+            //     include 'nguoidung/update_taikhoan.php';
+            //     break;
+            // case 'delete_User';
+            //     if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {
+            //         $user_id = $_GET['id_user'];
+            //         delete_User($user_id);
+            //     }
+            //     header('Location:index.php?act=show_list_users');
+            //     break;
+
+                //comment 
+
+            // case 'show_list_cmt':
+            //     $list_cmt = show_list_cmt();
+            //     include 'binhluan/show_cmt.php';
+            //     break;
+            // case 'show_list_cmt_user':
+            //     $list_cmt = show_list_cmt_user();
+            //     include 'binhluan/show_cmt_user.php';
+            //     break;
+
+            // case 'delete_cmt';
+            //     if (isset($_GET['id_cmt']) && ($_GET['id_cmt']) > 0) {
+            //         $cmt_id = $_GET['id_cmt'];
+            //         delete_cmt($cmt_id);
+            //     }
+            //     header('Location:index.php?act=show_list_cmt');
+            //     break;
+            
+            default:
+                include "home.php";
+                break;
+        }
+    } else {
+        include "home.php";
+    }
+    include "footer.php";
+// } else {
+//     header('Location:../index.php');
+// }
+?>
+    
