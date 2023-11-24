@@ -2,13 +2,30 @@
 ob_start();
 session_start();
 include "model/pdo.php";
+include "model/phim.php";
 include "view/header.php";
 include "model/users.php";
-include "model/phim.php";
+include "model/dat-ve.php";
+include "model/do-an.php";
+include "model/ghe.php";
 
 $phim_dangchieu = show_phim_dangchieu();
 $phim_sapchieu = show_phim_sapchieu();
 $phim_vebantruoc = show_phim_vebantruoc();
+
+$show_ve = show_ve();
+$show_do_an = show_do_an();
+
+$show_hang_ghe_A = show_hang_ghe_A();
+$show_hang_ghe_B = show_hang_ghe_B();
+
+
+$lich = lich_phim();
+$ngay_chieu = ngay_chieu();
+
+// $suat_chieu = suat_chieu();
+
+
 
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
@@ -28,32 +45,48 @@ if (isset($_GET['act'])) {
         case 'events_details':
             include 'view/khuyen-mai-va-su-kien/events_details.php';
             break;
-            case 'movie_details':
+        case 'movie_details':
+            if (isset($_GET['id_phim']) && ($_GET['id_phim'] > 0)) {
+                $movie_detail = loadone_phim($_GET['id_phim']);
+                include 'view/movie-details.php';
+            } else {
+                include 'view/home.php';
+            }
+            break;
+        case 'chon_ve':
+            if (isset($_GET['id_phim']) && ($_GET['id_phim'] > 0)) {
+                $ve_phim = loadone_ve_phim($_GET['id_phim']);
+                include 'view/datghe_bongnc/web/chon_ve.php';
+            } else {
+                include 'view/movie_details.php';
+            }
+
+            break;
+        case 'datghe':
+            include 'view/datghe_bongnc/web/datghe.php';
+            break;
+            case 'do_an':
+                include 'view/datghe_bongnc/web/do_an.php';
+                break;
+        case 'giohang':
+            include 'view/datghe_bongnc/web/giohang.php';
+            break;
+            case 'lich_chieu':
                 if (isset($_GET['id_phim']) && ($_GET['id_phim'] > 0)) {
                     $movie_detail = loadone_phim($_GET['id_phim']);
                     include 'view/movie-details.php';
                 } else {
                     include 'view/home.php';
                 }
-    
                 break;
-        case 'chon_ve':
-            include 'view/datghe_bongnc/web/chon_ve.php';
-            break;
-        case 'datghe':
-            include 'view/datghe_bongnc/web/datghe.php';
-            break;
-        case 'giohang':
-            include 'view/datghe_bongnc/web/giohang.php';
-            break;
         case 'contact':
             include 'view/lien-he/contact.php';
             break;
         case 'login':
-            if (isset($_POST['btn_signin'])&&($_POST['btn_signin'])) {
+            if (isset($_POST['btn_signin']) && ($_POST['btn_signin'])) {
                 $email = $_POST['email'];
                 $pass = $_POST['pass'];
-                $result=sign_Users($email,$pass);
+                $result = sign_Users($email, $pass);
                 if ($result) {
                     // if ($result['vai_tro']==0) {
                     //     $_SESSION['user'] = $result;
@@ -63,8 +96,8 @@ if (isset($_GET['act'])) {
                     //         header("Location: index.php");
                     //     }
                     // } else {
-                        $_SESSION['user'] = $result;
-                        header('Location: index.php');
+                    $_SESSION['user'] = $result;
+                    header('Location: index.php');
                     // }
                 } else {
                     echo "Không đăng nhập được";
@@ -73,7 +106,7 @@ if (isset($_GET['act'])) {
             include 'account/signin.php';
             break;
         case 'quenmk':
-            if (isset($_POST['btn_verify']) && $_POST['btn_verify'] ) {
+            if (isset($_POST['btn_verify']) && $_POST['btn_verify']) {
                 $email = $_POST['email'];
                 $result = sign_change_pass($email);
                 if ($result) {
@@ -90,14 +123,13 @@ if (isset($_GET['act'])) {
                 $old_pass = $_POST['old_pass'];
                 $new_pass = $_POST['new_pass'];
                 $user_id = $_POST['id_user'];
-                $result = edit_query_user($user_id,$old_pass);
-                if($result){
+                $result = edit_query_user($user_id, $old_pass);
+                if ($result) {
                     restore_Pass($user_id, $new_pass);
                     header('Location:index.php?act=login');
-                }else{
+                } else {
                     echo 'Nhap sai mat khau cu';
                 }
-                
             }
             include 'account/doimk.php';
             break;

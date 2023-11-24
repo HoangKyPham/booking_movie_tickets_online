@@ -5,6 +5,25 @@
         pdo_execute($sql_user,$sql_dat_ve);
     }
 
+
+// ve_phim
+    function loadone_ve_phim($id_phim)
+    {
+        $sql = "select * from phim where id_phim=" . $id_phim;
+        $result = pdo_query_one($sql);
+        return $result;
+    }
+    
+// show 
+
+function show_ve(){
+    $sql = "SELECT * from phong_chieu";
+    $result = pdo_query($sql);
+    return $result;
+    
+}
+
+
     // function sign_Users($email,$pass){
     //     $sql ="select * from users where user_name = '$email' and pass = '$pass'";
     //     $result = pdo_query_one($sql);
