@@ -234,25 +234,44 @@
             <div class="main" style="width: 750px; margin-left: 50px;">
                 <div class="slider slider-nav">
 
-                    <?php $ngayHienTai = date('Y-m-d'); // Lấy ngày hiện tại
-                    $soNgayGioiHan = 14; // Giới hạn trong 1 tuần
+                    <?php
+                    // $ngayHienTai = date('Y-m-d'); // Lấy ngày hiện tại
+                    // $soNgayGioiHan = 14; // Giới hạn trong 1 tuần
 
-                    // echo "Ngày và thứ trong 1 tuần kể từ ngày $ngayHienTai:";
+                    // // echo "Ngày và thứ trong 1 tuần kể từ ngày $ngayHienTai:";
 
-                    for ($i = 0; $i < $soNgayGioiHan; $i++) {
-                        $ngayHienTai = date('Y-m-d', strtotime("+$i days"));
-                        $thuHienTai = date('l', strtotime($ngayHienTai));
+                    // for ($i = 0; $i < $soNgayGioiHan; $i++) {
+                    //     $ngayHienTai = date('Y-m-d', strtotime("+$i days"));
+                    //     $thuHienTai = date('l', strtotime($ngayHienTai));
 
-                        echo '<div>
-                            <h1>' . $thuHienTai . '<br>
-                            <p style="font-size: 14px; height: 10px;">' . $ngayHienTai . '</p>           
-                           </div>';
+                    //     echo '<div>
+                    //         <h1>' . $thuHienTai . '<br>
+                    //         <p style="font-size: 14px; height: 10px;">' . $ngayHienTai . '</p>           
+                    //        </div>';
 
-                        // echo "\nNgày $ngayHienTai là thứ $thuHienTai";
+                    //     // echo "\nNgày $ngayHienTai là thứ $thuHienTai";
+                    // }
+
+                    ?>
+                    <?php
+                    foreach ($ngay_chieu as $ngay_chieu_item) {
+                        // var_dump($ngay_chieu_item);
+                    ?>
+
+                        <div>
+
+                            <div>
+                                <h1><?= date('l', strtotime($ngay_chieu_item['ngaychieu'])) ?><br>
+                                    <p style="font-size: 14px; height: 10px;"><?= $ngay_chieu_item['ngaychieu'] ?></p>
+                            </div>
+
+                        </div>
+                    <?php
                     }
                     ?>
 
                 </div>
+
                 <div class="slider slider-for">
                     <div>
                         <div class="rowthoigian">
@@ -268,20 +287,22 @@
                             <div class="thoigian">
                                 <ul>
                                     <li class="gio" style="padding: 0 50px">
-                                        <a href="index.php?act=chon_ve">10:20</a>
-                                        <a href="">11:20</a>
-                                        <a href="">12:35</a>
-                                        <a href="">15:00</a>
-                                        <a href="">15:55</a>
-                                        <a href="">17:25</a>
-                                        <a href="">17:25</a>
-                                        <a href="">17:25</a>
+                                        <?php
+                                        foreach ($lich as $lich_item) {
+                                            // var_dump($lich_item);
+                                        ?>
+                                            <a href="index.php?act=chon_ve&id_phim=<?php echo $lich_item['id_phim']; ?>"><?= $lich_item['gio_chieu'] ?></a>
+                                        <?php
+
+                                        }
+                                        ?>
+
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <!-- <div>
                         <div class="rowthoigian">
                             <div class="info">
                                 <div class="inside">
@@ -306,8 +327,8 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div>
+                    </div> -->
+                    <!-- <div>
                         <div class="rowthoigian">
                             <div class="info">
                                 <div class="inside">
@@ -332,8 +353,8 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div>
+                    </div> -->
+                    <!-- <div>
                         <div class="rowthoigian">
                             <div class="info">
                                 <div class="inside">
@@ -358,8 +379,8 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div>
+                    </div> -->
+                    <!-- <div>
                         <div class="rowthoigian">
                             <div class="info">
                                 <div class="inside">
@@ -625,7 +646,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- <div class="action">
         <a href="#" data-slide="3">go to slide 3</a>

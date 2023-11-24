@@ -7,14 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 */
 
     /*--reset--*/
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&amp;display=swap');
- body {
-	font-family: 'Poppins', sans-serif;
-	font-weight: 500;
-	font-style: normal;
-	font-size: 14px;
-	color: #bcbcbc;
-}
+
     html,
     body,
     div,
@@ -265,7 +258,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         -o-background-size: cover;
         -ms-background-size: cover;
         background-attachment: fixed;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
     }
 
     .mr_agilemain span {
@@ -309,7 +302,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         letter-spacing: 2px;
         text-align: center;
         margin: 0.8em 1vw .9em;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
     }
 
     h2 {
@@ -360,7 +353,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         width: 80%;
         background: transparent;
         border: 1px solid #888686;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
         font-size: 1em;
         margin-top: 10px;
         color: #fff;
@@ -375,7 +368,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         border-radius: 10px;
         font-size: 1em;
         letter-spacing: 1px;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
         cursor: pointer;
     }
 
@@ -481,7 +474,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         /* Firefox 1-3.6 */
         -moz-border-radius: 5px;
         display: inline-block;
-        vertical-align: middle;
+        /* vertical-align: middle; */
         text-align: center;
         border: 3px solid #ff9800;
         box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
@@ -643,79 +636,185 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .chonve p {
         padding: 5px 20px;
     }
-
-    .btn_submit:hover {
-        background-color: #e4d804;
-    }
-
+    .btn_submit:hover{
+background-color: #e4d804;
+}
     /*--//responsive--*/
 </style>
 
 <body onload="onLoaderFunc()">
-    <h1></h1>
-    <div class="contaicon">
-        <div class="w3ls-reg">
-            <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 50px; color: #ffffff;">Chọn vé</h2>
-            <!-- input fields -->
-            <div class="inputForm">
-                <?php 
-                extract($ve_phim);
-                ?>
-                <div class="chonve" style="display: flex;">
-                    <img src="Assets/img/<?php echo $ve_phim['anh']; ?>" alt="" style="width: 150px;height: 220px; object-fit: cover;">
-                    <ul>
-                        <li>
-                            <p style="font-size: 20px; color: #e4d804; font-weight: 600;"><?php echo $ve_phim['ten_phim'] ?></p>
-                        </li>
-                        <li>
-                            <p>Showing on Tue 14 Nov 21:15</p>
-                        </li>
-                        <li>
-                            <p>BHD Star 3.2 - Screen 3</p>
-                        </li>
-                    </ul>
-                </div>
-                <?php
-            ?>
-                <p style="padding-top: 30px; font-size: 20px; font-weight: 600; color: #f00;">Lưu ý</p>
-                <p>- Hãy chọn kỹ loại vé và số lượng bạn muốn mua</p>
-                <p>- Vui lòng chọn kỹ loại vé và số lượng quý khách muốn mua</p>
-                <p>- Để có trải nghiệm mua vé tốt nhất xin vui lòng sử dụng App BHDStar</p>
-                <br>
-                <br>
-                <div class="mr_agilemain" style="border-top: 1px solid #ccc; padding: 20px 0;">
-                    <div class="agileits-left">
-                    <label>Loại vé</label>
-                        <?php
-                        foreach ($show_ve as $ve) {
-                        ?>     
-                            <p style="padding: 22px 0;"><?php echo $ve['loai_phong_chieu'] ?></p>
-                            <!-- <p>Adult-VIP-2D-ES</p> -->
-                        <?php } ?>
-                    </div>
 
-                    <div class="agileits-left">
-                    <label>Giá</label>
-                    <?php
-                        foreach ($show_ve as $ve) {
-                        ?> 
-                        <p style="padding: 22px 0;"><?php echo $ve['gia'] ?></p>
-                        <!-- <p>65.000</p> -->
-                        <?php } ?>
+    <style>
+        .formbongnuoc {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: auto;
+
+        }
+
+        .combo-bongnc {
+            display: flex;
+        }
+        .combo-bongnc ul li {
+            padding: 0 30px;
+        }
+
+        .combo-bongnc ul li p {
+            padding: 10px 0;
+        }
+
+        .counter button {
+            border-radius: 5px;
+            padding: 0 15px;
+        }
+
+        #count {
+            font-size: 1.3em;
+            margin: 0px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const decrementButton = document.getElementById('decrement');
+            const incrementButton = document.getElementById('increment');
+            const countElement = document.getElementById('count');
+
+            let count = 0;
+
+            function updateCount() {
+                countElement.textContent = count;
+            }
+
+            decrementButton.addEventListener('click', function() {
+                count = Math.max(0, count - 1);
+                updateCount();
+            });
+
+            incrementButton.addEventListener('click', function() {
+                count += 1;
+                updateCount();
+            });
+
+            // Initialize count display
+            updateCount();
+        });
+    </script>
+    <h2 style="text-align: center; font-size: 30px; font-weight: bold; margin-top: 150px; color: #ffffff; height: 100px;">Combo Bỏng&Nước</h2>
+    <div class="formbongnuoc">
+        <?php 
+        foreach ($show_do_an as $doan_item) {
+            # code...
+        
+        ?>
+        <section class="combo-bongnc">
+
+            <img  style="width: 150px; height: 150px; object-fit:cover;" src="Assets/img/<?php echo $doan_item['img']; ?>" alt="">
+ 
+            <ul>
+                <li>
+                    <p><?php echo $doan_item['ten_do_an'] ?></p>
+                </li>
+                <li>
+                    <p>* <?php echo $doan_item['mo_ta'] ?></p>
+                </li>
+                <li>
+                    <p>Giá: <?php echo $doan_item['gia'] ?>đ</p>
+                </li>
+                <li>
+                    <div class="counter">
+                        <button id="decrement">-</button>
+                        <button id="count">0</button>
+                        <button id="increment">+</button>
                     </div>
-                    <div class="agileits-right">
-                        <label>Số lượng</label>
-                        <input type="number" id="Numseats" required min="1">
-                        <input type="number" id="Numseats" required min="1">
-                        <input type="number" id="Numseats" required min="1">
-                        <input type="number" id="Numseats" required min="1">        
-                    </div>
-                </div>
-                <a href="index.php?act=datghe"><button class="btn_submit" onclick="takeData()">Chọn ghế</button></a>
-            </div>
-        </div>
+                </li>
+            </ul>
+            
+           
+           
+        </section>
+               
+        <?php } ?>     
     </div>
 
+    <!-- <div class="formbongnuoc" style="padding: 100px 0;">
+        <section class="combo-bongnc">
+
+            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
+            <ul>
+                <li>
+                    <p>Line 3 single combo</p>
+                </li>
+                <li>
+                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
+                </li>
+                <li>
+                    <p>* Nhận tronng ngày xem phim</p>
+                </li>
+                <li>
+                    <p>Giá: 100.000đ</p>
+                </li>
+                <li>
+                    <div class="counter">
+                        <button id="decrement">-</button>
+                        <button id="count">0</button>
+                        <button id="increment">+</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="combo-bongnc">
+
+            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
+            <ul>
+                <li>
+                    <p>Line 3 single combo</p>
+                </li>
+                <li>
+                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
+                </li>
+                <li>
+                    <p>* Nhận tronng ngày xem phim</p>
+                </li>
+                <li>
+                    <p>Giá: 100.000đ</p>
+                </li>
+                <li>
+                    <div class="counter">
+                        <button id="decrement">-</button>
+                        <button id="count">0</button>
+                        <button id="increment">+</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="combo-bongnc">
+
+            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
+            <ul>
+                <li>
+                    <p>Line 3 single combo</p>
+                </li>
+                <li>
+                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
+                </li>
+                <li>
+                    <p>* Nhận tronng ngày xem phim</p>
+                </li>
+                <li>
+                    <p>Giá: 100.000đ</p>
+                </li>
+                <li>
+                    <div class="counter">
+                        <button id="decrement">-</button>
+                        <button id="count">0</button>
+                        <button id="increment">+</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div> -->
+    <a href="index.php?act=giohang" style="display: flex; justify-content: center; padding: 50px;"><button class="btn_submit">Xác nhận</button></a>
     <!-- js -->
     <script src="js/jquery-2.2.3.min.js"></script>
     <!-- //js -->

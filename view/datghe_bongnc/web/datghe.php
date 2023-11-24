@@ -474,7 +474,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         /* Firefox 1-3.6 */
         -moz-border-radius: 5px;
         display: inline-block;
-        vertical-align: middle;
+        /* vertical-align: middle; */
         text-align: center;
         border: 3px solid #ff9800;
         box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
@@ -637,6 +637,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         padding: 5px 20px;
     }
 
+    .btn_submit:hover {
+        background-color: #e4d804;
+    }
+
+    .btn_submit {
+        margin-top: 60px;
+    }
+
     /*--//responsive--*/
 </style>
 
@@ -703,7 +711,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <td>3</td>
                         <td>4</td>
                         <td>5</td>
-                        <td></td>
+                        <!-- <td></td> -->
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
@@ -714,10 +722,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </tr>
                     <tr>
                         <td>A</td>
-                        <td>
-                            <input type="checkbox" class="seats" value="A1">
-                        </td>
-                        <td>
+                        <?php
+                        foreach ($show_hang_ghe_A as $ghe_A) {
+
+                        ?>
+                            <td>
+                                <input type="checkbox" class="seats" value="<?php echo $ghe_A['ten_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                        <!-- <td>
                             <input type="checkbox" class="seats" value="A2">
                         </td>
                         <td>
@@ -750,15 +765,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </td>
                         <td>
                             <input type="checkbox" class="seats" value="A12">
-                        </td>
+                        </td> -->
+
                     </tr>
 
                     <tr>
                         <td>B</td>
+                        <?php 
+                        foreach ($show_hang_ghe_B as $ghe_B) {
+                            # code...
+                        ?>
                         <td>
-                            <input type="checkbox" class="seats" value="B1">
+                            <input type="checkbox" class="seats" value="<?php echo $ghe_B['ten_ghe'] ?>">
                         </td>
-                        <td>
+                        <?php 
+                        }
+                        ?>
+                        <!-- <td>
                             <input type="checkbox" class="seats" value="B2">
                         </td>
                         <td>
@@ -791,7 +814,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </td>
                         <td>
                             <input type="checkbox" class="seats" value="B12">
-                        </td>
+                        </td> -->
                     </tr>
 
                     <tr>
@@ -1152,221 +1175,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </tr>
                 </table>
             </div>
+            <a href="index.php?act=do_an"><button class="btn_submit">Chọn đồ ăn</button></a>
             <!-- //details after booking displayed here -->
         </div>
     </div>
 
-    <style>
-        .formbongnuoc {
-            display: flex;
-            justify-content: center;
-        }
-
-        .combo-bongnc {
-            display: flex;
-        }
-
-        .combo-bongnc ul li {
-            padding: 0 30px;
-        }
-
-        .combo-bongnc ul li p {
-            padding: 10px 0;
-        }
-
-        .counter button {
-            border-radius: 5px;
-            padding: 0 15px;
-        }
-
-        #count {
-            font-size: 1.3em;
-            margin: 0px;
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const decrementButton = document.getElementById('decrement');
-            const incrementButton = document.getElementById('increment');
-            const countElement = document.getElementById('count');
-
-            let count = 0;
-
-            function updateCount() {
-                countElement.textContent = count;
-            }
-
-            decrementButton.addEventListener('click', function() {
-                count = Math.max(0, count - 1);
-                updateCount();
-            });
-
-            incrementButton.addEventListener('click', function() {
-                count += 1;
-                updateCount();
-            });
-
-            // Initialize count display
-            updateCount();
-        });
-    </script>
-    <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 100px; color: #ffffff;">Combo Bỏng&Nước</h2>
-    <div class="formbongnuoc">
-        <section class="combo-bongnc">
-
-            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
-            <ul>
-                <li>
-                    <p>Line 3 single combo</p>
-                </li>
-                <li>
-                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
-                </li>
-                <li>
-                    <p>* Nhận tronng ngày xem phim</p>
-                </li>
-                <li>
-                    <p>Giá: 100.000đ</p>
-                </li>
-                <li>
-                    <div class="counter">
-                        <button id="decrement">-</button>
-                        <button id="count">0</button>
-                        <button id="increment">+</button>
-                    </div>
-                </li>
-            </ul>
-        </section>
-        <section class="combo-bongnc">
-
-            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
-            <ul>
-                <li>
-                    <p>Line 3 single combo</p>
-                </li>
-                <li>
-                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
-                </li>
-                <li>
-                    <p>* Nhận tronng ngày xem phim</p>
-                </li>
-                <li>
-                    <p>Giá: 100.000đ</p>
-                </li>
-                <li>
-                    <div class="counter">
-                        <button id="decrement">-</button>
-                        <button id="count">0</button>
-                        <button id="increment">+</button>
-                    </div>
-                </li>
-            </ul>
-        </section>
-        <section class="combo-bongnc">
-
-            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
-            <ul>
-                <li>
-                    <p>Line 3 single combo</p>
-                </li>
-                <li>
-                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
-                </li>
-                <li>
-                    <p>* Nhận tronng ngày xem phim</p>
-                </li>
-                <li>
-                    <p>Giá: 100.000đ</p>
-                </li>
-                <li>
-                    <div class="counter">
-                        <button id="decrement">-</button>
-                        <button id="count">0</button>
-                        <button id="increment">+</button>
-                    </div>
-                </li>
-            </ul>
-        </section>
-    </div>
-
-    <div class="formbongnuoc" style="padding: 100px 0;">
-        <section class="combo-bongnc">
-
-            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
-            <ul>
-                <li>
-                    <p>Line 3 single combo</p>
-                </li>
-                <li>
-                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
-                </li>
-                <li>
-                    <p>* Nhận tronng ngày xem phim</p>
-                </li>
-                <li>
-                    <p>Giá: 100.000đ</p>
-                </li>
-                <li>
-                    <div class="counter">
-                        <button id="decrement">-</button>
-                        <button id="count">0</button>
-                        <button id="increment">+</button>
-                    </div>
-                </li>
-            </ul>
-        </section>
-        <section class="combo-bongnc">
-
-            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
-            <ul>
-                <li>
-                    <p>Line 3 single combo</p>
-                </li>
-                <li>
-                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
-                </li>
-                <li>
-                    <p>* Nhận tronng ngày xem phim</p>
-                </li>
-                <li>
-                    <p>Giá: 100.000đ</p>
-                </li>
-                <li>
-                    <div class="counter">
-                        <button id="decrement">-</button>
-                        <button id="count">0</button>
-                        <button id="increment">+</button>
-                    </div>
-                </li>
-            </ul>
-        </section>
-        <section class="combo-bongnc">
-
-            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
-            <ul>
-                <li>
-                    <p>Line 3 single combo</p>
-                </li>
-                <li>
-                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
-                </li>
-                <li>
-                    <p>* Nhận tronng ngày xem phim</p>
-                </li>
-                <li>
-                    <p>Giá: 100.000đ</p>
-                </li>
-                <li>
-                    <div class="counter">
-                        <button id="decrement">-</button>
-                        <button id="count">0</button>
-                        <button id="increment">+</button>
-                    </div>
-                </li>
-            </ul>
-        </section>
-    </div>
-    <a href="index.php?act=giohang" style="display: flex; justify-content: center; padding-bottom: 50px;"><button>Xác nhận</button></a>
     <!-- js -->
     <script src="js/jquery-2.2.3.min.js"></script>
     <!-- //js -->
