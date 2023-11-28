@@ -644,157 +644,103 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         padding: 5px 20px;
     }
 
-    .btn_submit:hover {
-        background-color: #e4d804;
-    }
-
     /*--//responsive--*/
 </style>
 
-<body onload="onLoaderFunc()">
+<?php
+if (isset($_SESSION['my_show'])) {
+    echo '<pre>';
+    print_r($_SESSION['my_show']);
+    echo '</pre>';
+?>
     <h1></h1>
     <div class="contaicon">
         <div class="w3ls-reg">
             <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 50px; color: #ffffff;">Chọn vé</h2>
             <!-- input fields -->
             <div class="inputForm">
-                <?php 
-                extract($ve_phim);
-                ?>
                 <div class="chonve" style="display: flex;">
-                    <img src="Assets/img/<?php echo $ve_phim['anh']; ?>" alt="" style="width: 150px;height: 220px; object-fit: cover;">
+                    <img src="Assets/img/<?php echo $phim_da_chon['anh']; ?>" alt="" style="width: 150px;height: 220px; object-fit: cover;">
                     <ul>
                         <li>
-                            <p style="font-size: 20px; color: #e4d804; font-weight: 600;"><?php echo $ve_phim['ten_phim'] ?></p>
+                            <p style="font-size: 20px; color: #e4d804; font-weight: 600;"><?php echo $phim_da_chon['ten_phim']; ?></p>
+
                         </li>
                         <li>
-                            <p>Showing on Tue 14 Nov 21:15</p>
+                            <p><?php echo  $phim_da_chon['ngay_chieu']; ?> / <?php echo $phim_da_chon['gio_chieu']; ?></p>
                         </li>
                         <li>
-                            <p>BHD Star 3.2 - Screen 3</p>
+                            <p><?php echo $phim_da_chon['ten_rap']; ?> - <?php echo $phim_da_chon['dia_diem']; ?></p>
                         </li>
                     </ul>
                 </div>
                 <?php
-            ?>
+                ?>
                 <p style="padding-top: 30px; font-size: 20px; font-weight: 600; color: #f00;">Lưu ý</p>
                 <p>- Hãy chọn kỹ loại vé và số lượng bạn muốn mua</p>
                 <p>- Vui lòng chọn kỹ loại vé và số lượng quý khách muốn mua</p>
-                <p>- Để có trải nghiệm mua vé tốt nhất xin vui lòng sử dụng App BHDStar</p>
                 <br>
                 <br>
-                <div class="mr_agilemain" style="border-top: 1px solid #ccc; padding: 20px 0;">
-                    <div class="agileits-left">
-                    <label>Loại vé</label>
-                        <?php
-                        foreach ($show_ve as $ve) {
-                        ?>     
-                            <p style="padding: 22px 0;"><?php echo $ve['loai_phong_chieu'] ?></p>
-                            <!-- <p>Adult-VIP-2D-ES</p> -->
-                        <?php } ?>
-                    </div>
+                <form action="index.php?act=dat_ve" method="post">
+                    <?php foreach ($show_ve as $ve) : ?>
+                        <div class="mr_agilemain" style="border-top: 1px solid #ccc; padding: 20px 0;">
+                            <div class="agileits-left">
+                                <!-- Input hidden chứa id_suat_chieu -->
+                                <label>Loại vé</label>
+                                <p style="padding: 22px 0;"><?php echo $ve['ten_ve'] ?></p>
+                                <input type="hidden" name="ten_<?php echo $ve['id_gia_ve']; ?>" value="<?php echo $ve['ten_ve']; ?>">
+                            </div>
+                            <div class="agileits-left">
+                                <label>Giá</label>
+                                <p style="padding: 22px 0;"><?php echo $ve['gia_ve'] ?></p>
+                                <input type="hidden" name="gia_<?php echo $ve['id_gia_ve']; ?>" value="<?php echo $ve['gia_ve']; ?>">
+                            </div>
 
-                    <div class="agileits-left">
-                    <label>Giá</label>
-                    <?php
-                        foreach ($show_ve as $ve) {
-                        ?> 
-                        <p style="padding: 22px 0;"><?php echo $ve['gia'] ?></p>
-                        <!-- <p>65.000</p> -->
-                        <?php } ?>
-                    </div>
-                    <div class="agileits-right">
-                        <label>Số lượng</label>
-                        <input type="number" id="Numseats" required min="1">
-                        <input type="number" id="Numseats" required min="1">
-                        <input type="number" id="Numseats" required min="1">
-                        <input type="number" id="Numseats" required min="1">        
-                    </div>
-                </div>
-                <a href="index.php?act=datghe"><button class="btn_submit" onclick="takeData()">Chọn ghế</button></a>
+                            <div class="agileits-right">
+                                <label>Số lượng</label>
+                                <!-- Input số lượng -->
+                                <input type="number" id="Numseats" name="so_luong_<?php echo $ve['id_gia_ve']; ?>" min="1">
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+
+                    <input type="submit" name="btn_dat_ve" value="Chọn ghế">
+                </form>
+
             </div>
         </div>
     </div>
+<?php
+} else {
+    header('Location:index.php');
+}
+?>
 
-    <!-- js -->
-    <script src="js/jquery-2.2.3.min.js"></script>
-    <!-- //js -->
-    <!-- script for seat selection -->
-    <script>
-        function onLoaderFunc() {
-            $(".seatStructure *").prop("disabled", true);
-            $(".displayerBoxes *").prop("disabled", true);
-        }
+<style>
+    .formbongnuoc {
+        display: flex;
+        justify-content: center;
+    }
 
-        function takeData() {
-            if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
-                alert("Please Enter your Name and Number of Seats");
-            } else {
-                $(".inputForm *").prop("disabled", true);
-                $(".seatStructure *").prop("disabled", false);
-                document.getElementById("notification").innerHTML =
-                    "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
-            }
-        }
+    .combo-bongnc {
+        display: flex;
+    }
 
+    .combo-bongnc ul li {
+        padding: 0 30px;
+    }
 
-        function updateTextArea() {
+    .combo-bongnc ul li p {
+        padding: 10px 0;
+    }
 
-            if ($("input:checked").length == ($("#Numseats").val())) {
-                $(".seatStructure *").prop("disabled", true);
+    .counter button {
+        border-radius: 5px;
+        padding: 0 15px;
+    }
 
-                var allNameVals = [];
-                var allNumberVals = [];
-                var allSeatsVals = [];
-
-                //Storing in Array
-                allNameVals.push($("#Username").val());
-                allNumberVals.push($("#Numseats").val());
-                $('#seatsBlock :checked').each(function() {
-                    allSeatsVals.push($(this).val());
-                });
-
-                //Displaying 
-                $('#nameDisplay').val(allNameVals);
-                $('#NumberDisplay').val(allNumberVals);
-                $('#seatsDisplay').val(allSeatsVals);
-            } else {
-                alert("Please select " + ($("#Numseats").val()) + " seats")
-            }
-        }
-
-
-        function myFunction() {
-            alert($("input:checked").length);
-        }
-
-        /*
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-        */
-
-
-        $(":checkbox").click(function() {
-            if ($("input:checked").length == ($("#Numseats").val())) {
-                $(":checkbox").prop('disabled', true);
-                $(':checked').prop('disabled', false);
-            } else {
-                $(":checkbox").prop('disabled', false);
-            }
-        });
-    </script>
-    <!-- //script for seat selection -->
-
-</body>
+    #count {
+        font-size: 1.3em;
+        margin: 0px;
+    }
+</style>
