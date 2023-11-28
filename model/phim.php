@@ -1,3 +1,4 @@
+
 <?php 
 
 function loadone_phim($id_phim){
@@ -47,7 +48,7 @@ function show_Pro() {
             FROM phim 
             INNER JOIN rap ON phim.id_rap = rap.id_rap
     ";
-    $result=pdo_query($sql);
+    $result = pdo_query($sql);
     return $result;
 }
 // function show_Pro() {
@@ -63,33 +64,38 @@ function show_Pro() {
 
 
 //CRUD product
-function insert_Pro($ten_phim,$ngay_phat_hanh,$ngon_ngu,$trailer,$thoi_luong,$trang_thai,$mo_ta,$id_rap,$id_khuyen_mai,$name_img){
+function insert_Pro($ten_phim, $ngay_phat_hanh, $ngon_ngu, $trailer, $thoi_luong, $trang_thai, $mo_ta, $id_rap, $id_khuyen_mai, $name_img)
+{
     $sql = "insert into phim value(null,'$ten_phim','$name_img','$mo_ta','$ngay_phat_hanh','$ngon_ngu','$trailer','$thoi_luong','$trang_thai',$id_rap,$id_khuyen_mai)";
     pdo_execute($sql);
 }
 
-function query_updatePro($phim_id){
+function query_updatePro($phim_id)
+{
     $sql = "SELECT phim.*,rap.* 
             FROM phim 
             INNER JOIN rap ON phim.id_rap = rap.id_rap 
             WHERE id_phim = $phim_id";
-    $result=pdo_query_one($sql);
+    $result = pdo_query_one($sql);
     return $result;
 }
 
-function update_Phim($id_phim,$ten_phim,$ngay_phat_hanh,$ngon_ngu,$trailer,$thoi_luong,$trang_thai,$mo_ta,$id_rap,$id_khuyen_mai,$name_img){
+function update_Phim($id_phim, $ten_phim, $ngay_phat_hanh, $ngon_ngu, $trailer, $thoi_luong, $trang_thai, $mo_ta, $id_rap, $id_khuyen_mai, $name_img)
+{
     $sql = "update phim set ten_phim='$ten_phim',anh='$name_img',mo_ta='$mo_ta',ngay_phat_hanh='$ngay_phat_hanh',ngon_ngu='$ngon_ngu',trailer='$trailer',thoi_luong='$thoi_luong',trang_thai_phim='$trang_thai',
     id_rap = $id_rap,id_khuyen_mai=$id_khuyen_mai where id_phim = $id_phim ";
     pdo_execute($sql);
 }
 
-function delete_Phim($phim_id){
+function delete_Phim($phim_id)
+{
     $sql = "delete from phim where id_phim = $phim_id";
     pdo_execute($sql);
 }
 
 
 // chi tiet san pham
+
 // function detail_Item($pro_id) {
 //     $sql = "SELECT products.*, categories.cate_name
 //     FROM products
@@ -134,6 +140,7 @@ function show_phim_dangchieu()
     return $result;
 }
 
+
 function show_phim_sapchieu()
 {
     $sql = "select * from phim where trang_thai_phim='Phim Sắp chiếu' order by id_phim desc";
@@ -144,9 +151,30 @@ function show_phim_sapchieu()
 function show_phim_vebantruoc()
 {
     $sql = "select * from phim where trang_thai_phim='Vé bán trước' order by id_phim desc";
+
     $result = pdo_query($sql);
     return $result;
 }
 
 
-?>
+function suat_chieu(){
+   $sql = "SELECT phim.*, rap.*, suat_chieu.* FROM phim 
+   INNER JOIN rap ON phim.id_rap = rap.id_rap INNER JOIN suat_chieu 
+   ON phim.id_phim = suat_chieu.id_phim WHERE DATE(suat_chieu.ngay_chieu)";
+   $result = pdo_query($sql);
+   return $result;
+}
+
+
+function lich_phim()
+{
+    $sql = "SELECT * FROM phim_lich pl JOIN lich l ON pl.id_lich = l.id JOIN phim p ON p.id_phim = pl.id_phim JOIN suat_chieu sc ON sc.id_phim = p.id_phim";
+    $result = pdo_query($sql);
+    return $result;
+}
+function ngay_chieu()
+{
+    $sql = "SELECT * FROM phim_lich pl JOIN lich l ON pl.id_lich = l.id JOIN phim p ON p.id_phim = pl.id_phim";
+    $result = pdo_query($sql);
+    return $result;
+}

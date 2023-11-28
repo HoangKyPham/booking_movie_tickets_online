@@ -90,7 +90,6 @@
                             </div>
                         <?php }
                         ?>
-
                     </div>
                 </div>
                 <div class="tab-pane fade" id="movies" role="tabpanel" aria-labelledby="movies-tab">
@@ -122,7 +121,6 @@
                             </div>
                         <?php }
                         ?>
-
                     </div>
                 </div>
                 <div class="tab-pane fade" id="anime" role="tabpanel" aria-labelledby="anime-tab">
@@ -150,10 +148,12 @@
                                     </ul>
                                 </div>
                             </div>
+
                         </div>
                         <?php 
                             }
                         ?>
+
 
                     </div>
                 </div>

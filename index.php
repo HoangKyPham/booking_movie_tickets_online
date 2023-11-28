@@ -38,7 +38,7 @@ if (!isset($_SESSION['my_info']) || count($_SESSION['my_info']) === 0) {
 }
 if (!isset($_SESSION['my_total'])) {
     $_SESSION['my_total'] = []; // Khởi tạo mảng nếu chưa có
-}
+};
 
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
@@ -119,6 +119,7 @@ if (isset($_GET['act'])) {
             $phim_da_chon = query_suat_chieu($id_phim, $id_suat_chieu, $id_rap);
 
             include 'view/datghe_bongnc/web/chon_ve.php';
+
             break;
         case 'dat_ghe':
             if (isset($_POST['btn_dat_ghe']) && ($_POST['btn_dat_ghe'])) {
@@ -153,6 +154,7 @@ if (isset($_GET['act'])) {
             }
             include 'view/datghe_bongnc/web/datghe.php';
             break;
+
         case 'dat_bong_nuoc':
             if (isset($_POST['btn_bong_nuoc']) && ($_POST['btn_bong_nuoc'])) {
                 $my_bong_nuoc = [];
@@ -416,6 +418,7 @@ if (isset($_GET['act'])) {
         case 'thanh_toan_that_bai':
             include 'view/datghe_bongnc/web/thanh_toan_that_bai.php';
             break;
+
         case 'contact':
             include 'view/lien-he/contact.php';
             break;
@@ -433,6 +436,7 @@ if (isset($_GET['act'])) {
                     //         header("Location: index.php");
                     //     }
                     // } else {
+
                     $_SESSION['my_user'] = [
                         'id_user' => $result['id_user'],
                         'email' => $result['email'],

@@ -105,7 +105,13 @@
     <!-- movie-details-area -->
     <section class="movie-details-area" data-background="img/bg/movie_details_bg.jpg">
         <div class="container">
+<<<<<<< HEAD
             <?php extract($movie_detail); ?>
+=======
+            <?php
+            extract($movie_detail);
+            ?>
+>>>>>>> develop
             <div class="row align-items-center position-relative">
                 <div class="col-xl-3 col-lg-4">
                     <div class="movie-details-img">
@@ -151,7 +157,12 @@
                     <a href="img/poster/movie_details_img.jpg" class="download-btn" download="">Download <img src="fonts/download.svg" alt=""></a>
                 </div>
             </div>
+<<<<<<< HEAD
 
+=======
+            <?php
+            ?>
+>>>>>>> develop
         </div>
     </section>
     <!-- movie-details-area-end -->
@@ -164,6 +175,7 @@
             <br>
             <div class="main" style="width: 750px; margin-left: 50px;">
                 <div class="slider slider-nav">
+<<<<<<< HEAD
                     <?php
                     foreach ($ngay_suat_chieu as $row_ngay_chieu) {
                     ?>
@@ -176,8 +188,49 @@
                     <?php
                     }
                     ?>
+=======
+
+                    <?php
+                    // $ngayHienTai = date('Y-m-d'); // Lấy ngày hiện tại
+                    // $soNgayGioiHan = 14; // Giới hạn trong 1 tuần
+
+                    // // echo "Ngày và thứ trong 1 tuần kể từ ngày $ngayHienTai:";
+
+                    // for ($i = 0; $i < $soNgayGioiHan; $i++) {
+                    //     $ngayHienTai = date('Y-m-d', strtotime("+$i days"));
+                    //     $thuHienTai = date('l', strtotime($ngayHienTai));
+
+                    //     echo '<div>
+                    //         <h1>' . $thuHienTai . '<br>
+                    //         <p style="font-size: 14px; height: 10px;">' . $ngayHienTai . '</p>           
+                    //        </div>';
+
+                    //     // echo "\nNgày $ngayHienTai là thứ $thuHienTai";
+                    // }
+
+                    ?>
+                    <?php
+                    foreach ($ngay_chieu as $ngay_chieu_item) {
+                        // var_dump($ngay_chieu_item);
+                    ?>
+
+                        <div>
+
+                            <div>
+                                <h1><?= date('l', strtotime($ngay_chieu_item['ngaychieu'])) ?><br>
+                                    <p style="font-size: 14px; height: 10px;"><?= $ngay_chieu_item['ngaychieu'] ?></p>
+                            </div>
+
+                        </div>
+                    <?php
+                    }
+                    ?>
+
+>>>>>>> develop
                 </div>
+
                 <div class="slider slider-for">
+<<<<<<< HEAD
                         <?php
                         extract($rap_va_gio_chieu);
                         $lastRap = null;
@@ -218,6 +271,404 @@
                                         </div>
                                     </div>
                 </div>
+=======
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">dia diem</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <?php
+                                        foreach ($lich as $lich_item) {
+                                            // var_dump($lich_item);
+                                        ?>
+                                            <a href="index.php?act=chon_ve&id_phim=<?php echo $lich_item['id_phim']; ?>"><?= $lich_item['gio_chieu'] ?></a>
+                                        <?php
+
+                                        }
+                                        ?>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+                <div class="slider slider-for">
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                        <a href="">17:25</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rowthoigian">
+                            <div class="info">
+                                <div class="inside">
+                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;">BHD Star 3.2</h4>
+                                    <p style="padding: 0px 10px; color: #90a0ba;">Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM</p>
+                                </div>
+                                <div class="vitri">
+                                    <a href=""><i></i>XEM VỊ TRÍ</a>
+                                </div>
+
+                            </div>
+                            <div class="thoigian">
+                                <ul>
+                                    <li class="gio" style="padding: 0 50px">
+                                        <a href="">10:10</a>
+                                        <a href="">11:20</a>
+                                        <a href="">12:35</a>
+                                        <a href="">15:00</a>
+                                        <a href="">15:55</a>
+                                        <a href="">17:25</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="action">
+        <a href="#" data-slide="3">go to slide 3</a>
+        <a href="#" data-slide="4">go to slide 4</a>
+        <a href="#" data-slide="5">go to slide 5</a>
+      </div> -->
+            </div>
+            <!--  -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="movie-history-wrap">
+                        <h3 class="title">About <span>History</span></h3>
+                        <p>Lorem ipsum dolor sit amet, consecetur adipiscing elseddo eiusmod tempor.There are many variations of passages of lorem
+                            Ipsum available, but the majority have suffered alteration in some injected humour.There are many variations of passages
+                            of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised
+                            words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure
+                            there isn't anything errassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to
+                            repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of
+                            over 200 Latin words, combined with a handful</p>
+                    </div>
+                </div>
+
+>>>>>>> develop
             </div>
 
     </section>
