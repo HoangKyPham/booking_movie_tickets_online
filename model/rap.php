@@ -4,6 +4,13 @@
         $result_rap = pdo_query($sql);
         return $result_rap;
     }
+    function loadone_rap($id_rap){
+        $sql = "select * 
+        from rap
+        where id_rap=$id_rap";
+        $result=pdo_query_one($sql);
+        return $result;
+        }
 
     // function insert_Cate($cate_name){
     //     $sql = "INSERT INTO categories VALUE(null,'$cate_name')";

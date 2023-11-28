@@ -636,117 +636,190 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .chonve p {
         padding: 5px 20px;
     }
-
-    .btn_submit:hover {
-        background-color: #e4d804;
-    }
-
-    .btn_submit {
-        margin-top: 60px;
-    }
-
+    .btn_submit:hover{
+background-color: #e4d804;
+}
     /*--//responsive--*/
 </style>
-<h1></h1>
-<div class="contaicon">
 
-    <div class="w3ls-reg">
-        <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 50px; color: #ffffff;">Chọn ghế</h2>
-        <!-- <div class="inputForm">
-                <h2>fill the required details below and select your seats</h2>
-                <div class="mr_agilemain">
-                    <div class="agileits-left">
-                        <label style="margin-left: 20px;"> Name
-                            <span>*</span>
-                        </label>
-                        <br>
-                        <input type="text" id="Username" required>
+<body onload="onLoaderFunc()">
+
+    <style>
+        .formbongnuoc {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: auto;
+
+        }
+
+        .combo-bongnc {
+            display: flex;
+        }
+        .combo-bongnc ul li {
+            padding: 0 30px;
+        }
+
+        .combo-bongnc ul li p {
+            padding: 10px 0;
+        }
+
+        .counter button {
+            border-radius: 5px;
+            padding: 0 15px;
+        }
+
+        #count {
+            font-size: 1.3em;
+            margin: 0px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const decrementButton = document.getElementById('decrement');
+            const incrementButton = document.getElementById('increment');
+            const countElement = document.getElementById('count');
+
+            let count = 0;
+
+            function updateCount() {
+                countElement.textContent = count;
+            }
+
+            decrementButton.addEventListener('click', function() {
+                count = Math.max(0, count - 1);
+                updateCount();
+            });
+
+            incrementButton.addEventListener('click', function() {
+                count += 1;
+                updateCount();
+            });
+
+            // Initialize count display
+            updateCount();
+        });
+    </script>
+    <h2 style="text-align: center; font-size: 30px; font-weight: bold; margin-top: 150px; color: #ffffff; height: 100px;">Combo Bỏng&Nước</h2>
+    <div class="formbongnuoc">
+        <?php 
+        foreach ($show_do_an as $doan_item) {
+            # code...
+        
+        ?>
+        <section class="combo-bongnc">
+
+            <img  style="width: 150px; height: 150px; object-fit:cover;" src="Assets/img/<?php echo $doan_item['img']; ?>" alt="">
+ 
+            <ul>
+                <li>
+                    <p><?php echo $doan_item['ten_do_an'] ?></p>
+                </li>
+                <li>
+                    <p>* <?php echo $doan_item['mo_ta'] ?></p>
+                </li>
+                <li>
+                    <p>Giá: <?php echo $doan_item['gia'] ?>đ</p>
+                </li>
+                <li>
+                    <div class="counter">
+                        <button id="decrement">-</button>
+                        <button id="count">0</button>
+                        <button id="increment">+</button>
                     </div>
-                    <div class="agileits-right">
-                        <label style="margin-left: 55px;"> Number of Seats
-                            <span>*</span>
-                        </label>
-                        <input type="number" id="Numseats" required min="1" style="margin-left: 40px;">
-                    </div>
-                </div>
-                <button onclick="takeData()">Start Selecting</button>
-            </div> -->
-        <div class="inputForm">
-
-            <p style="padding-top: 10px;">Vui lòng chọn ghế trong sơ đồ ghế phía dưới. Nếu bạn muốn chọn loại ghế khác hoặc thay đổi số lượng vé muốn mua vui lòng quay lại bước "Chọn Vé" ở thanh công cụ bên trên để quay trở lại màn hình chọn.</p>
-            <br>
-        </div>
-        <ul class="seat_w3ls" style="margin-left: 15%;">
-            <li class="smallBox greenBox">Selected Seat</li>
-
-            <li class="smallBox redBox">Reserved Seat</li>
-
-            <li class="smallBox emptyBox">Empty Seat</li>
-        </ul>
-        <form action="index.php?act=dat_ghe" method="post">
-            <div class="seatStructure txt-center" style="overflow-x:auto;">
-                <table id="seatsBlock">
-                    <p id="notification"></p>
-                    <tr>
-                        <td></td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <!-- <td></td> -->
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>10</td>
-                        <td>11</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>A</td>
-                        <?php
-                        foreach ($show_hang_ghe_A as $ghe_A) {
-
-                        ?>
-                            <td>
-                                <input type="checkbox" name="<?php echo $ghe_A['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_A['ten_ghe'] ?>">
-                                <input type="hidden" name="gia_<?php echo $ghe_A['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_A['gia'] ?>">
-                                <input type="hidden" name="id_<?php echo $ghe_A['id_ghe'] ?>" class="seats" value="<?php echo $ghe_A['id_ghe'] ?>">
-
-                            </td>
-                        <?php
-                        }
-                        ?>
-                    </tr>
-                    <tr>
-                        <td>B</td>
-                        <?php
-                        foreach ($show_hang_ghe_B as $ghe_B) {
-                        ?>
-                            <td>
-                                <input type="checkbox" name="<?php echo $ghe_B['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_B['ten_ghe'] ?>">
-                                <input type="hidden" name="gia_<?php echo $ghe_B['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_B['gia'] ?>">
-                                <input type="hidden" name="id_<?php echo $ghe_B['id_ghe'] ?>" class="seats" value="<?php echo $ghe_B['id_ghe'] ?>">
-                            </td>
-                        <?php
-                        }
-                        ?>
-                    </tr>
-                </table>
-            </div>
-            <input name="btn_dat_ghe" type="submit" value="Xác nhận" style="display: flex; width:100px; margin-top: 100px;; justify-content: center; padding-bottom: 50px;"></input>
-        </form>
-
+                </li>
+            </ul>
+            
+           
+           
+        </section>
+               
+        <?php } ?>     
     </div>
-</div>
 
-<!-- js -->
-<script src="js/jquery-2.2.3.min.js"></script>
-<!-- //js -->
-<!-- script for seat selection -->
-<!-- <script>
+    <!-- <div class="formbongnuoc" style="padding: 100px 0;">
+        <section class="combo-bongnc">
 
+            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
+            <ul>
+                <li>
+                    <p>Line 3 single combo</p>
+                </li>
+                <li>
+                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
+                </li>
+                <li>
+                    <p>* Nhận tronng ngày xem phim</p>
+                </li>
+                <li>
+                    <p>Giá: 100.000đ</p>
+                </li>
+                <li>
+                    <div class="counter">
+                        <button id="decrement">-</button>
+                        <button id="count">0</button>
+                        <button id="increment">+</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="combo-bongnc">
+
+            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
+            <ul>
+                <li>
+                    <p>Line 3 single combo</p>
+                </li>
+                <li>
+                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
+                </li>
+                <li>
+                    <p>* Nhận tronng ngày xem phim</p>
+                </li>
+                <li>
+                    <p>Giá: 100.000đ</p>
+                </li>
+                <li>
+                    <div class="counter">
+                        <button id="decrement">-</button>
+                        <button id="count">0</button>
+                        <button id="increment">+</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="combo-bongnc">
+
+            <img src="view/datghe_bongnc/web/images/bongnuoc.jpg" alt="" style="width: 150px; height: 150px;">
+            <ul>
+                <li>
+                    <p>Line 3 single combo</p>
+                </li>
+                <li>
+                    <p>* Miễn phí vị bắp phô mai, Caramel</p>
+                </li>
+                <li>
+                    <p>* Nhận tronng ngày xem phim</p>
+                </li>
+                <li>
+                    <p>Giá: 100.000đ</p>
+                </li>
+                <li>
+                    <div class="counter">
+                        <button id="decrement">-</button>
+                        <button id="count">0</button>
+                        <button id="increment">+</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div> -->
+    <a href="index.php?act=giohang" style="display: flex; justify-content: center; padding: 50px;"><button class="btn_submit">Xác nhận</button></a>
+    <!-- js -->
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!-- script for seat selection -->
+    <script>
         function onLoaderFunc() {
             $(".seatStructure *").prop("disabled", true);
             $(".displayerBoxes *").prop("disabled", true);
@@ -821,6 +894,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             }
         });
     </script>
-    //script for seat selection
+    <!-- //script for seat selection -->
 
-</body> -->
+</body>

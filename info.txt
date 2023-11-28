@@ -1,0 +1,13 @@
+http://localhost/duan1/movflx/index.php?act=thanh_toan_thanh_cong
+&vnp_Amount=45000000
+&vnp_BankCode=NCB
+&vnp_BankTranNo=VNP14202276
+&vnp_CardType=ATM
+&vnp_OrderInfo=Thanh+to%C3%A1n+v%C3%A9+xem+phim
+&vnp_PayDate=20231126224705
+&vnp_ResponseCode=00
+&vnp_TmnCode=5NC5P2K0
+&vnp_TransactionNo=14202276
+&vnp_TransactionStatus=00
+&vnp_TxnRef=3477
+&vnp_SecureHash=74d2facb31d3f3f5e6a2a34f29f2dc7cec4c035d5e7594701b349d227ce79ab5074390d9c9af08f569deb1f1f7b59e4652d2cc254351f263e01dd3c4d6fb65cd
