@@ -5,6 +5,55 @@
         pdo_execute($sql_user,$sql_dat_ve);
     }
 
+    // ve_phim
+    function loadone_ve_phim($id_phim)
+    {
+        $sql = "select * from phim where id_phim=" . $id_phim;
+        $result = pdo_query_one($sql);
+        return $result;
+    }
+    
+// show 
+
+function show_ve(){
+    $sql = "SELECT * FROM gia_ve";
+    $result = pdo_query($sql);
+    return $result;
+    
+}
+
+function insert_ve($id_suat_chieu, $id_ghe, $trang_thai, $id_gia_ve,$id_pay){
+    $sql = "INSERT INTO ve VALUE(null,'$id_suat_chieu','$id_ghe','$trang_thai','$id_gia_ve','$id_pay')";
+    pdo_execute($sql);
+}
+
+function insert_vnpay(
+    $id_user, 
+    $vnp_Amount, 
+    $vnp_BankCode, 
+    $vnp_BankTranNo, 
+    $vnp_CardType, 
+    $vnp_Orderinfo, 
+    $vnp_PayDate, 
+    $vnp_ResponseCode, 
+    $vnp_TmnCode, 
+    $vnp_TransactionNo, 
+    $vnp_TransactionStatus, 
+    $vnp_TxnRef, 
+    $vnp_SecureHash){
+        $sql = "INSERT INTO vnpay VALUES (null,'$id_user', '$vnp_Amount', '$vnp_BankCode', '$vnp_BankTranNo', '$vnp_CardType', '$vnp_Orderinfo', '$vnp_PayDate', '$vnp_ResponseCode', '$vnp_TmnCode', '$vnp_TransactionNo', '$vnp_TransactionStatus', '$vnp_TxnRef', '$vnp_SecureHash')";
+        pdo_execute($sql);
+    }
+function query_payment($email){
+    $sql = "select user.*,vnpay.*
+    from user
+    inner join vnpay on user.id_user = vnpay.id_user
+    where user.email = '$email' ORDER BY vnpay.id_pay DESC LIMIT 1      
+    ";
+    $result = pdo_query_one($sql);
+    return $result;
+}
+
     // function sign_Users($email,$pass){
     //     $sql ="select * from users where user_name = '$email' and pass = '$pass'";
     //     $result = pdo_query_one($sql);

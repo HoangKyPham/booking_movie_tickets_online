@@ -639,177 +639,57 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     /*--//responsive--*/
 </style>
-<h1></h1>
+
+
+<h1>Thanh toán thành công</h1>
+<p><?php echo '<pre>';
+echo 'my_show: ';
+print_r($_SESSION['my_show']);
+
+echo 'my_ticket: ';
+print_r($_SESSION['my_ticket']);
+
+echo 'my_seat: ';
+print_r($_SESSION['my_seat']);
+
+echo 'my_bonus: ';
+print_r($_SESSION['my_bonus']);
+
+echo 'my_info: ';
+print_r($_SESSION['my_info']);
+
+echo 'my_total: ';
+print_r($_SESSION['my_total']);
+echo '</pre>';
+ ?></p>
 <div class="contaicon">
-
-    <div class="w3ls-reg">
-        <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 50px; color: #ffffff;">Chọn ghế</h2>
-        <!-- <div class="inputForm">
-                <h2>fill the required details below and select your seats</h2>
-                <div class="mr_agilemain">
-                    <div class="agileits-left">
-                        <label style="margin-left: 20px;"> Name
-                            <span>*</span>
-                        </label>
-                        <br>
-                        <input type="text" id="Username" required>
-                    </div>
-                    <div class="agileits-right">
-                        <label style="margin-left: 55px;"> Number of Seats
-                            <span>*</span>
-                        </label>
-                        <input type="number" id="Numseats" required min="1" style="margin-left: 40px;">
-                    </div>
-                </div>
-                <button onclick="takeData()">Start Selecting</button>
-            </div> -->
-        <div class="inputForm">
-
-            <p style="padding-top: 10px;">Vui lòng chọn ghế trong sơ đồ ghế phía dưới. Nếu bạn muốn chọn loại ghế khác hoặc thay đổi số lượng vé muốn mua vui lòng quay lại bước "Chọn Vé" ở thanh công cụ bên trên để quay trở lại màn hình chọn.</p>
-            <br>
-        </div>
-        <ul class="seat_w3ls" style="margin-left: 15%;">
-            <li class="smallBox greenBox">Selected Seat</li>
-
-            <li class="smallBox redBox">Reserved Seat</li>
-
-            <li class="smallBox emptyBox">Empty Seat</li>
-        </ul>
-        <form action="index.php?act=dat_ghe" method="post">
-            <div class="seatStructure txt-center" style="overflow-x:auto;">
-                <table id="seatsBlock">
-                    <p id="notification"></p>
-                    <tr>
-                        <td></td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td></td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>10</td>
-                        <td>11</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>A</td>
-                        <?php
-                        foreach ($show_hang_ghe_A as $ghe_A) {
-                        ?>
-                            <td>
-                                <input type="checkbox" name="<?php echo $ghe_A['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_A['ten_ghe'] ?>">
-                                <input type="hidden" name="gia_<?php echo $ghe_A['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_A['gia'] ?>">
-                                <input type="hidden" name="id_<?php echo $ghe_A['id_ghe'] ?>" class="seats" value="<?php echo $ghe_A['id_ghe'] ?>">
-                            </td>
-                        <?php
-                        }
-                        ?>
-
-                    </tr>
-                    <tr>
-                        <td>B</td>
-                        <?php
-                        foreach ($show_hang_ghe_B as $ghe_B) {
-                        ?>
-                            <td>
-                                <input type="checkbox" name="<?php echo $ghe_B['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_B['ten_ghe'] ?>">
-                                <input type="hidden" name="gia_<?php echo $ghe_B['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_B['gia'] ?>">
-                                <input type="hidden" name="id_<?php echo $ghe_B['id_ghe'] ?>" class="seats" value="<?php echo $ghe_B['id_ghe'] ?>">
-                            </td>
-                        <?php
-                        }
-                        ?>
-                    </tr>
-                </table>
-            </div>
-            <input name="btn_dat_ghe" type="submit" value="Xác nhận" style="display: flex; width:100px; margin-top: 100px;; justify-content: center; padding-bottom: 50px;"></input>
-        </form>
-    </div>
 </div>
 
-<!-- js -->
-<script src="js/jquery-2.2.3.min.js"></script>
-<!-- //js -->
-<!-- script for seat selection -->
-<!-- <script>
-        function onLoaderFunc() {
-            $(".seatStructure *").prop("disabled", true);
-            $(".displayerBoxes *").prop("disabled", true);
-        }
+<style>
+    .formbongnuoc {
+        display: flex;
+        justify-content: center;
+    }
 
-        function takeData() {
-            if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
-                alert("Please Enter your Name and Number of Seats");
-            } else {
-                $(".inputForm *").prop("disabled", true);
-                $(".seatStructure *").prop("disabled", false);
-                document.getElementById("notification").innerHTML =
-                    "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
-            }
-        }
+    .combo-bongnc {
+        display: flex;
+    }
 
+    .combo-bongnc ul li {
+        padding: 0 30px;
+    }
 
-        function updateTextArea() {
+    .combo-bongnc ul li p {
+        padding: 10px 0;
+    }
 
-            if ($("input:checked").length == ($("#Numseats").val())) {
-                $(".seatStructure *").prop("disabled", true);
+    .counter button {
+        border-radius: 5px;
+        padding: 0 15px;
+    }
 
-                var allNameVals = [];
-                var allNumberVals = [];
-                var allSeatsVals = [];
-
-                //Storing in Array
-                allNameVals.push($("#Username").val());
-                allNumberVals.push($("#Numseats").val());
-                $('#seatsBlock :checked').each(function() {
-                    allSeatsVals.push($(this).val());
-                });
-
-                //Displaying 
-                $('#nameDisplay').val(allNameVals);
-                $('#NumberDisplay').val(allNumberVals);
-                $('#seatsDisplay').val(allSeatsVals);
-            } else {
-                alert("Please select " + ($("#Numseats").val()) + " seats")
-            }
-        }
-
-
-        function myFunction() {
-            alert($("input:checked").length);
-        }
-
-        /*
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-        */
-
-
-        $(":checkbox").click(function() {
-            if ($("input:checked").length == ($("#Numseats").val())) {
-                $(":checkbox").prop('disabled', true);
-                $(':checked').prop('disabled', false);
-            } else {
-                $(":checkbox").prop('disabled', false);
-            }
-        });
-    </script>
-    //script for seat selection
-
-</body> -->
+    #count {
+        font-size: 1.3em;
+        margin: 0px;
+    }
+</style>

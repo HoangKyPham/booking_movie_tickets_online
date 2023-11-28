@@ -1,4 +1,47 @@
 <?php 
+
+function loadone_phim($id_phim){
+    $sql = "select * 
+    from phim
+    where id_phim=$id_phim";
+    $result=pdo_query_one($sql);
+    return $result;
+    }
+
+function query_ngay($id_phim) {
+    $sql = "SELECT DISTINCT ngay_chieu
+    FROM suat_chieu
+    WHERE id_phim = $id_phim";
+    $atb_phim = pdo_query($sql);
+    return $atb_phim;
+}
+
+function query_rap_gio_chieu($id_phim,$ngay){
+    $sql = "SELECT rap.*, phim.*, suat_chieu.*
+    FROM suat_chieu
+    JOIN rap ON suat_chieu.id_rap = rap.id_rap
+    JOIN phim ON suat_chieu.id_phim = phim.id_phim
+    WHERE phim.id_phim = $id_phim AND suat_chieu.ngay_chieu = '$ngay'";
+    $result = pdo_query($sql);
+    return $result;
+}
+
+
+function query_gio_chieu_select($id_phim,$date){
+    $sql = "select * from suat_chieu where id_phim = $id_phim and ngay_chieu= $date";
+    $result = pdo_query($sql);
+    return $result;
+}
+
+function query_gio_chieu_default($id_phim){
+    $sql = "SELECT * FROM suat_chieu WHERE id_phim = $id_phim LIMIT 1";
+    $result = pdo_query($sql);
+    return $result;
+}
+
+
+
+////
 function show_Pro() {
     $sql = "SELECT rap.*,phim.* 
             FROM phim 
@@ -47,38 +90,60 @@ function delete_Phim($phim_id){
 
 
 // chi tiet san pham
-function detail_Item($pro_id) {
-    $sql = "SELECT products.*, categories.cate_name
-    FROM products
-    INNER JOIN categories ON products.cate_id = categories.cate_id WHERE products.pro_id = $pro_id";
-    $result=pdo_query_one($sql);
-    return $result;
-}
-//show pro theo danh muc
-function show_Pro_Cate($cate_id) {
-    $sql = "SELECT *
-    FROM products
-    WHERE cate_id = ".$cate_id;
-    $result=pdo_query($sql);
-    return $result;
-}
+// function detail_Item($pro_id) {
+//     $sql = "SELECT products.*, categories.cate_name
+//     FROM products
+//     INNER JOIN categories ON products.cate_id = categories.cate_id WHERE products.pro_id = $pro_id";
+//     $result=pdo_query_one($sql);
+//     return $result;
+// }
+// //show pro theo danh muc
+// function show_Pro_Cate($cate_id) {
+//     $sql = "SELECT *
+//     FROM products
+//     WHERE cate_id = ".$cate_id;
+//     $result=pdo_query($sql);
+//     return $result;
+// }
 
-//show san pham moi trang chu
-function show_Pro_New(){
-    $sql = "select * from products order by pro_id desc limit 6 ";
+// //show san pham moi trang chu
+// function show_Pro_New(){
+//     $sql = "select * from products order by pro_id desc limit 6 ";
+//     $result = pdo_query($sql);
+//     return $result;
+// }
+
+// //show product with keywords
+// function show_Pro_Key($keyw = "") {
+//     $sql = "SELECT products.*, categories.cate_name, COUNT(comment.pro_id) AS soluong
+//     FROM products
+//     INNER JOIN categories ON products.cate_id = categories.cate_id
+//     LEFT JOIN comment ON products.pro_id = comment.pro_id
+//     WHERE products.pro_name LIKE '%$keyw%'
+//     GROUP BY products.pro_id
+//     ORDER BY soluong DESC;";
+//     $result = pdo_query($sql);
+//     return $result;
+// }
+
+//show phim ra trang chu
+function show_phim_dangchieu()
+{
+    $sql = "select * from phim where trang_thai_phim='Phim đang chiếu' order by id_phim desc";
     $result = pdo_query($sql);
     return $result;
 }
 
-//show product with keywords
-function show_Pro_Key($keyw = "") {
-    $sql = "SELECT products.*, categories.cate_name, COUNT(comment.pro_id) AS soluong
-    FROM products
-    INNER JOIN categories ON products.cate_id = categories.cate_id
-    LEFT JOIN comment ON products.pro_id = comment.pro_id
-    WHERE products.pro_name LIKE '%$keyw%'
-    GROUP BY products.pro_id
-    ORDER BY soluong DESC;";
+function show_phim_sapchieu()
+{
+    $sql = "select * from phim where trang_thai_phim='Phim Sắp chiếu' order by id_phim desc";
+    $result = pdo_query($sql);
+    return $result;
+}
+
+function show_phim_vebantruoc()
+{
+    $sql = "select * from phim where trang_thai_phim='Vé bán trước' order by id_phim desc";
     $result = pdo_query($sql);
     return $result;
 }
