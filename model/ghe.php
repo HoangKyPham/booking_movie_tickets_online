@@ -1,4 +1,11 @@
 <?php 
+
+function list_ghe(){
+    $sql = "select * from ghe";
+    $result = pdo_query($sql);
+    return $result;
+}
+
 function show_hang_ghe_A(){
     $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'A%' ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
