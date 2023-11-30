@@ -17,6 +17,7 @@ $phim_vebantruoc = show_phim_vebantruoc();
 
 $show_do_an = show_do_an();
 $show_ve = show_ve();
+$list_ghe = list_ghe();
 
 $show_hang_ghe_A = show_hang_ghe_A();
 $show_hang_ghe_B = show_hang_ghe_B();
@@ -71,16 +72,6 @@ if (isset($_GET['act'])) {
             break;
             // qua trinh dat ve
 
-            // case 'chon_ve': // doi ten thanh show dat ve 
-            //     // if(isset($_POST['btn_dat_ve']) && ($_POST['btn_dat_ve'])){
-            //     //     $so_luong_ve_thuong = $_POST['so_luong_phong_chieu_thuong'];
-            //     //     $so_luong_ve_vip = $_POST['so_luong_phong_chieu_vip'];
-            //     //     $add_ve = [$so_luong_ve_thuong,$so_luong_ve_vip];
-            //     //     array_push($_SESSION['mycart'],$add_ve);
-            //     //     header('index.php?act=datghe');
-            //     // }
-            //     include 'view/datghe_bongnc/web/chon_ve.php';
-            //     break;
         case 'chon_rap_ca_chieu':
             if (isset($_POST['btn_rap_ca_chieu']) && ($_POST['btn_rap_ca_chieu'])) {
                 $id_phim = $_POST['id_phim'];

@@ -649,9 +649,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php
 if (isset($_SESSION['my_show'])) {
-    echo '<pre>';
-    print_r($_SESSION['my_show']);
-    echo '</pre>';
 ?>
     <h1></h1>
     <div class="contaicon">

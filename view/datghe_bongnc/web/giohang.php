@@ -662,7 +662,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <?php
         if (isset($_SESSION['my_ticket']) && $_SESSION['my_seat'] && $_SESSION['my_bonus'] && $_SESSION['my_show']) {
         ?>
-            <form action="index.php?act=thanh_toan" method="post">
                 <h2 style="text-align: center; font-size: 30px; font-weight: bold; color: #ffffff; padding: 30px 0; border-bottom: 1px solid #ccc;">Giỏ hàng của bạn</h2>
                 <div class="form_muc">
                     <ul>
