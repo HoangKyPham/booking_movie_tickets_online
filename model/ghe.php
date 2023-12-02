@@ -76,6 +76,11 @@ function show_hang_ghe_J(){
     
 }
 
+function update_trang_thai_ghe($id_ghe){
+    $sql = "update ghe set trang_thai = '1' where id_ghe = $id_ghe";
+    pdo_execute($sql);
+}
+
 
 
 

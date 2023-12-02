@@ -648,7 +648,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </style>
 
 <?php
-if (isset($_SESSION['my_show'])) {
+if (isset($_SESSION['my_show']) && count($_SESSION['my_show'])!=0) {
 ?>
     <h1></h1>
     <div class="contaicon">
