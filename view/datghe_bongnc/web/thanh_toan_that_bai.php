@@ -638,14 +638,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     }
 
     /*--//responsive--*/
-</style>
-
-
-<h1>Thanh toán thất bại</h1>
-<div class="contaicon">
-</div>
-
-<style>
     .formbongnuoc {
         display: flex;
         justify-content: center;
@@ -673,3 +665,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         margin: 0px;
     }
 </style>
+
+
+<?php
+if (isset($_SESSION['my_info']) && count($_SESSION['my_info']) != 0) {
+    $list_sessions = ['my_show', 'my_ticket', 'my_seat', 'my_bonus', 'my_info', 'my_total'];
+        foreach ($list_sessions as $session) {
+        unset($_SESSION[$session]);
+    }
+?>
+    <h1>Thanh toán thất bại</h1>
+    <div class="contaicon">
+    </div>
+<?php
+} else {
+    header('Location:index.php');
+}
+?>

@@ -638,11 +638,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     }
 
     /*--//responsive--*/
-    .contaicon{
-        display: flex ;
+    .contaicon {
+        display: flex;
         flex-direction: column;
         width: 80%;
-    } 
+    }
+
     .formbongnuoc {
         display: flex;
         justify-content: center;
@@ -670,44 +671,54 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         margin: 0px;
     }
 </style>
-
-<body>
-    <h1></h1>
-    <div class="contaicon">
-        <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 100px; color: #ffffff;">Combo Bỏng&Nước</h2>
-        <form action="index.php?act=dat_bong_nuoc" method="post">
-        <div class="formbongnuoc">
-            <?php
-            foreach ($show_do_an as $doan_item) {
-            ?>
-                <section class="combo-bongnc">
-                <input type="hidden" name="id_<?php echo $doan_item['id_do_an']; ?>" value="<?php echo $doan_item['id_do_an']; ?>">
-                    <img style="width: 150px; height: 150px; object-fit:cover;" src="Assets/img/<?php echo $doan_item['img']; ?>" alt="">
-                    <ul>
-                        <li>
-                            <p><?php echo $doan_item['ten_do_an'] ?></p>
-                            <input type="hidden" name="ten_<?php echo $doan_item['id_do_an']?>" value="<?php echo $doan_item['ten_do_an']?>">
-                        </li>
-                        <li>
-                            <p>* <?php echo $doan_item['mo_ta'] ?></p>
-                        </li>
-                        <li>
-                            <p>Giá: <?php echo $doan_item['gia'] ?>đ</p>
-                            <input type="hidden" name="gia_<?php echo $doan_item['id_do_an']?>" value="<?php echo $doan_item['gia']?>">
-                        </li>
-                        <li>
-                            <div class="counter">
-                            <input type="number" id="Numseats" name="so_luong_<?php echo $doan_item['id_do_an']; ?>" min="1">
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-            <?php
-            }
-            ?>
-            </section>
+<?php
+if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat'])!=0) {
+?>
+    <body>
+        <h1></h1>
+        <div class="contaicon">
+            <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 100px; color: #ffffff;">Combo Bỏng&Nước</h2>
+            <form action="index.php?act=dat_bong_nuoc" method="post">
+                <div class="formbongnuoc">
+                    <?php
+                    foreach ($show_do_an as $doan_item) {
+                    ?>
+                        <section class="combo-bongnc">
+                            <input type="hidden" name="id_<?php echo $doan_item['id_do_an']; ?>" value="<?php echo $doan_item['id_do_an']; ?>">
+                            <img style="width: 150px; height: 150px; object-fit:cover;" src="Assets/img/<?php echo $doan_item['img']; ?>" alt="">
+                            <ul>
+                                <li>
+                                    <p><?php echo $doan_item['ten_do_an'] ?></p>
+                                    <input type="hidden" name="ten_<?php echo $doan_item['id_do_an'] ?>" value="<?php echo $doan_item['ten_do_an'] ?>">
+                                </li>
+                                <li>
+                                    <p>* <?php echo $doan_item['mo_ta'] ?></p>
+                                </li>
+                                <li>
+                                    <p>Giá: <?php echo $doan_item['gia'] ?>đ</p>
+                                    <input type="hidden" name="gia_<?php echo $doan_item['id_do_an'] ?>" value="<?php echo $doan_item['gia'] ?>">
+                                </li>
+                                <li>
+                                    <div class="counter">
+                                        <input type="number" id="Numseats" name="so_luong_<?php echo $doan_item['id_do_an']; ?>" min="1">
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                    <?php
+                    }
+                    ?>
+                    </section>
+                </div>
+                <input name="btn_bong_nuoc" type="submit" value="Xác nhận" style="display: flex; justify-content: center; padding-bottom: 50px;"></input>
+            </form>
         </div>
-            <input name="btn_bong_nuoc" type="submit" value="Xác nhận" style="display: flex; justify-content: center; padding-bottom: 50px;"></input>
-        </form>
-    </div>
-</body>
+    </body>
+
+
+<?php
+} else {
+    header('Location:index.php');
+}
+
+?>

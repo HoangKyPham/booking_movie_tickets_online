@@ -1,7 +1,7 @@
 <?php
-function insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai, $mat_khau)
+function insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai)
 {
-    $sql_user = "INSERT INTO user VALUE(null,'$email','$ho_ten','$so_dien_thoai','$dia_chi',$mat_khau)";
+    $sql_user = "INSERT INTO user VALUE(null,'$email','$ho_ten','$so_dien_thoai','$dia_chi')";
     pdo_execute($sql_user);
 }
 
@@ -23,7 +23,7 @@ function sign_Users($email, $pass) // them mat khau vao bang role
     $sql = "select user.*,role.*
             from user
             inner join role on user.id_user = role.id_user 
-            where email = '$email' and mat_khau = '$pass' and vai_tro = 1";
+            where user.email = '$email' and role.mat_khau = '$pass' and role.vai_tro = 1";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -32,7 +32,7 @@ function sign_change_pass($email)
     $sql = "select user.*,role.*
             from user
             inner join role on user.id_user = role.id_user 
-            where email = '$email' and vai_tro = 1";
+            where user.email = '$email' and role.vai_tro = 1";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -62,13 +62,17 @@ function query_user_payment($email){
     return $result;
 }
 
+function check_info(){
+
+
+}
 
 
 
 
 
 
-
+///
 
 function restore_Pass($user_id, $new_pass)
 {

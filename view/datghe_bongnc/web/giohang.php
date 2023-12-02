@@ -653,15 +653,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     }
 
     /*--//responsive--*/
+    .payment-form {
+        display: flex;
+        justify-content: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    #selectedPayment {
+        margin-top: 20px;
+    }
 </style>
-<h1></h1>
-<div class="contaicon">
-    <!-- Xác nhận -->
-    <div class="formxacnhan">
-    <form action="index.php?act=thanh_toan" method="post">
-        <?php
-        if (isset($_SESSION['my_ticket']) && $_SESSION['my_seat'] && $_SESSION['my_bonus'] && $_SESSION['my_show']) {
-        ?>
+
+<?php
+if (isset($_SESSION['my_bonus']) && count($_SESSION['my_bonus']) != 0) {
+?>
+    <h1></h1>
+    <div class="contaicon">
+        <!-- Xác nhận -->
+        <div class="formxacnhan">
+            <form action="index.php?act=thanh_toan" method="post">
                 <h2 style="text-align: center; font-size: 30px; font-weight: bold; color: #ffffff; padding: 30px 0; border-bottom: 1px solid #ccc;">Giỏ hàng của bạn</h2>
                 <div class="form_muc">
                     <ul>
@@ -738,153 +752,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </li>
                     </ul>
                 </div>
+        </div>
     </div>
-</div>
 
-<!--  -->
-<h2 style="text-align: center; font-size: 30px; font-weight: bold; color: #ffffff; padding-top: 30px;">Chi tiết cá nhân</h2>
-<div class="formttcanhan">
-    <ul>
-        <li>
-            <label for="">Tên*</label>
-            <input type="text" require name="name">
-        </li>
-        <li>
-            <label for="">Email*</label>
-            <input type="text" require name="email">
-        </li>
-        <li>
-            <label for="">Điện thoại*</label>
-            <input type="text" require name="phone">
-        </li>
-        <li>
-            <label for="">Địa chỉ*</label>
-            <input type="text" require name="address">
-        </li>
-    </ul>
-</div>
-<div style="text-align: center;">
-    <input type="submit" name="redirect" value="Thanh toán">
-</div>
-</form>
-<a href="index.php?act=huy_dat_ve"><input type="submit" style="margin: 30px 15px;" value="Hủy đặt vé"></input></a>
+    <!--  -->
+    <h2 style="text-align: center; font-size: 30px; font-weight: bold; color: #ffffff; padding-top: 30px;">Chi tiết cá nhân</h2>
+    <div class="formttcanhan">
+        <ul>
+            <li>
+                <label for="">Tên*</label>
+                <input type="text" require name="name">
+            </li>
+            <li>
+                <label for="">Email*</label>
+                <input type="text" require name="email">
+            </li>
+            <li>
+                <label for="">Điện thoại*</label>
+                <input type="text" require name="phone">
+            </li>
+            <li>
+                <label for="">Địa chỉ*</label>
+                <input type="text" require name="address">
+            </li>
+        </ul>
+    </div>
+    <div style="text-align: center;">
+        <input type="submit" name="redirect" value="Thanh toán">
+    </div>
+    </form>
+    <a href="index.php?act=huy_dat_ve"><input type="submit" style="margin: 30px 15px;" value="Hủy đặt vé"></input></a>
 <?php
-        }
+}else {
+    header('Location:index.php');
+}
 ?>
 
-<style>
-    .payment-form {
-        display: flex;
-        justify-content: center;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    #selectedPayment {
-        margin-top: 20px;
-    }
-</style>
-<!-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            const selectedPayment = document.getElementById('selectedPayment');
-
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    updateSelectedPayment();
-                });
-            });
-
-            function updateSelectedPayment() {
-                const selectedPaymentArray = [];
-                checkboxes.forEach(function(checkbox) {
-                    if (checkbox.checked) {
-                        selectedPaymentArray.push(checkbox.value);
-                    }
-                });
-
-                selectedPayment.textContent = 'Loại thanh toán đã chọn: ' + selectedPaymentArray.join(', ');
-            }
-        });
-    </script> -->
-<!-- <h2 style="text-align: center; font-size: 30px; font-weight: bold; color: #ffffff; padding: 20px;">Loại thẻ thanh toán</h2>
-<div class="payment-form">
-    <ul>
-        <li>
-            <input type="checkbox" id="creditCard" name="paymentType" value="Momo">Momo
-        </li>
-        <li>
-            <input type="checkbox" id="debitCard" name="paymentType" value="Zalopay">Zalopay
-        </li>
-        <li>
-            <input type="checkbox" id="paypal" name="paymentType" value="PayPal">PayPal
-        </li>
-    </ul>
-</div>
-<div id="selectedPayment" style="text-align: center;">Loại thanh toán đã chọn: </div>
-<div style="text-align: center;">
-    <button style="margin: 30px 15px;">Hủy đặt vé</button>
-    <button>Thanh toán</button>
-</div> -->
-
-<!-- js -->
-<script src="js/jquery-2.2.3.min.js"></script>
-<!-- //js -->
-<!-- script for seat selection -->
-<!-- <script>
-        function onLoaderFunc() {
-            $(".seatStructure *").prop("disabled", true);
-            $(".displayerBoxes *").prop("disabled", true);
-        }
-
-        function takeData() {
-            if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
-                alert("Please Enter your Name and Number of Seats");
-            } else {
-                $(".inputForm *").prop("disabled", true);
-                $(".seatStructure *").prop("disabled", false);
-                document.getElementById("notification").innerHTML =
-                    "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
-            }
-        }
-
-
-        function updateTextArea() {
-
-            if ($("input:checked").length == ($("#Numseats").val())) {
-                $(".seatStructure *").prop("disabled", true);
-
-                var allNameVals = [];
-                var allNumberVals = [];
-                var allSeatsVals = [];
-
-                //Storing in Array
-                allNameVals.push($("#Username").val());
-                allNumberVals.push($("#Numseats").val());
-                $('#seatsBlock :checked').each(function() {
-                    allSeatsVals.push($(this).val());
-                });
-
-                //Displaying 
-                $('#nameDisplay').val(allNameVals);
-                $('#NumberDisplay').val(allNumberVals);
-                $('#seatsDisplay').val(allSeatsVals);
-            } else {
-                alert("Please select " + ($("#Numseats").val()) + " seats")
-            }
-        }
-
-
-        function myFunction() {
-            alert($("input:checked").length);
-        } -->
-
-<!-- /*
-function getCookie(cname) {
-var name = cname + "=";
-var ca = document.cookie.split(';');
-for(var i = 0; i < ca.length; i++) { var c=ca[i]; while (c.charAt(0)==' ' ) { c=c.substring(1); } if (c.indexOf(name)==0) { return c.substring(name.length, c.length); } } return "" ; } */ // $(":checkbox").click(function() { // if ($("input:checked").length==($("#Numseats").val())) { // $(":checkbox").prop('disabled', true); // $(':checked').prop('disabled', false); // } else { // $(":checkbox").prop('disabled', false); // } // }); // </script>
-    //script for seat selection -->

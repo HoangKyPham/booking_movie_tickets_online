@@ -33,6 +33,7 @@ function insert_ve($id_suat_chieu, $id_ghe, $trang_thai, $id_gia_ve,$id_pay){
 
 function insert_vnpay(
     $id_user, 
+    $id_do_an,
     $vnp_Amount, 
     $vnp_BankCode, 
     $vnp_BankTranNo, 
@@ -45,7 +46,7 @@ function insert_vnpay(
     $vnp_TransactionStatus, 
     $vnp_TxnRef, 
     $vnp_SecureHash){
-        $sql = "INSERT INTO vnpay VALUES (null,'$id_user', '$vnp_Amount', '$vnp_BankCode', '$vnp_BankTranNo', '$vnp_CardType', '$vnp_Orderinfo', '$vnp_PayDate', '$vnp_ResponseCode', '$vnp_TmnCode', '$vnp_TransactionNo', '$vnp_TransactionStatus', '$vnp_TxnRef', '$vnp_SecureHash')";
+        $sql = "INSERT INTO vnpay VALUES (null,'$id_user','$id_do_an', '$vnp_Amount', '$vnp_BankCode', '$vnp_BankTranNo', '$vnp_CardType', '$vnp_Orderinfo', '$vnp_PayDate', '$vnp_ResponseCode', '$vnp_TmnCode', '$vnp_TransactionNo', '$vnp_TransactionStatus', '$vnp_TxnRef', '$vnp_SecureHash')";
         pdo_execute($sql);
     }
 function query_payment($email){
