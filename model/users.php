@@ -12,9 +12,9 @@ function query_insert_role_User()
     return $result;
 }
 
-function insert_Role($id_user)
+function insert_Role($id_user,$mat_khau)
 {
-    $sql_thong_tin = "insert into role value(null,1,$id_user)";
+    $sql_thong_tin = "insert into role value(null,1,$id_user,$mat_khau)";
     pdo_execute($sql_thong_tin);
 }
 
@@ -69,23 +69,27 @@ function check_info(){
 
 
 
-
-
-
 ///
 
 function restore_Pass($user_id, $new_pass)
 {
-    $sql = "update user set mat_khau= '$new_pass' WHERE id_user = '$user_id'";
+    $sql = "update role set mat_khau= '$new_pass' WHERE id_user = '$user_id'";
     pdo_execute($sql);
 }
 
 function edit_query_user($user_id, $old_pass)
 {
-    $sql = "select * from user where id_user = $user_id and mat_khau = $old_pass";
+    $sql = "select user.*,role.* 
+    from user 
+    inner join role on user.id_user = role.id_user
+    where user.id_user = $user_id and role.mat_khau = $old_pass";
     $result = pdo_query_one($sql);
     return $result;
 }
+
+
+
+///
 
 function update_Users($user_id, $user_name, $pass, $email)
 {

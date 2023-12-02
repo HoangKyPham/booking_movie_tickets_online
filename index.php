@@ -395,6 +395,7 @@ if (isset($_GET['act'])) {
                 $email = $_POST['email'];
                 $result = sign_change_pass($email);
                 if ($result) {
+                    $_SESSION['change_password'] = $result;
                     header('Location:index.php?act=doimk');
                 } else {
                     echo "Nhap sai thong tin tai khoan hoac mat khau";
@@ -405,14 +406,15 @@ if (isset($_GET['act'])) {
         case 'doimk':
             if (isset($_POST['btn_restore']) && ($_POST['btn_restore'])) {
                 $old_pass = $_POST['old_pass'];
-                $new_pass = $_POST['new_pass'];
+                $new_pass_1 = $_POST['new_pass_1'];
+                $new_pass_2 = $_POST['new_pass_2'];
                 $user_id = $_POST['id_user'];
                 $result = edit_query_user($user_id, $old_pass);
-                if ($result) {
-                    restore_Pass($user_id, $new_pass);
+                if ($result && $new_pass_1 == $new_pass_2) {
+                    restore_Pass($user_id, $new_pass_2);
                     header('Location:index.php?act=login');
                 } else {
-                    echo 'Nhap sai mat khau cu';
+                    echo 'Nhap sai mat khau';
                 }
             }
             include 'account/doimk.php';
@@ -424,9 +426,9 @@ if (isset($_GET['act'])) {
                 $ho_ten = $_POST['ho_ten'];
                 $so_dien_thoai = $_POST['so_dien_thoai'];
                 $dia_chi = $_POST['dia_chi'];
-                insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai, $mat_khau);
+                insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai);
                 $result = query_insert_role_User();
-                insert_Role($result['id_user']);
+                insert_Role($result['id_user'],$mat_khau);
                 header('Location:index.php?act=login');
             }
             include 'account/signup.php';
