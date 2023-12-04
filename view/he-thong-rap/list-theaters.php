@@ -34,10 +34,13 @@
                         </div>
                     </div>
                     <div class="row tr-movie-active">
+                        <?php foreach ($show_rap as $row) {
+                            extract($row);
+                         ?>
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
                             <div class="movie-item movie-item-three mb-50">
                                 <div class="movie-poster">
-                                    <img src="img/poster/ucm_poster01.jpg" alt="">
+                                    <img style="width:302.5px;height:429.29px;object-fit:cover;" src="Assets/img/<?php echo $row['img']; ?>" alt="">
                                     <ul class="overlay-btn">
                                         <li class="rating">
                                             <i class="fas fa-star"></i>
@@ -52,14 +55,15 @@
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">Women's Day</a></h5>
-                                        <span class="date">2021</span>
+                                        <h5 class="title"><a href="movie-details.html"><?php echo $row['dia_diem'] ?></a></h5>
+
+                                        <!-- <span class="date">2021</span> -->
                                     </div>
                                     <div class="bottom">
                                         <ul>
-                                            <li><span class="quality">hd</span></li>
+                                            <li><span class="quality">Chia sẻ</span></li>
                                             <li>
-                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <!-- <span class="duration"><i class="far fa-clock"></i> 128 min</span> -->
                                                 <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                             </li>
                                         </ul>
@@ -67,7 +71,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one">
+                        <?php  } ?>
+                        <!-- <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one">
                             <div class="movie-item movie-item-three mb-50">
                                 <div class="movie-poster">
                                     <img src="img/poster/ucm_poster02.jpg" alt="">
@@ -297,7 +302,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-12">

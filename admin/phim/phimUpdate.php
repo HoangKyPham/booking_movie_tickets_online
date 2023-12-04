@@ -62,20 +62,6 @@ extract($result);
                                     ?>
                                 </select>
                                 <br>
-                                <label for="exampleInputEmail1">Rạp</label>
-                                <br>
-                                <select name="id_rap" id="">
-                                    <?php
-                                    foreach ($result_rap as $row_rap) {
-                                    ?>
-                                        <option value="<?php echo $row_rap['id_rap']; ?>" <?php if ($row_rap['id_rap'] == $result['id_rap'])   echo 'selected'; ?>>
-                                            <?php echo $row_rap['ten_rap']; ?>
-                                        </option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                                <br>
                                 <label for="exampleInputEmail1">Mã khuyến mãi</label>
                                 <br>    
                                 <select name="id_khuyen_mai" id="">
@@ -84,6 +70,20 @@ extract($result);
                                     ?>
                                         <option value="<?php echo $row_khuyenmai['id_khuyen_mai']; ?>" <?php if ($row_khuyenmai['id_khuyen_mai'] == $result['id_khuyen_mai'])   echo 'selected'; ?>>
                                             <?php echo $row_khuyenmai['ten_khuyen_mai']; ?>
+                                        </option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                                <br>
+                                <label for="exampleInputEmail1">Thể loại</label>
+                                <br>    
+                                <select name="id_the_loai" id="">
+                                    <?php
+                                    foreach ($result_loai as $row_loai) {
+                                    ?>
+                                        <option value="<?php echo $row_loai['id_the_loai']; ?>" <?php if ($row_loai['id_the_loai'] == $result['id_the_loai'])   echo 'selected'; ?>>
+                                            <?php echo $row_loai['ten_the_loai']; ?>
                                         </option>
                                     <?php
                                     }

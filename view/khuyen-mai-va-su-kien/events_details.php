@@ -29,10 +29,13 @@
             <section class="blog-details-area blog-bg" data-background="img/bg/blog_bg.jpg">
                 <div class="container">
                     <div class="row">
+                        <?php 
+                         extract($events_detail);
+                        ?>
                         <div class="col-lg-8">
                             <div class="blog-post-item blog-details-wrap">
                                 <div class="blog-post-thumb">
-                                    <a href="blog-details.html"><img src="img/poster/su.jpg" alt=""></a>
+                                    <a href="blog-details.html"><img src="Assets/img/<?php echo $events_detail['img']; ?>" alt="" style="width: 856.66px; height: 451.86px; object-fit:cover"></a>
                                 </div>
                                 <div class="blog-post-content">
                                     <div class="banner-meta" style="height: 10px;">
@@ -45,7 +48,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <h2 class="title">GIÁ VÉ ƯU ĐÃI CHO SUẤT KHUYA</h2>
+                                    <h2 class="title"><?php echo $events_detail['ten_khuyen_mai'] ?></h2>
                                     <p style="font-weight: bold; color: #e4d804;">– Chương trình: ƯU ĐÃI SUẤT CHIẾU KHUYA</p>
                                 <p><span style="color: #fff;">– Hình thức áp dụng:</span> Giá vé 2D đặc biệt cho khách hàng xem phim vào các suất
                                     chiếu sau 22:00</p>
@@ -77,6 +80,7 @@
                             </div>
                        
                         </div>
+                        <?php ?>
                         <div class="col-lg-4">
                             <aside class="blog-sidebar">
                                 
