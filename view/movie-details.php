@@ -166,7 +166,6 @@
 
                     <?php
                     foreach ($ngay_suat_chieu as $row_ngay_chieu) {
-                        date_default_timezone_set('Asia/Ho_Chi_Minh');
                         $ngayHienTai = date("Y-m-d");
                         if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai ) {
                                     
