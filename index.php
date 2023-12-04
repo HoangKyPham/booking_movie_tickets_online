@@ -200,7 +200,7 @@ if (isset($_GET['act'])) {
             include 'view/datghe_bongnc/web/giohang.php';
             break;
         case 'thanh_toan':
-
+            
             if (isset($_POST['redirect'])) {
                 $name = $_POST['name'];
                 $phone = $_POST['phone'];
