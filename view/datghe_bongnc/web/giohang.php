@@ -651,7 +651,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         width: 300px;
         height: 30px;
     }
-
+    .input_chon{
+    background: #f5f5f5;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+.input_chon:hover{
+    background-color: #e4d804;
+}
     /*--//responsive--*/
     .payment-form {
         display: flex;
@@ -667,6 +679,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         margin-top: 20px;
     }
 </style>
+
 
 <?php
 if (isset($_SESSION['my_bonus']) && count($_SESSION['my_bonus']) != 0) {
@@ -711,38 +724,62 @@ if (isset($_SESSION['my_bonus']) && count($_SESSION['my_bonus']) != 0) {
                         <p style="color: #e4d804;">Giá</p>
                         <p style="color: #e4d804;">Cộng</p>
                     </div>
-
-                    <div class="muccon">
-                        <?php
-                        $tong_tien_ve = 0;
-                        foreach ($_SESSION['my_ticket'] as $type => $ticket) : ?>
-                            <?php
-                            if (isset($ticket['so_luong']) && $ticket['so_luong'] > 0) :
-                                $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
-                            ?>
-                                <p><?php echo $ticket['ten_gia_ve'] ?></p>
-                                <p><?php echo $ticket['so_luong'] ?></p>
-                                <p><?php echo $ticket['gia_ve'] ?> VND</p>
-
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                    <div style="margin-left: 12%; padding: 20px 0;">
+                        <p>Quý khách vui lòng kiểm tra lại thông tin trước khi thanh toán</p>
+                        <p style="color: red;">Vé mua sẽ không được đổi hoặc trả lại</p>
+                        <p>Please check the information before purchasing ticket</p>
+                        <p style="color: red;">Purchased ticket can not be changed or refunded</p>
                     </div>
 
-                    <div class="muccon">
-                        <?php
-                        $tong_tien_bonus = 0;
-                        foreach ($_SESSION['my_bonus'] as $type => $bonus) : ?>
-                            <?php
-                            if (isset($bonus['so_luong']) && $bonus['so_luong'] > 0) :
-                                $tong_tien_bonus += $bonus['so_luong'] * $bonus['gia_do_an'];
+                    <div class="noidung_muc">
+                        <div class="muccon">
+                            <p style="color: #e4d804;">Mục</p>
+                            <p style="color: #e4d804;">Số lượng</p>
+                            <p style="color: #e4d804;">Giá</p>
+                            <p style="color: #e4d804;">Cộng</p>
+                        </div>
 
-                            ?>
-                                <p><?php echo $bonus['ten_do_an'] ?></p>
-                                <p><?php echo $bonus['so_luong'] ?></p>
-                                <p><?php echo $bonus['gia_do_an'] ?> VND</p>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                        <div class="muccon">
+                            <?php
+                            $tong_tien_ve = 0;
+                            foreach ($_SESSION['my_ticket'] as $type => $ticket) : ?>
+                                <?php
+                                if (isset($ticket['so_luong']) && $ticket['so_luong'] > 0) :
+                                    $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
+                                ?>
+                                    <p><?php echo $ticket['ten_gia_ve'] ?></p>
+                                    <p><?php echo $ticket['so_luong'] ?></p>
+                                    <p><?php echo $ticket['gia_ve'] ?> VND</p>
+
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="muccon">
+                            <?php
+                            $tong_tien_bonus = 0;
+                            foreach ($_SESSION['my_bonus'] as $type => $bonus) : ?>
+                                <?php
+                                if (isset($bonus['so_luong']) && $bonus['so_luong'] > 0) :
+                                    $tong_tien_bonus += $bonus['so_luong'] * $bonus['gia_do_an'];
+
+                                ?>
+                                    <p><?php echo $bonus['ten_do_an'] ?></p>
+                                    <p><?php echo $bonus['so_luong'] ?></p>
+                                    <p><?php echo $bonus['gia_do_an'] ?> VND</p>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
+                    <div class="tongtien">
+                        <ul>
+                            <li style="display: flex; margin-right: 390px;">
+                                <p style="font-size: 20px; font-weight: 600;">Tổng cộng:</p>
+                                <p style="position: relative; left: 420px; font-size: 20px; font-weight: 600;"><?php echo $_SESSION['my_total'][0]; ?></p>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
                 <div class="tongtien">
                     <ul>

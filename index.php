@@ -10,17 +10,45 @@ include "model/do-an.php";
 include "model/ghe.php";
 include "model/suat-chieu.php";
 include "model/rap.php";
+include "model/thanh_vien.php";
+
+include "model/cinema.php";
+include "model/khuyenmai.php";
+
+$show_rap = show_he_thong_rap();
+$show_promotion = show_khuyen_mai();
 
 $phim_dangchieu = show_phim_dangchieu();
 $phim_sapchieu = show_phim_sapchieu();
 $phim_vebantruoc = show_phim_vebantruoc();
 
+$show_the_loai_phim = show_the_loai_phim();
+$show_movie = show_movie();
+
+// show phim theo thể loại
+$show_phim_bomtan = show_phim_bomtan();
+$show_phim_hoathinh = show_phim_hoathinh();
+$show_phim_tamly = show_phim_tamly();
+$show_phim_kinhdi = show_phim_kinhdi();
+
 $show_do_an = show_do_an();
 $show_ve = show_ve();
 $list_ghe = list_ghe();
 
+$all_user = all_user();
+// $show_thongtin_user = show_thongtin_user();
+// $ls_giaodich = ls_giaodich();
+
 $show_hang_ghe_A = show_hang_ghe_A();
 $show_hang_ghe_B = show_hang_ghe_B();
+$show_hang_ghe_C = show_hang_ghe_C();
+$show_hang_ghe_D = show_hang_ghe_D();
+$show_hang_ghe_E = show_hang_ghe_E();
+$show_hang_ghe_F = show_hang_ghe_F();
+$show_hang_ghe_G = show_hang_ghe_G();
+$show_hang_ghe_H = show_hang_ghe_H();
+$show_hang_ghe_I = show_hang_ghe_I();
+$show_hang_ghe_J = show_hang_ghe_J();
 
 if (!isset($_SESSION['my_show']) || count($_SESSION['my_show']) === 0) {
     $_SESSION['my_show'] = []; // Khởi tạo mảng nếu chưa có
@@ -44,6 +72,19 @@ if (!isset($_SESSION['my_total'])) {
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
+        case 'search_Items':
+            if (isset($_POST['keyw']) && ($_POST['keyw'] != "")) {
+                $keyw = $_POST['keyw'];
+                $result = show_Pro_Key($keyw);
+            } else {
+                $keyw = "";
+                $result = show_Pro_Key($keyw);
+            }
+            include 'view/search_phim.php';
+            break;
+        case 'movie-item':
+                include 'view/movie-item.php';
+                break;
         case 'movie_show_schedule':
             include 'view/lich-chieu/movie-show-schedule.php';
             break;
@@ -57,7 +98,12 @@ if (isset($_GET['act'])) {
             include 'view/khuyen-mai-va-su-kien/sale-events.php';
             break;
         case 'events_details':
-            include 'view/khuyen-mai-va-su-kien/events_details.php';
+            if (isset($_GET['id_khuyen_mai']) && ($_GET['id_khuyen_mai'] > 0)) {
+                $events_detail = loadone_khuyen_mai($_GET['id_khuyen_mai']);
+                include 'view/khuyen-mai-va-su-kien/events_details.php';
+            } else {
+                include 'view/khuyen-mai-va-su-kien/sale-events.php';
+            }
             break;
         case 'movie_details':
             if (isset($_GET['id_phim'])) {
@@ -215,6 +261,7 @@ if (isset($_GET['act'])) {
             }
             if (isset($_POST['redirect'])) {
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+
                 $vnp_Returnurl = "http://localhost/duan1/movflx/index.php?act=xac_minh_thanh_toan";
                 $vnp_TmnCode = "5NC5P2K0";
                 $vnp_HashSecret = "BDMOPKKCZTPNRAMDSHDXRVUMEPOAZSMV";
@@ -225,6 +272,7 @@ if (isset($_GET['act'])) {
                 $vnp_Locale = 'vn';
                 $vnp_BankCode = 'NCB';
                 $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+
                 $inputData = array(
                     "vnp_Version" => "2.1.0",
                     "vnp_TmnCode" => $vnp_TmnCode,
@@ -238,11 +286,13 @@ if (isset($_GET['act'])) {
                     "vnp_OrderType" => $vnp_OrderType,
                     "vnp_ReturnUrl" => $vnp_Returnurl,
                     "vnp_TxnRef" => $vnp_TxnRef,
+
                 );
 
                 if (isset($vnp_BankCode) && $vnp_BankCode != "") {
                     $inputData['vnp_BankCode'] = $vnp_BankCode;
                 }
+
                 ksort($inputData);
                 $query = "";
                 $i = 0;
@@ -271,6 +321,7 @@ if (isset($_GET['act'])) {
                 } else {
                     echo json_encode($returnData);
                 }
+                
             }
             include 'view/datghe_bongnc/web/giohang.php';
             break;
@@ -362,10 +413,10 @@ if (isset($_GET['act'])) {
             }
             break;
         case 'thanh_toan_thanh_cong':
-            include 'view/datghe_bongnc/web/thanh_toan_thanh_cong.php';
+            include 'view/datghe_bongnc/web/thong-bao/tt_thanh_cong.php';
             break;
         case 'thanh_toan_that_bai':
-            include 'view/datghe_bongnc/web/thanh_toan_that_bai.php';
+            include 'view/datghe_bongnc/web/thong-bao/tt_that_bai.php';
             break;
         case 'contact':
             include 'view/lien-he/contact.php';
@@ -374,21 +425,37 @@ if (isset($_GET['act'])) {
             if (isset($_POST['btn_signin']) && ($_POST['btn_signin'])) {
                 $email = $_POST['email'];
                 $pass = $_POST['pass'];
-                $result = sign_Users($email, $pass);
-                if ($result) {
-                    $_SESSION['my_user'] = [
-                        'id_user' => $result['id_user'],
-                        'email' => $result['email'],
-                        'phone' => $result['phone'],
-                        'ho_ten' => $result['ho_ten'],
-                        'dia_chi' => $result['dia_chi']
-                    ];
-                    header('Location: index.php');
+                $check_user = sign_Users($email, $pass);
+                if (is_array($check_user)) {
+                    $_SESSION['user'] = $check_user;
+                    // if ($result['vai_tro']==0) {
+                    //     $_SESSION['user'] = $result;
+                    //     if ($_GET['act'] === 'admin') {
+                    //         header("Location: admin/index.php?act=show_thong_ke");
+                    //     } else {
+                    //         header("Location: index.php");
+                    //     }
+                    // } else {
+
+                    // $_SESSION['my_user'] = [
+                    //     'id_user' => $result['id_user'],
+                    //     'email' => $result['email'],
+                    //     'phone' => $result['phone'],
+                    //     'ho_ten' => $result['ho_ten'],
+                    //     'dia_chi' => $result['dia_chi']
+                    // ];
+                    header('Location: http://localhost/movflx/index.php?act=thanh_vien');
+                    // }
+
                 } else {
-                    echo "Không đăng nhập được";
+                    $erro = "Đăng nhập thất bại: Email hoặc mật khẩu bị sai";
+                   
                 }
             }
             include 'account/signin.php';
+            break;
+        case 'thanh_vien':
+            include 'account/thanhvien.php';
             break;
         case 'quenmk':
             if (isset($_POST['btn_verify']) && $_POST['btn_verify']) {
@@ -421,7 +488,7 @@ if (isset($_GET['act'])) {
             break;
         case 'register':
             if (isset($_POST['btn_register']) && ($_POST['btn_register'])) {
-                $mat_khau = $_POST['pass'];
+                $pass = $_POST['pass'];
                 $email = $_POST['email'];
                 $ho_ten = $_POST['ho_ten'];
                 $so_dien_thoai = $_POST['so_dien_thoai'];
@@ -430,8 +497,10 @@ if (isset($_GET['act'])) {
                 $result = query_insert_role_User();
                 insert_Role($result['id_user'],$mat_khau);
                 header('Location:index.php?act=login');
+                // echo "dk thanh cong";
             }
             include 'account/signup.php';
+            // echo "loi cai cc dcm";
             break;
         case 'register_insert_thong_tin':
             break;

@@ -161,13 +161,16 @@
 
             <!-- gio chieu -->
             <!--  -->
-            <br>
-            <div class="main" style="width: 750px; margin-left: 50px;">
+            <div class="main" style="width: 750px;">
                 <div class="slider slider-nav">
 
                     <?php
                     foreach ($ngay_suat_chieu as $row_ngay_chieu) {
-                    ?>
+                        date_default_timezone_set('Asia/Ho_Chi_Minh');
+                        $ngayHienTai = date("Y-m-d");
+                        if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai ) {
+                                    
+                    ?>              
                         <a href="index.php?act=movie_details&id_phim=<?php echo $id_phim; ?>&date=<?php echo $row_ngay_chieu['ngay_chieu']; ?>">
                             <div>
                                 <h1><?php echo $row_ngay_chieu['ngay_chieu']; ?><br>
@@ -175,7 +178,7 @@
                             </div>
                         </a>
                     <?php
-                    }
+                   } }
                     ?>
                 </div>
 

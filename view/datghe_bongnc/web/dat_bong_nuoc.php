@@ -641,8 +641,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .contaicon {
         display: flex;
         flex-direction: column;
-        width: 80%;
-    }
+    } 
 
     .formbongnuoc {
         display: flex;
@@ -670,7 +669,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         font-size: 1.3em;
         margin: 0px;
     }
+    .input_chon{
+    background: #f5f5f5;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
+    margin-left: 650px;
+    margin-top: 70px;
+}
+.input_chon:hover{
+    background-color: #e4d804;
+}
+
 </style>
+
 <?php
 if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat'])!=0) {
 ?>
@@ -720,3 +736,4 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat'])!=0) {
 }
 
 ?>
+

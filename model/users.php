@@ -1,4 +1,5 @@
 <?php
+
 function insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai)
 {
     $sql_user = "INSERT INTO user VALUE(null,'$email','$ho_ten','$so_dien_thoai','$dia_chi')";
@@ -23,7 +24,8 @@ function sign_Users($email, $pass) // them mat khau vao bang role
     $sql = "select user.*,role.*
             from user
             inner join role on user.id_user = role.id_user 
-            where user.email = '$email' and role.mat_khau = '$pass' and role.vai_tro = 1";
+            where email = '$email' and pass = '$pass' and vai_tro = 1";
+
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -56,7 +58,8 @@ function insert_info_payment($name, $phone, $email, $address)
     pdo_execute($sql);
 }
 
-function query_user_payment($email){
+function query_user_payment($email)
+{
     $sql = "select * from user where email = '$email'";
     $result = pdo_query_one($sql);
     return $result;
@@ -108,4 +111,23 @@ function delete_User($user_id)
 {
     $sql = "delete from users where user_id = $user_id";
     pdo_execute($sql);
+}
+
+
+function all_user()
+{
+    $sql = "SELECT * FROM USER";
+    $result = pdo_query($sql);
+    return $result;
+}
+
+function check_tk_admin($email, $pass)
+{
+    $sql = "SELECT * FROM user INNER JOIN role on user.id_user = role.id_user where email='" . $email . "' and pass='" . $pass . "'";
+    $result = pdo_query($sql);
+    if (count($result) >= 0) {
+        return $result['0']['vai_tro'];
+    } else {
+        return 0;
+    }
 }
