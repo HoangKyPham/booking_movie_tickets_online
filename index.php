@@ -33,6 +33,7 @@ $show_phim_kinhdi = show_phim_kinhdi();
 
 $show_do_an = show_do_an();
 $show_ve = show_ve();
+$list_ghe = list_ghe();
 
 $all_user = all_user();
 // $show_thongtin_user = show_thongtin_user();
@@ -117,16 +118,6 @@ if (isset($_GET['act'])) {
             break;
             // qua trinh dat ve
 
-            // case 'chon_ve': // doi ten thanh show dat ve 
-            //     // if(isset($_POST['btn_dat_ve']) && ($_POST['btn_dat_ve'])){
-            //     //     $so_luong_ve_thuong = $_POST['so_luong_phong_chieu_thuong'];
-            //     //     $so_luong_ve_vip = $_POST['so_luong_phong_chieu_vip'];
-            //     //     $add_ve = [$so_luong_ve_thuong,$so_luong_ve_vip];
-            //     //     array_push($_SESSION['mycart'],$add_ve);
-            //     //     header('index.php?act=datghe');
-            //     // }
-            //     include 'view/datghe_bongnc/web/chon_ve.php';
-            //     break;
         case 'chon_rap_ca_chieu':
             if (isset($_POST['btn_rap_ca_chieu']) && ($_POST['btn_rap_ca_chieu'])) {
                 $id_phim = $_POST['id_phim'];
@@ -174,7 +165,8 @@ if (isset($_GET['act'])) {
                     $ten_ghe_A = $ghe_A['ten_ghe'];
                     $gia_ghe_A = $ghe_A['gia'];
                     $id_ghe_A = $ghe_A['id_ghe'];
-                    if (isset($_POST[$ten_ghe_A]) && $_POST[$ten_ghe_A] === $ten_ghe_A) {
+                    $trang_thai_ghe = $ghe_A['trang_thai'];
+                    if (isset($_POST[$ten_ghe_A]) && $_POST[$ten_ghe_A] === $ten_ghe_A && $trang_thai_ghe == 0) {
                         $selected_seats[] = [
                             'ten_ghe' => $ten_ghe_A,
                             'gia' => $gia_ghe_A,
@@ -186,7 +178,8 @@ if (isset($_GET['act'])) {
                     $ten_ghe_B = $ghe_B['ten_ghe'];
                     $gia_ghe_B = $ghe_B['gia'];
                     $id_ghe_B = $ghe_B['id_ghe'];
-                    if (isset($_POST[$ten_ghe_B]) && $_POST[$ten_ghe_B] === $ten_ghe_B) {
+                    $trang_thai_ghe = $ghe_B['trang_thai'];
+                    if (isset($_POST[$ten_ghe_B]) && $_POST[$ten_ghe_B] === $ten_ghe_B && $trang_thai_ghe == 0) {
                         $selected_seats[] = [
                             'ten_ghe' => $ten_ghe_B,
                             'gia' => $gia_ghe_B,
@@ -224,7 +217,10 @@ if (isset($_GET['act'])) {
             include 'view/datghe_bongnc/web/dat_bong_nuoc.php';
             break;
         case 'huy_dat_ve':
-            session_destroy();
+            $list_sessions = ['my_show', 'my_ticket', 'my_seat', 'my_bonus', 'my_info', 'my_total'];
+            foreach ($list_sessions as $session) {
+                unset($_SESSION[$session]);
+            }
             header('Location:index.php');
             break;
         case 'view_cart':
@@ -250,6 +246,7 @@ if (isset($_GET['act'])) {
             include 'view/datghe_bongnc/web/giohang.php';
             break;
         case 'thanh_toan':
+            
             if (isset($_POST['redirect'])) {
                 $name = $_POST['name'];
                 $phone = $_POST['phone'];
@@ -264,11 +261,11 @@ if (isset($_GET['act'])) {
             }
             if (isset($_POST['redirect'])) {
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                $vnp_Returnurl = "http://localhost/movflx/index.php?act=xac_minh_thanh_toan";
-                $vnp_TmnCode = "5NC5P2K0"; //Mã website tại VNPAY 
-                $vnp_HashSecret = "BDMOPKKCZTPNRAMDSHDXRVUMEPOAZSMV"; //Chuỗi bí mật
 
-                $vnp_TxnRef = rand(00, 9999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+                $vnp_Returnurl = "http://localhost/duan1/movflx/index.php?act=xac_minh_thanh_toan";
+                $vnp_TmnCode = "5NC5P2K0";
+                $vnp_HashSecret = "BDMOPKKCZTPNRAMDSHDXRVUMEPOAZSMV";
+                $vnp_TxnRef = rand(00, 9999); 
                 $vnp_OrderInfo = "Thanh toán vé xem phim";
                 $vnp_OrderType = "billpayment";
                 $vnp_Amount = $_SESSION['my_total'][0] * 100;
@@ -295,7 +292,7 @@ if (isset($_GET['act'])) {
                 if (isset($vnp_BankCode) && $vnp_BankCode != "") {
                     $inputData['vnp_BankCode'] = $vnp_BankCode;
                 }
-              
+
                 ksort($inputData);
                 $query = "";
                 $i = 0;
@@ -326,7 +323,7 @@ if (isset($_GET['act'])) {
                 }
                 
             }
-            include "view/datghe_bongnc/web/giohang.php";
+            include 'view/datghe_bongnc/web/giohang.php';
             break;
         case 'xac_minh_thanh_toan':
             // Xử lý khi thanh toán thành công
@@ -362,7 +359,6 @@ if (isset($_GET['act'])) {
                             $email = $info['email'];
                             $address = $info['address'];
                             update_info_payment($id_user, $name, $phone, $email, $address);
-                            
                         }
                     }
                 } else {
@@ -374,30 +370,29 @@ if (isset($_GET['act'])) {
                     insert_info_payment($name, $phone, $email, $address);
                 }
 
-                 //insert vnpay
-                 $user = query_user_payment($email);
-                 // $id_do_an = $_SESSION['my_bonus']['']; // tuong tu nhu ben tren
-                 $list_do_an = $_SESSION['my_bonus'];
-                 foreach ($list_do_an as $do_an_item) {
-                     $id_user = $user['id_user'];
-                     insert_vnpay(
-                     $id_user, 
-                     $vnp_Amount, 
-                     $vnp_BankCode, 
-                     $vnp_BankTranNo, 
-                     $vnp_CardType, 
-                     $vnp_Orderinfo, 
-                     $vnp_PayDate, 
-                     $vnp_ResponseCode, 
-                     $vnp_TmnCode, 
-                     $vnp_TransactionNo, 
-                     $vnp_TransactionStatus, 
-                     $vnp_TxnRef, 
-                     $vnp_SecureHash);
- 
-                 }
-                 //insert vnpay lấy ra được các id_user,id_ve,id_do_an sau khi them từ các bảng và có sẵn
-                 //fore => user => vnpay => ve
+                //insert vnpay
+                $user = query_user_payment($email);
+                $list_do_an = $_SESSION['my_bonus'];
+                foreach ($list_do_an as $do_an_item) {
+                    $id_user = $user['id_user'];
+                    $id_do_an = $do_an_item['id_do_an'];
+                    insert_vnpay(
+                        $id_user,
+                        $id_do_an,
+                        $vnp_Amount,
+                        $vnp_BankCode,
+                        $vnp_BankTranNo,
+                        $vnp_CardType,
+                        $vnp_Orderinfo,
+                        $vnp_PayDate,
+                        $vnp_ResponseCode,
+                        $vnp_TmnCode,
+                        $vnp_TransactionNo,
+                        $vnp_TransactionStatus,
+                        $vnp_TxnRef,
+                        $vnp_SecureHash
+                    );
+                }
                 $payment = query_payment($email);
                 //insert ve
                 $id_suat_chieu = $_SESSION['my_show'][0][1];
@@ -409,10 +404,9 @@ if (isset($_GET['act'])) {
                 for ($i = 0; $i < $count; $i++) {
                     $id_ghe = $list_ghe[$i]['id_ghe'];
                     $id_gia_ve = $list_ve[$i]['id_gia_ve'];
-                    insert_ve($id_suat_chieu, $id_ghe, $trang_thai, $id_gia_ve,$id_pay);
+                    insert_ve($id_suat_chieu, $id_ghe, $trang_thai, $id_gia_ve, $id_pay);
+                    update_trang_thai_ghe($id_ghe);
                 }
-
-
                 header('Location:index.php?act=thanh_toan_thanh_cong');
             } else {
                 header('Location:index.php?act=thanh_toan_that_bai');
@@ -424,7 +418,6 @@ if (isset($_GET['act'])) {
         case 'thanh_toan_that_bai':
             include 'view/datghe_bongnc/web/thong-bao/tt_that_bai.php';
             break;
-
         case 'contact':
             include 'view/lien-he/contact.php';
             break;
@@ -453,6 +446,7 @@ if (isset($_GET['act'])) {
                     // ];
                     header('Location: http://localhost/movflx/index.php?act=thanh_vien');
                     // }
+
                 } else {
                     $erro = "Đăng nhập thất bại: Email hoặc mật khẩu bị sai";
                    
@@ -468,7 +462,7 @@ if (isset($_GET['act'])) {
                 $email = $_POST['email'];
                 $result = sign_change_pass($email);
                 if ($result) {
-                    // $_SESSION['my_user'] = $result;
+                    $_SESSION['change_password'] = $result;
                     header('Location:index.php?act=doimk');
                 } else {
                     echo "Nhap sai thong tin tai khoan hoac mat khau";
@@ -479,14 +473,15 @@ if (isset($_GET['act'])) {
         case 'doimk':
             if (isset($_POST['btn_restore']) && ($_POST['btn_restore'])) {
                 $old_pass = $_POST['old_pass'];
-                $new_pass = $_POST['new_pass'];
+                $new_pass_1 = $_POST['new_pass_1'];
+                $new_pass_2 = $_POST['new_pass_2'];
                 $user_id = $_POST['id_user'];
                 $result = edit_query_user($user_id, $old_pass);
-                if ($result) {
-                    restore_Pass($user_id, $new_pass);
+                if ($result && $new_pass_1 == $new_pass_2) {
+                    restore_Pass($user_id, $new_pass_2);
                     header('Location:index.php?act=login');
                 } else {
-                    echo 'Nhap sai mat khau cu';
+                    echo 'Nhap sai mat khau';
                 }
             }
             include 'account/doimk.php';
@@ -498,9 +493,9 @@ if (isset($_GET['act'])) {
                 $ho_ten = $_POST['ho_ten'];
                 $so_dien_thoai = $_POST['so_dien_thoai'];
                 $dia_chi = $_POST['dia_chi'];
-                insert_User($email, $ho_ten, $so_dien_thoai, $dia_chi);
+                insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai);
                 $result = query_insert_role_User();
-                insert_Role($result['id_user'],['pass']);
+                insert_Role($result['id_user'],$mat_khau);
                 header('Location:index.php?act=login');
                 // echo "dk thanh cong";
             }

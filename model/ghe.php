@@ -1,4 +1,11 @@
 <?php 
+
+function list_ghe(){
+    $sql = "select * from ghe";
+    $result = pdo_query($sql);
+    return $result;
+}
+
 function show_hang_ghe_A(){
     $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'A%' ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
@@ -67,6 +74,11 @@ function show_hang_ghe_J(){
     $result = pdo_query($sql);
     return $result;
     
+}
+
+function update_trang_thai_ghe($id_ghe){
+    $sql = "update ghe set trang_thai = '1' where id_ghe = $id_ghe";
+    pdo_execute($sql);
 }
 
 

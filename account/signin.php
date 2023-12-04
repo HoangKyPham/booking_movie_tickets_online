@@ -65,12 +65,13 @@
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card overflow-hidden">
 
-                            <div class="auth-head position-relative">
-                                <div class="bg-overlay-2"></div>
-                                <div class="text-primary position-relative text-center p-5">
-                                    <h5 class="text-white f-20 mt-3">Đăng nhập</h5>
+
+                                <div class="auth-head position-relative">
+                                    <div class="bg-overlay-2"></div>
+                                    <div class="text-primary position-relative text-center p-5">
+                                        <h5 class="text-white f-20 mt-3">Đăng nhập</h5>
+                                    </div>
                                 </div>
-                            </div>
 
                             <div class="card-body p-4">
                                 <div class="p-3">
@@ -109,21 +110,22 @@
                                     </p>
 
                                     <!-- end form -->
+
                                 </div>
+                                <!-- end cardbody -->
                             </div>
-                            <!-- end cardbody -->
-                        </div>
-                        <!-- end card -->
+                            <!-- end card -->
 
                         <div class="mt-5 text-center">
                             <p>Bạn chưa có tài khoản ? <a href="index.php?act=register" style="color:#e4d804"> Đăng ký ngay </a> </p>
                         </div>
+                        <!-- end col -->
                     </div>
-                    <!-- end col -->
+                    <!-- end row -->
                 </div>
-                <!-- end row -->
             </div>
         </div>
     </div>
    
     <!-- end -->
+

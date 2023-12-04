@@ -60,6 +60,7 @@
     <!--fonts -->
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
 
+<script src="https://kit.fontawesome.com/530a13a970.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -113,10 +114,23 @@
                                     </ul>
                                 </div>
                                 <div class="header-action d-none d-md-block">
-                                    <ul>
-                                        <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
-                                        <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;">Sign In</a></li>
-                                    </ul>
+                                    <?php
+                                    if (isset($_SESSION['my_user'])) {
+                                    ?>
+                                        <ul>
+                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
+                                            <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;"><i class="fa-regular fa-user"></i><?php echo $_SESSION['my_user']['ho_ten']; ?></a></li>
+                                        </ul>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <ul>
+                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
+                                            <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;">Sign In</a></li>
+                                        </ul>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </nav>
                         </div>
