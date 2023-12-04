@@ -56,7 +56,61 @@
       <li>
         <a href="index.php?act=showPro">
           <i class='bx bx-box'></i>
-          <span class="links_name">Product</span>
+          <span class="links_name">Movie</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=showfood">
+          <i class='bx bx-box'></i>
+          <span class="links_name">Food</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=showkm">
+          <i class='bx bx-box'></i>
+          <span class="links_name">Promotion</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=showghe">
+          <i class='bx bx-box'></i>
+          <span class="links_name">Chair table</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=showsc">
+          <i class='bx bx-box'></i>
+          <span class="links_name">Movie screening</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=showrap">
+          <i class='bx bx-box'></i>
+          <span class="links_name">Cinema</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=showpc">
+          <i class='bx bx-list-ul'></i>
+          <span class="links_name">Cinema Room</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=showtlp">
+          <i class='bx bx-list-ul'></i>
+          <span class="links_name">Movie genre</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=showve">
+          <i class='bx bx-list-ul'></i>
+          <span class="links_name">Cinema ticket</span>
+        </a>
+      </li>
+      <li>
+        <a href="index.php?act=thanh_vien">
+          <i class='bx bx-list-ul'></i>
+          <span class="links_name">Account</span>
         </a>
       </li>
       <li>
@@ -100,7 +154,7 @@
       <div class="search-box">
         <form action="index.php?act=search" method="post">
           <input type="text" placeholder="Search..." name="keyw" style="height: 48px;" required>
-          <i class='bx bx-search'></i>
+          <button type="submit"><i class='bx bx-search'></i></button>
         </form>
       </div>
       <div class="profile-details">
