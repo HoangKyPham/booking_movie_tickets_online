@@ -29,8 +29,8 @@
     }
 </style>
 <?php
-if (isset($_SESSION['user'])) {
-    $result = $_SESSION['user'];
+if (isset($_SESSION['change_password']) && !(isset($_SESSION['my_user']))) {
+    $result = $_SESSION['change_password'];
 ?>
 <!-- breadcrumb-area -->
 <section class="breadcrumb-area breadcrumb-bg" data-background="img/bg/breadcrumb_bg.jpg">
@@ -84,7 +84,7 @@ if (isset($_SESSION['user'])) {
                                     <div class="form-password mb-3 auth-pass-inputgroup">
                                         <label class="form-label" for="userpassword">Mật khẩu mới</label>
                                         <div class="position-relative">
-                                            <input type="password" id="password-input" placeholder="Enter password" name="new_pass">
+                                            <input type="password" id="password-input" placeholder="Enter password" name="new_pass_1">
                                             <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">
                                                 <i class="mdi mdi-eye-outline f-16 text-muted"></i>
                                             </button>
@@ -93,7 +93,7 @@ if (isset($_SESSION['user'])) {
                                     <div class="form-password mb-3 auth-pass-inputgroup">
                                         <label class="form-label" for="userpassword">Nhập lại mật khẩu mới</label>
                                         <div class="position-relative">
-                                            <input type="password" id="password-input" placeholder="Enter password" name="new_pass">
+                                            <input type="password" id="password-input" placeholder="Enter password" name="new_pass_2">
                                             <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">
                                                 <i class="mdi mdi-eye-outline f-16 text-muted"></i>
                                             </button>
