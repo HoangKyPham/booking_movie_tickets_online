@@ -714,8 +714,6 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat'])!=0) {
             </form>
         </div>
     </body>
-
-
 <?php
 } else {
     header('Location:index.php');
