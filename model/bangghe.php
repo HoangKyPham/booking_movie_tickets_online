@@ -1,3 +1,4 @@
+
 <?php
 function show_ghe() {
     $sql = "select * from ghe";
@@ -27,5 +28,6 @@ function  delete_ghe($id_ghe){
     $sql = "delete from ghe where id_ghe = $id_ghe";
     pdo_execute($sql);
 }
+
 
 ?>

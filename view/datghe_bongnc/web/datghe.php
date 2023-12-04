@@ -681,36 +681,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 }
     /*--//responsive--*/
 </style>
-<h1></h1>
-<div class="contaicon">
-
-    <div class="w3ls-reg">
-        <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 50px; color: #ffffff;">Chọn ghế</h2>
-        <!-- <div class="inputForm">
-                <h2>fill the required details below and select your seats</h2>
-                <div class="mr_agilemain">
-                    <div class="agileits-left">
-                        <label style="margin-left: 20px;"> Name
-                            <span>*</span>
-                        </label>
-                        <br>
-                        <input type="text" id="Username" required>
-                    </div>
-                    <div class="agileits-right">
-                        <label style="margin-left: 55px;"> Number of Seats
-                            <span>*</span>
-                        </label>
-                        <input type="number" id="Numseats" required min="1" style="margin-left: 40px;">
-                    </div>
-                </div>
-                <button onclick="takeData()">Start Selecting</button>
-            </div> -->
-        <div class="inputForm">
-
-    .reserved {
-        background-color: red;
-    }
-</style>
 <?php
 if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket'])!=0) {
 ?>

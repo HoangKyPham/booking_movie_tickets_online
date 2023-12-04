@@ -1,3 +1,4 @@
+
 <?php
 function show_pc() {
     $sql = "SELECT rap.*,phong_chieu.* 
@@ -35,6 +36,7 @@ function  delete_pc($id_phong_chieu){
     $sql = "delete from phong_chieu where id_phong_chieu = $id_phong_chieu";
     pdo_execute($sql);
 }
+
 
 
 

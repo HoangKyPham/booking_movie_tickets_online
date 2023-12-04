@@ -26,4 +26,5 @@ function  delete_food($id_do_an){
     pdo_execute($sql);
 }
 
+
 ?>

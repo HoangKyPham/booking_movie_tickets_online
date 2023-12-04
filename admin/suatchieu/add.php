@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 920e94d8c211f9c82fbc48eb10df5a869856c861
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -70,4 +73,8 @@
 <!-- <script>
     CKEDITOR.replace('editor');
 </script>
+<<<<<<< HEAD
  -->
+=======
+ -->
+>>>>>>> 920e94d8c211f9c82fbc48eb10df5a869856c861

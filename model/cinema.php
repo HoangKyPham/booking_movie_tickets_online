@@ -34,5 +34,4 @@ function  delete_rap($id_rap){
     $sql = "delete from rap where id_rap = $id_rap";
     pdo_execute($sql);
 }
-
 ?>

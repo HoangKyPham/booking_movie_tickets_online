@@ -4,4 +4,5 @@
         $result_ghe = pdo_query($sql);
         return $result_ghe;
     } 
+
 ?>

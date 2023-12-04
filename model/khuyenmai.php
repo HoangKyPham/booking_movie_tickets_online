@@ -1,3 +1,4 @@
+
 <?php
 function show_km() {
     $sql = "select * from khuyen_mai";
@@ -40,4 +41,3 @@ function loadone_khuyen_mai($id_khuyen_mai)  {
     return $result;
 }
 
-?>

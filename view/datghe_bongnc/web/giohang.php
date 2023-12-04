@@ -717,20 +717,6 @@ if (isset($_SESSION['my_bonus']) && count($_SESSION['my_bonus']) != 0) {
                     <p style="color: red;">Purchased ticket can not be changed or refunded</p>
                 </div>
 
-                <div class="noidung_muc">
-                    <div class="muccon">
-                        <p style="color: #e4d804;">Mục</p>
-                        <p style="color: #e4d804;">Số lượng</p>
-                        <p style="color: #e4d804;">Giá</p>
-                        <p style="color: #e4d804;">Cộng</p>
-                    </div>
-                    <div style="margin-left: 12%; padding: 20px 0;">
-                        <p>Quý khách vui lòng kiểm tra lại thông tin trước khi thanh toán</p>
-                        <p style="color: red;">Vé mua sẽ không được đổi hoặc trả lại</p>
-                        <p>Please check the information before purchasing ticket</p>
-                        <p style="color: red;">Purchased ticket can not be changed or refunded</p>
-                    </div>
-
                     <div class="noidung_muc">
                         <div class="muccon">
                             <p style="color: #e4d804;">Mục</p>
@@ -750,7 +736,6 @@ if (isset($_SESSION['my_bonus']) && count($_SESSION['my_bonus']) != 0) {
                                     <p><?php echo $ticket['ten_gia_ve'] ?></p>
                                     <p><?php echo $ticket['so_luong'] ?></p>
                                     <p><?php echo $ticket['gia_ve'] ?> VND</p>
-
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
@@ -780,14 +765,6 @@ if (isset($_SESSION['my_bonus']) && count($_SESSION['my_bonus']) != 0) {
                         </ul>
                     </div>
 
-                </div>
-                <div class="tongtien">
-                    <ul>
-                        <li style="display: flex; margin-right: 390px;">
-                            <p style="font-size: 20px; font-weight: 600;">Tổng cộng:</p>
-                            <p style="position: relative; left: 420px; font-size: 20px; font-weight: 600;"><?php echo $_SESSION['my_total'][0]; ?></p>
-                        </li>
-                    </ul>
                 </div>
         </div>
     </div>
