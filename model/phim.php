@@ -40,58 +40,99 @@ function query_gio_chieu_default($id_phim){
     return $result;
 }
 
-
-
-////
 function show_Pro() {
-    $sql = "SELECT rap.*,phim.* 
-            FROM phim 
-            INNER JOIN rap ON phim.id_rap = rap.id_rap
-    ";
-    $result = pdo_query($sql);
-    return $result;
+    $sql = "SELECT * FROM phim 
+    INNER JOIN khuyen_mai on khuyen_mai.id_khuyen_mai = phim.id_khuyen_mai 
+    INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai;";
+    $result_phim = pdo_query($sql);
+    return $result_phim;
+
 }
-// function show_Pro() {
-//     $sql = "SELECT products.*, categories.cate_name, COUNT(comment.pro_id) 'soluong'
-//     FROM products
-//     INNER JOIN categories ON products.cate_id = categories.cate_id
-//     LEFT JOIN comment ON products.pro_id = comment.pro_id
-//     GROUP BY products.pro_id ORDER BY soluong DESC
-//      ";
-//     $result=pdo_query($sql);
+
+
+function  insert_Pro($ten_phim,$ngay_phat_hanh,$ngon_ngu,$trailer,$thoi_luong,$trang_thai,$mo_ta,$id_khuyen_mai,$name_img,$id_the_loai){
+    $sql = "insert into phim value(null,'$ten_phim','$name_img','$mo_ta','$ngay_phat_hanh','$ngon_ngu','$trailer','$thoi_luong','$trang_thai',$id_khuyen_mai,$id_the_loai)";
+    pdo_execute($sql);
+}
+
+// function query_updatePro($phim_id){
+//     $sql = "SELECT phim.*,rap.* 
+//             FROM phim 
+//             INNER JOIN rap ON phim.id_rap = rap.id_rap 
+//             WHERE id_phim = $phim_id";
+//     $result=pdo_query_one($sql);
 //     return $result;
 // }
-
-
-//CRUD product
-function insert_Pro($ten_phim, $ngay_phat_hanh, $ngon_ngu, $trailer, $thoi_luong, $trang_thai, $mo_ta, $id_rap, $id_khuyen_mai, $name_img)
-{
-    $sql = "insert into phim value(null,'$ten_phim','$name_img','$mo_ta','$ngay_phat_hanh','$ngon_ngu','$trailer','$thoi_luong','$trang_thai',$id_rap,$id_khuyen_mai)";
-    pdo_execute($sql);
-}
-
-function query_updatePro($phim_id)
-{
-    $sql = "SELECT phim.*,rap.* 
-            FROM phim 
-            INNER JOIN rap ON phim.id_rap = rap.id_rap 
-            WHERE id_phim = $phim_id";
-    $result = pdo_query_one($sql);
+function query_updatePro($phim_id) {
+    $sql = "select * from phim where id_phim  = ".$phim_id;
+    $result=pdo_query_one($sql);
     return $result;
 }
 
-function update_Phim($id_phim, $ten_phim, $ngay_phat_hanh, $ngon_ngu, $trailer, $thoi_luong, $trang_thai, $mo_ta, $id_rap, $id_khuyen_mai, $name_img)
-{
+function  update_Phim($id_phim,$ten_phim,$ngay_phat_hanh,$ngon_ngu,$trailer,$thoi_luong,$trang_thai,$mo_ta,$id_khuyen_mai,$name_img,$id_the_loai){
     $sql = "update phim set ten_phim='$ten_phim',anh='$name_img',mo_ta='$mo_ta',ngay_phat_hanh='$ngay_phat_hanh',ngon_ngu='$ngon_ngu',trailer='$trailer',thoi_luong='$thoi_luong',trang_thai_phim='$trang_thai',
-    id_rap = $id_rap,id_khuyen_mai=$id_khuyen_mai where id_phim = $id_phim ";
+    id_khuyen_mai=$id_khuyen_mai,id_the_loai=$id_the_loai where id_phim = $id_phim ";
     pdo_execute($sql);
 }
 
-function delete_Phim($phim_id)
-{
+function delete_Phim($phim_id){
     $sql = "delete from phim where id_phim = $phim_id";
     pdo_execute($sql);
 }
+
+
+
+// COMENT ERROL
+////
+// function show_Pro() {
+//     $sql = "SELECT rap.*,phim.* 
+//             FROM phim 
+//             INNER JOIN rap ON phim.id_rap = rap.id_rap
+//     ";
+//     $result = pdo_query($sql);
+//     return $result;
+// }
+// // function show_Pro() {
+// //     $sql = "SELECT products.*, categories.cate_name, COUNT(comment.pro_id) 'soluong'
+// //     FROM products
+// //     INNER JOIN categories ON products.cate_id = categories.cate_id
+// //     LEFT JOIN comment ON products.pro_id = comment.pro_id
+// //     GROUP BY products.pro_id ORDER BY soluong DESC
+// //      ";
+// //     $result=pdo_query($sql);
+// //     return $result;
+// // }
+
+
+// //CRUD product
+// function insert_Pro($ten_phim, $ngay_phat_hanh, $ngon_ngu, $trailer, $thoi_luong, $trang_thai, $mo_ta, $id_rap, $id_khuyen_mai, $name_img)
+// {
+//     $sql = "insert into phim value(null,'$ten_phim','$name_img','$mo_ta','$ngay_phat_hanh','$ngon_ngu','$trailer','$thoi_luong','$trang_thai',$id_rap,$id_khuyen_mai)";
+//     pdo_execute($sql);
+// }
+
+// function query_updatePro($phim_id)
+// {
+//     $sql = "SELECT phim.*,rap.* 
+//             FROM phim 
+//             INNER JOIN rap ON phim.id_rap = rap.id_rap 
+//             WHERE id_phim = $phim_id";
+//     $result = pdo_query_one($sql);
+//     return $result;
+// }
+
+// function update_Phim($id_phim, $ten_phim, $ngay_phat_hanh, $ngon_ngu, $trailer, $thoi_luong, $trang_thai, $mo_ta, $id_rap, $id_khuyen_mai, $name_img)
+// {
+//     $sql = "update phim set ten_phim='$ten_phim',anh='$name_img',mo_ta='$mo_ta',ngay_phat_hanh='$ngay_phat_hanh',ngon_ngu='$ngon_ngu',trailer='$trailer',thoi_luong='$thoi_luong',trang_thai_phim='$trang_thai',
+//     id_rap = $id_rap,id_khuyen_mai=$id_khuyen_mai where id_phim = $id_phim ";
+//     pdo_execute($sql);
+// }
+
+// function delete_Phim($phim_id)
+// {
+//     $sql = "delete from phim where id_phim = $phim_id";
+//     pdo_execute($sql);
+// }
 
 
 // chi tiet san pham
