@@ -37,21 +37,36 @@
                                     <option value="Vé bán trước">Vé bán trước</option>
                                 </select>
                                 <br>
-                                <label for="exampleInputEmail1">Rạp</label>
-                                <br>
-                                <select name="id_rap" id="">
-                                    <option value="1">Rạp 1</option>
-                                    <option value="2">Rạp 2</option>
-                                </select>
-                                <br>
                                 <label for="exampleInputEmail1">Mã khuyến mãi</label>
                                 <br>
                                 <select name="id_khuyen_mai" id="">
-                                    <option value="1">Khuyến mãi 1</option>
-                                    <option value="2">Khuyến mãi 2</option>
+                                      <?php
+                                            include_once '../model/pdo.php';
+                                            $a = "select * from khuyen_mai";
+                                            $result1 = pdo_query($a);
+                                            foreach ($result1 as $row) {
+                                            ?>
+                                                <option value="<?php echo $row['id_khuyen_mai'] ?>">
+                                                <?php echo $row['ten_khuyen_mai'] ?>
+                                                    </option>
+                                            <?php } ?>
                                 </select>
-
-
+                                <br>
+                                <label for="exampleInputEmail1">Thể Loại</label>
+                                <br>
+                                 <select name="id_the_loai" id="">
+                                      <?php
+                                            include_once '../model/pdo.php';
+                                            $a = "select * from the_loai_phim";
+                                            $result1 = pdo_query($a);
+                                            foreach ($result1 as $row) {
+                                            ?>
+                                                <option value="<?php echo $row['id_the_loai'] ?>">
+                                                <?php echo $row['ten_the_loai'] ?>
+                                                    </option>
+                                            <?php } ?>
+                                </select>
+                                <br>
                             </div>
 
                         </div>
