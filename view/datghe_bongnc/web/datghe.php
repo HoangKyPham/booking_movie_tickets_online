@@ -7,7 +7,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 */
 
     /*--reset--*/
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&amp;display=swap');
 
+    body {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 14px;
+	color: #bcbcbc;
+}
     html,
     body,
     div,
@@ -376,16 +384,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         margin: 2em 0;
     }
 
-    .screen {
+    .screen { 
         width: 100%;
-        background: #ff9800;
+        background: #fff;
+        opacity: 0.5;
         margin: 2em 0;
     }
-
+.wthree{
+    background: #12151e none repeat scroll 0 0;
+    border: 2px solid #e4d804;
+}
     h2.wthree {
         padding: 0.8em;
         font-size: 1.2em;
-        color: #000;
+        color: #ffffff;
         text-transform: uppercase;
         font-weight: 600;
         letter-spacing: 7px;
@@ -654,7 +666,46 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .btn_submit {
         margin-top: 60px;
     }
+    .input_chon{
+    background: #f5f5f5;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+.input_chon:hover{
+    background-color: #e4d804;
+}
+    /*--//responsive--*/
+</style>
+<h1></h1>
+<div class="contaicon">
 
+    <div class="w3ls-reg">
+        <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 50px; color: #ffffff;">Chọn ghế</h2>
+        <!-- <div class="inputForm">
+                <h2>fill the required details below and select your seats</h2>
+                <div class="mr_agilemain">
+                    <div class="agileits-left">
+                        <label style="margin-left: 20px;"> Name
+                            <span>*</span>
+                        </label>
+                        <br>
+                        <input type="text" id="Username" required>
+                    </div>
+                    <div class="agileits-right">
+                        <label style="margin-left: 55px;"> Number of Seats
+                            <span>*</span>
+                        </label>
+                        <input type="number" id="Numseats" required min="1" style="margin-left: 40px;">
+                    </div>
+                </div>
+                <button onclick="takeData()">Start Selecting</button>
+            </div> -->
+        <div class="inputForm">
 
     .reserved {
         background-color: red;
@@ -746,6 +797,7 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket'])!=0) {
                 </div>
                 <input name="btn_dat_ghe" type="submit" value="Xác nhận" style="display: flex; width:100px; margin-top: 100px;; justify-content: center; padding-bottom: 50px;"></input>
             </form>
+
 
         </div>
     </div>
