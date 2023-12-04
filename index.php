@@ -12,6 +12,11 @@ include "model/suat-chieu.php";
 include "model/rap.php";
 include "model/thanh_vien.php";
 
+include "model/cinema.php";
+include "model/khuyenmai.php";
+
+$show_rap = show_he_thong_rap();
+$show_promotion = show_khuyen_mai();
 
 $phim_dangchieu = show_phim_dangchieu();
 $phim_sapchieu = show_phim_sapchieu();
@@ -92,7 +97,12 @@ if (isset($_GET['act'])) {
             include 'view/khuyen-mai-va-su-kien/sale-events.php';
             break;
         case 'events_details':
-            include 'view/khuyen-mai-va-su-kien/events_details.php';
+            if (isset($_GET['id_khuyen_mai']) && ($_GET['id_khuyen_mai'] > 0)) {
+                $events_detail = loadone_khuyen_mai($_GET['id_khuyen_mai']);
+                include 'view/khuyen-mai-va-su-kien/events_details.php';
+            } else {
+                include 'view/khuyen-mai-va-su-kien/sale-events.php';
+            }
             break;
         case 'movie_details':
             if (isset($_GET['id_phim'])) {
