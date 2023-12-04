@@ -30,71 +30,78 @@
 </style>
 
 <!-- START -->
- <!-- breadcrumb-area -->
- <section class="breadcrumb-area breadcrumb-bg" data-background="img/bg/breadcrumb_bg.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="breadcrumb-content">
-                            <h2 class="title">Quên mật khẩu</h2>
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
-                                </ol>
-                            </nav>
-                        </div>
+<!-- breadcrumb-area -->
+<?php
+if (!(isset($_SESSION['my_user']))) {
+?>
+    <section class="breadcrumb-area breadcrumb-bg" data-background="img/bg/breadcrumb_bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">Quên mật khẩu</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- breadcrumb-area-end -->
-<div class="wrap">
-    <div class="account-pages">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <div class="card overflow-hidden">
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+    <div class="wrap">
+        <div class="account-pages">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card overflow-hidden">
 
-                        <div class="auth-head position-relative">
-                            <div class="bg-overlay-2"></div>
-                            <div class="text-primary position-relative text-center p-5">
-                                <h5 class="text-white f-20 mt-3">Quên mật khẩu</h5>
+                            <div class="auth-head position-relative">
+                                <div class="bg-overlay-2"></div>
+                                <div class="text-primary position-relative text-center p-5">
+                                    <h5 class="text-white f-20 mt-3">Quên mật khẩu</h5>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="card-body p-4">
-                            <div class="p-3">
-                                <form class="custom-form" action="index.php?act=quenmk" method="post">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="username">Bạn vui lòng nhập email vào form dưới đây, chúng tôi sẽ gửi mật khẩu về email bạn.</label>
-                                        <input type="text" id="username" placeholder="Email*" name="email">
-                                    </div>
-                                    
-                                    <div class="mt-3">
-                                        <input class="btn rounded-3 w-100" type="submit" value="Lấy lại mật khẩu" name="btn_verify"></input>
-                                        <a href="index.php?act=login"><button type="button" class="btn rounded-3" style="margin: 0 20px">Hủy bỏ</button></a>
-                                    </div>
-                                <!-- <div>
+                            <div class="card-body p-4">
+                                <div class="p-3">
+                                    <form class="custom-form" action="index.php?act=quenmk" method="post">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="username">Bạn vui lòng nhập email vào form dưới đây, chúng tôi sẽ gửi mật khẩu về email bạn.</label>
+                                            <input type="text" id="username" placeholder="Email*" name="email">
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <input class="btn rounded-3 w-100" type="submit" value="Lấy lại mật khẩu" name="btn_verify"></input>
+                                            <a href="index.php?act=login"><button type="button" class="btn rounded-3" style="margin: 0 20px">Hủy bỏ</button></a>
+                                        </div>
+                                        <!-- <div>
                                     <a href="index.php?act=login">huy</a>
                                 </div> -->
-                                </form>
-                                <!-- end form -->
+                                    </form>
+                                    <!-- end form -->
+                                </div>
                             </div>
+                            <!-- end cardbody -->
                         </div>
-                        <!-- end cardbody -->
-                    </div>
-                    <!-- end card -->
+                        <!-- end card -->
 
-                    <!-- <div class="mt-5 text-center">
+                        <!-- <div class="mt-5 text-center">
                         <p>Bạn chưa có tài khoản ? <a href="index.php?act=register"  style="color:#e4d804"> Đăng ký ngay </a> </p>
                     </div> -->
+                    </div>
+                    <!-- end col -->
                 </div>
-                <!-- end col -->
+                <!-- end row -->
             </div>
-            <!-- end row -->
         </div>
     </div>
-</div>
-
-<!-- end -->
+    ?>
+<?php
+} else {
+    header('Location:index.php');
+}
+?>

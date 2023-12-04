@@ -2,6 +2,7 @@
 <?php
 ob_start();
 session_start();
+if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
 include "../model/pdo.php";
 // include "../model/rap.php";
 include "../model/phim.php";
@@ -24,8 +25,6 @@ include "../model/giave.php";
 include "../model/vnpay.php";
 include "../model/jap.php";
 include "../model/users.php";
-// include "../model/comment.php";
-// include "../model/users.php";
 include "header.php";
 //controllers
 // if (isset($_SESSION['user'])) {
@@ -43,46 +42,51 @@ include "header.php";
                 }
                 include 'phim/phimShow.php';
                 break;
+            case 'logout_admin':
+                if (isset($_SESSION['vai_tro'])) unset($_SESSION['vai_tro']); {
+                    header('location: ../login_admin/login_admin.php');
+                }   
+                break;
 
-            // case 'updateCate':
-            //     if (isset($_GET['id_cate']) && ($_GET['id_cate']) > 0) {
-            //         $cate_id = $_GET['id_cate'];
-            //         $result = query_CateUpdate($cate_id);
-            //     }
-            //     include 'danhmuc/cateUpdate.php';
-            //     break;
+                // case 'updateCate':
+                //     if (isset($_GET['id_cate']) && ($_GET['id_cate']) > 0) {
+                //         $cate_id = $_GET['id_cate'];
+                //         $result = query_CateUpdate($cate_id);
+                //     }
+                //     include 'danhmuc/cateUpdate.php';
+                //     break;
 
-            // case 'updateCategory':
-            //     if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
-            //         $cate_id = $_POST['cate_id'];
-            //         $cate_name = $_POST['cate_name'];
-            //         update_Cate($cate_id, $cate_name);
-            //     }
-            //     header('Location:index.php?act=show_list_cate');
-            //     include 'danhmuc/cateShowAdd.php';
-            //     break;
+                // case 'updateCategory':
+                //     if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                //         $cate_id = $_POST['cate_id'];
+                //         $cate_name = $_POST['cate_name'];
+                //         update_Cate($cate_id, $cate_name);
+                //     }
+                //     header('Location:index.php?act=show_list_cate');
+                //     include 'danhmuc/cateShowAdd.php';
+                //     break;
 
-            // case 'deleteCate':
-            //     if (isset($_GET['id_cate']) && ($_GET['id_cate']) > 0) {
-            //         $cate_id = $_GET['id_cate'];
-            //         delete_Cate($cate_id);
-            //         header('Location:index.php?act=show_list_cate');
-            //     }
-            //     include 'danhmuc/cateShowAdd.php';
-            //     break;
+                // case 'deleteCate':
+                //     if (isset($_GET['id_cate']) && ($_GET['id_cate']) > 0) {
+                //         $cate_id = $_GET['id_cate'];
+                //         delete_Cate($cate_id);
+                //         header('Location:index.php?act=show_list_cate');
+                //     }
+                //     include 'danhmuc/cateShowAdd.php';
+                //     break;
 
-            // case 'show_list_cate':
-            //     if (isset($_POST['btn_add']) && ($_POST['btn_add'])) {
-            //         $cate_name = $_POST['cate_name'];
-            //         insert_Cate($cate_name);
-            //     }
-            //     $list_statistical = show_list_cate();
-            //     include 'danhmuc/cateShowAdd.php';
-            //     break;
-            // case 'show_thong_ke':
-            //     $list_statistical = show_list_cate();
-            //     include 'home.php';
-            //     break;
+                // case 'show_list_cate':
+                //     if (isset($_POST['btn_add']) && ($_POST['btn_add'])) {
+                //         $cate_name = $_POST['cate_name'];
+                //         insert_Cate($cate_name);
+                //     }
+                //     $list_statistical = show_list_cate();
+                //     include 'danhmuc/cateShowAdd.php';
+                //     break;
+                // case 'show_thong_ke':
+                //     $list_statistical = show_list_cate();
+                //     include 'home.php';
+                //     break;
                 // San pham 
 
             case 'showPro':
@@ -144,6 +148,7 @@ include "header.php";
                         $row_img = $result_img;
                         $name_img = $row_img['anh'];
                     }
+
                     update_Phim($id_phim,$ten_phim,$ngay_phat_hanh,$ngon_ngu,$trailer,$thoi_luong,$trang_thai,$mo_ta,$id_khuyen_mai,$name_img,$id_the_loai);
                 }
                 header('Location:index.php?act=showPro');
@@ -155,8 +160,7 @@ include "header.php";
                 }
                 header('Location:index.php?act=showPro');
                 break;
-
-                
+               
                 case 'showfood':
                     $result = show_food();
                     include 'doan/show.php';
@@ -634,23 +638,23 @@ include "header.php";
 
                 //comment 
 
-            // case 'show_list_cmt':
-            //     $list_cmt = show_list_cmt();
-            //     include 'binhluan/show_cmt.php';
-            //     break;
-            // case 'show_list_cmt_user':
-            //     $list_cmt = show_list_cmt_user();
-            //     include 'binhluan/show_cmt_user.php';
-            //     break;
+                // case 'show_list_cmt':
+                //     $list_cmt = show_list_cmt();
+                //     include 'binhluan/show_cmt.php';
+                //     break;
+                // case 'show_list_cmt_user':
+                //     $list_cmt = show_list_cmt_user();
+                //     include 'binhluan/show_cmt_user.php';
+                //     break;
 
-            // case 'delete_cmt';
-            //     if (isset($_GET['id_cmt']) && ($_GET['id_cmt']) > 0) {
-            //         $cmt_id = $_GET['id_cmt'];
-            //         delete_cmt($cmt_id);
-            //     }
-            //     header('Location:index.php?act=show_list_cmt');
-            //     break;
-            
+                // case 'delete_cmt';
+                //     if (isset($_GET['id_cmt']) && ($_GET['id_cmt']) > 0) {
+                //         $cmt_id = $_GET['id_cmt'];
+                //         delete_cmt($cmt_id);
+                //     }
+                //     header('Location:index.php?act=show_list_cmt');
+                //     break;
+
             default:
                 include "home.php";
                 break;
@@ -659,8 +663,11 @@ include "header.php";
         include "home.php";
     }
     include "footer.php";
-// } else {
-//     header('Location:../index.php');
-// }
+    // } else {
+    //     header('Location:../index.php');
+    // }
+} else {
+    header('location: ../login_admin/login_admin.php');
+}
 ?>
     

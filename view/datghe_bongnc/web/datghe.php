@@ -7,7 +7,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 */
 
     /*--reset--*/
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&amp;display=swap');
 
+    body {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 14px;
+	color: #bcbcbc;
+}
     html,
     body,
     div,
@@ -376,16 +384,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         margin: 2em 0;
     }
 
-    .screen {
+    .screen { 
         width: 100%;
-        background: #ff9800;
+        background: #fff;
+        opacity: 0.5;
         margin: 2em 0;
     }
-
+.wthree{
+    background: #12151e none repeat scroll 0 0;
+    border: 2px solid #e4d804;
+}
     h2.wthree {
         padding: 0.8em;
         font-size: 1.2em;
-        color: #000;
+        color: #ffffff;
         text-transform: uppercase;
         font-weight: 600;
         letter-spacing: 7px;
@@ -483,8 +495,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         background-color: #ffffff;
     }
 
-    input[type=checkbox]:checked:before {
-        background-color: Green;
+    <?php
+    foreach ($list_ghe as $ghe) {
+        if ($ghe['trang_thai'] == 1) {
+            $ten_ghe = $ghe['ten_ghe'];
+            echo "input[type=checkbox].seats_$ten_ghe:checked:before {
+                    background-color: red;
+                    font-size: 15px;
+                }";
+        }
+    }
+    ?>input[type=checkbox].seats:checked:before {
+        background-color: green;
         font-size: 15px;
     }
 
@@ -644,7 +666,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .btn_submit {
         margin-top: 60px;
     }
-
+    .input_chon{
+    background: #f5f5f5;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+.input_chon:hover{
+    background-color: #e4d804;
+}
     /*--//responsive--*/
 </style>
 <h1></h1>
@@ -673,154 +707,134 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div> -->
         <div class="inputForm">
 
-            <p style="padding-top: 10px;">Vui lòng chọn ghế trong sơ đồ ghế phía dưới. Nếu bạn muốn chọn loại ghế khác hoặc thay đổi số lượng vé muốn mua vui lòng quay lại bước "Chọn Vé" ở thanh công cụ bên trên để quay trở lại màn hình chọn.</p>
-            <br>
+    .reserved {
+        background-color: red;
+    }
+</style>
+<?php
+if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket'])!=0) {
+?>
+    <h1></h1>
+    <div class="contaicon">
+        <div class="muccon">
+            <?php
+            $tong_tien_ve = 0;
+            $tong_ve = 0;
+            foreach ($_SESSION['my_ticket'] as $type => $ticket) : ?>
+                <?php
+                if (isset($ticket['so_luong']) && $ticket['so_luong'] > 0) :
+                    $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
+                    $tong_ve += $ticket['so_luong'];
+                ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <span id="selected-ticket-count" style="display: none;"><?php echo $tong_ve; ?></span>
         </div>
-        <ul class="seat_w3ls" style="margin-left: 15%;">
-            <li class="smallBox greenBox">Selected Seat</li>
-
-            <li class="smallBox redBox">Reserved Seat</li>
-
-            <li class="smallBox emptyBox">Empty Seat</li>
-        </ul>
-        <form action="index.php?act=dat_ghe" method="post">
-            <div class="seatStructure txt-center" style="overflow-x:auto;">
-                <table id="seatsBlock">
-                    <p id="notification"></p>
-                    <tr>
-                        <td></td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <!-- <td></td> -->
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>10</td>
-                        <td>11</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>A</td>
-                        <?php
-                        foreach ($show_hang_ghe_A as $ghe_A) {
-
-                        ?>
-                            <td>
-                                <input type="checkbox" name="<?php echo $ghe_A['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_A['ten_ghe'] ?>">
-                                <input type="hidden" name="gia_<?php echo $ghe_A['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_A['gia'] ?>">
-                                <input type="hidden" name="id_<?php echo $ghe_A['id_ghe'] ?>" class="seats" value="<?php echo $ghe_A['id_ghe'] ?>">
-
-                            </td>
-                        <?php
-                        }
-                        ?>
-                    </tr>
-                    <tr>
-                        <td>B</td>
-                        <?php
-                        foreach ($show_hang_ghe_B as $ghe_B) {
-                        ?>
-                            <td>
-                                <input type="checkbox" name="<?php echo $ghe_B['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_B['ten_ghe'] ?>">
-                                <input type="hidden" name="gia_<?php echo $ghe_B['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_B['gia'] ?>">
-                                <input type="hidden" name="id_<?php echo $ghe_B['id_ghe'] ?>" class="seats" value="<?php echo $ghe_B['id_ghe'] ?>">
-                            </td>
-                        <?php
-                        }
-                        ?>
-                    </tr>
-                </table>
+        <div class="w3ls-reg">
+            <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 50px; color: #ffffff;">Chọn ghế</h2>
+            <div class="inputForm">
+                <p style="padding-top: 10px;">Vui lòng chọn ghế trong sơ đồ ghế phía dưới. Nếu bạn muốn chọn loại ghế khác hoặc thay đổi số lượng vé muốn mua vui lòng quay lại bước "Chọn Vé" ở thanh công cụ bên trên để quay trở lại màn hình chọn.</p>
+                <br>
             </div>
-            <input name="btn_dat_ghe" type="submit" value="Xác nhận" style="display: flex; width:100px; margin-top: 100px;; justify-content: center; padding-bottom: 50px;"></input>
-        </form>
+            <ul class="seat_w3ls" style="margin-left: 15%;">
+                <li class="smallBox greenBox">Selected Seat</li>
 
+                <li class="smallBox redBox">Reserved Seat</li>
+
+                <li class="smallBox emptyBox">Empty Seat</li>
+            </ul>
+            <form action="index.php?act=dat_ghe" method="post">
+                <div class="seatStructure txt-center" style="overflow-x:auto;">
+                    <table id="seatsBlock">
+                        <p id="notification"></p>
+                        <tr>
+                            <td></td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <?php
+                            foreach ($show_hang_ghe_A as $ghe_A) {
+
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_A['ten_ghe'] ?>" <?php if ($ghe_A['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_A['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_A['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_A['ten_ghe'] ?>" value="<?php echo $ghe_A['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_A['id_ghe'] ?>" value="<?php echo $ghe_A['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <?php
+                            foreach ($show_hang_ghe_B as $ghe_B) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_B['ten_ghe'] ?>" <?php if ($ghe_B['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_B['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_B['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_B['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_B['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_B['id_ghe'] ?>" class="seats" value="<?php echo $ghe_B['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                </div>
+                <input name="btn_dat_ghe" type="submit" value="Xác nhận" style="display: flex; width:100px; margin-top: 100px;; justify-content: center; padding-bottom: 50px;"></input>
+            </form>
+
+
+        </div>
     </div>
-</div>
+    <script>
+        function checkSeatLimit() {
+            var selectedSeats = document.querySelectorAll('.seats:checked');
+            var maxSelectedSeats = parseInt(document.getElementById('selected-ticket-count').innerText);
 
-<!-- js -->
-<script src="js/jquery-2.2.3.min.js"></script>
-<!-- //js -->
-<!-- script for seat selection -->
-<!-- <script>
-
-        function onLoaderFunc() {
-            $(".seatStructure *").prop("disabled", true);
-            $(".displayerBoxes *").prop("disabled", true);
-        }
-
-        function takeData() {
-            if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
-                alert("Please Enter your Name and Number of Seats");
-            } else {
-                $(".inputForm *").prop("disabled", true);
-                $(".seatStructure *").prop("disabled", false);
-                document.getElementById("notification").innerHTML =
-                    "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
-            }
-        }
-
-
-        function updateTextArea() {
-
-            if ($("input:checked").length == ($("#Numseats").val())) {
-                $(".seatStructure *").prop("disabled", true);
-
-                var allNameVals = [];
-                var allNumberVals = [];
-                var allSeatsVals = [];
-
-                //Storing in Array
-                allNameVals.push($("#Username").val());
-                allNumberVals.push($("#Numseats").val());
-                $('#seatsBlock :checked').each(function() {
-                    allSeatsVals.push($(this).val());
+            if (selectedSeats.length >= maxSelectedSeats) {
+                var checkboxes = document.querySelectorAll('.seats:not(:checked)');
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.disabled = true;
                 });
-
-                //Displaying 
-                $('#nameDisplay').val(allNameVals);
-                $('#NumberDisplay').val(allNumberVals);
-                $('#seatsDisplay').val(allSeatsVals);
             } else {
-                alert("Please select " + ($("#Numseats").val()) + " seats")
+                // Nếu số lượng ghế chưa đạt tới giới hạn, mở khóa tất cả checkbox
+                var checkboxes = document.querySelectorAll('.seats');
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.disabled = false;
+                });
             }
         }
 
+        // Gọi hàm khi trang được load
+        window.onload = function() {
+            checkSeatLimit();
 
-        function myFunction() {
-            alert($("input:checked").length);
-        }
-
-        /*
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-        */
-
-
-        $(":checkbox").click(function() {
-            if ($("input:checked").length == ($("#Numseats").val())) {
-                $(":checkbox").prop('disabled', true);
-                $(':checked').prop('disabled', false);
-            } else {
-                $(":checkbox").prop('disabled', false);
-            }
-        });
+            // Thêm sự kiện change cho tất cả các checkbox để kiểm tra giới hạn khi người dùng chọn hoặc bỏ chọn
+            var checkboxes = document.querySelectorAll('.seats');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', checkSeatLimit);
+            });
+        };
     </script>
-    //script for seat selection
 
-</body> -->
+<?php
+} else {
+    header('Location:index.php');
+}
+
+?>

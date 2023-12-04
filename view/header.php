@@ -20,8 +20,8 @@
 
     <!-- Custom  Css -->
     <link rel="stylesheet" type="text/css" href="account/css-login/style.css" />
-   
- <!-- CSS here -->
+
+    <!-- CSS here -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -41,17 +41,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
     /> -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
     <!--  -->
     <script>
-        addEventListener("load", function () {
+        addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
         }, false);
 
@@ -65,7 +59,8 @@
     <!-- //Custom-Stylesheet-Links -->
     <!--fonts -->
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
-    
+
+<script src="https://kit.fontawesome.com/530a13a970.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -104,6 +99,8 @@
                                     <ul class="navigation">
                                         <li class="active menu-item-has-children"><a href="index.php">Home</a>
                                         </li>
+                                        <li class="menu-item-has-children"><a href="index.php?act=movie-item">Phim của chúng tôi</a>
+                                        </li>
                                         <li class="menu-item-has-children"><a href="index.php?act=movie_show_schedule">Lịch chiếu</a>
                                             <ul class="submenu">
                                                 <li><a href="index.php?act=movie_show_schedule">Lịch chiếu theo phim</a></li>
@@ -117,10 +114,23 @@
                                     </ul>
                                 </div>
                                 <div class="header-action d-none d-md-block">
-                                    <ul>
-                                        <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
-                                        <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;">Sign In</a></li>
-                                    </ul>
+                                    <?php
+                                    if (isset($_SESSION['my_user'])) {
+                                    ?>
+                                        <ul>
+                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
+                                            <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;"><i class="fa-regular fa-user"></i><?php echo $_SESSION['my_user']['ho_ten']; ?></a></li>
+                                        </ul>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <ul>
+                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
+                                            <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;">Sign In</a></li>
+                                        </ul>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </nav>
                         </div>
@@ -153,9 +163,9 @@
                         <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <form>
-                                        <input type="text" placeholder="Search here...">
-                                        <button><i class="fas fa-search"></i></button>
+                                    <form action="index.php?act=search_Items" method="POST">
+                                        <input type="text" name="keyw" placeholder="Search here..." required>
+                                        <button type="submit"><i class="fas fa-search"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -167,4 +177,4 @@
             </div>
         </div>
     </header>
-    <!-- header-area-end -->    
+    <!-- header-area-end -->
