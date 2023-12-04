@@ -218,15 +218,11 @@ include "header.php";
                          delete_food($id_do_an);
                      }
                      header('Location:index.php?act=showfood');
-                     break;
-
-
-                        
+                     break; 
                  case 'showkm':
                     $result = show_km();
                     include 'khuyenmai/show.php';
                     break;
-
                     case 'addkm':
                         if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
                             $ten_khuyen_mai = $_POST['ten_khuyen_mai'];

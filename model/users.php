@@ -123,7 +123,7 @@ function all_user()
 
 function check_tk_admin($email, $pass)
 {
-    $sql = "SELECT * FROM user INNER JOIN role on user.id_user = role.id_user where email='" . $email . "' and pass='" . $pass . "'";
+    $sql = "SELECT * FROM user INNER JOIN role on user.id_user = role.id_user where user.email='" . $email . "' and role.mat_khau='" . $pass . "'";
     $result = pdo_query($sql);
     if (count($result) >= 0) {
         return $result['0']['vai_tro'];

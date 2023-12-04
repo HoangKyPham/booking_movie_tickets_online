@@ -126,23 +126,12 @@
         </a>
       </li> -->
       <li>
-        <a href="index.php?act=show_list_cmt">
-          <i class='bx bx-coin-stack'></i>
-          <span class="links_name">Comments</span>
-        </a>
-      </li>
-      <li>
         <a href="index.php?act=show_list_users">
           <i class='bx bx-book-alt'></i>
           <span class="links_name">Accounts</span>
         </a>
       </li>
-      <li class="log_out">
-        <a href="index.php?act=log_out">
-          <i class='bx bx-log-out'></i>
-          <span class="links_name">Log out</span>
-        </a>
-      </li>
+      
     </ul>
   </div>
   <section class="home-section">

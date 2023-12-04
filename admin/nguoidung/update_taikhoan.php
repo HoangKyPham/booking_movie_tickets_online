@@ -1,4 +1,4 @@
-<!-- 
+
 <style>
     form{
         display: flex;
@@ -27,8 +27,8 @@
         <span style="text-align: left;">Email</span>
         <input type="email" name="email" class="box" placeholder="abc123@gmail.com" id="" required value="<?php echo $result['email'] ?>">
         <span style="text-align: left;">Mật Khẩu</span>
-        <input type="text" name="pass" class="box" placeholder="*****" id="" required value="<?php echo $result['pass'] ?>">
+        <input type="text" name="pass" class="box" placeholder="*****" id="" required value="<?php echo $result['mat_khau'] ?>">
         <div class="dn btn--edit">
             <input type="submit" value="Cập nhật" name="btn_update" style="background-color:#fa7858">
         </div>       
-</form> -->
+</form>
