@@ -27,36 +27,37 @@
             border-color: #e4d804;
 
         }
-        .ahover{
+
+        .ahover {
             color: #646e72;
             margin-left: 110px;
         }
-        .ahover:hover{
+
+        .ahover:hover {
             color: #e4d804;
         }
-             
     </style>
 
     <!-- START -->
-     <!-- breadcrumb-area -->
-     <section class="breadcrumb-area breadcrumb-bg" data-background="img/bg/breadcrumb_bg.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="breadcrumb-content">
-                                <h2 class="title">Đăng nhập</h2>
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area breadcrumb-bg" data-background="img/bg/breadcrumb_bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">Đăng nhập</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
-            </section>
-            <!-- breadcrumb-area-end -->
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
     <div class="wrap">
         <div class="account-pages">
             <div class="container">
@@ -73,31 +74,40 @@
 
                             <div class="card-body p-4">
                                 <div class="p-3">
-                                    <form class="custom-form" action="index.php?act=login" method="post">
+                                    <form class="custom-form" action="index.php?act=login" method="POST">
 
                                         <div class="mb-3">
                                             <label class="form-label" for="username">Email</label>
-                                            <input type="text" id="username" placeholder="Enter username" name="email">
+                                            <input type="email" id="username" placeholder="Enter username" name="email" required>
                                         </div>
                                         <div class="form-password mb-3 auth-pass-inputgroup">
                                             <label class="form-label" for="userpassword">Password</label>
                                             <div class="position-relative">
-                                                <input type="password" id="password-input" placeholder="Enter password" name = "pass">
+                                                <input type="password" id="password-input" placeholder="Enter password" name="pass" required maxlength="15">
                                                 <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">
                                                     <i class="mdi mdi-eye-outline f-16 text-muted"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="form-check">
+                                        <!-- <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="customControlInline">
                                             <label class="form-check-label" for="customControlInline">Remember me</label>
-                                        </div>
-                                        <div class="mt-3">
+                                        </div> -->
+                                        <div class="mt-3" style="padding-top: 10px;">
                                             <input class="btn rounded-3 w-100" type="submit" value="Đăng nhập" name="btn_signin"></input>
+
                                             <a class="ahover" href="index.php?act=quenmk">Quên mật khẩu</a>
                                         </div>
-                                       
+
                                     </form>
+                                    <p style="color: red; font-size: 14px; margin-top: 20px;">
+                                        <?php
+                                        if (isset($erro) && ($erro != "")) {
+                                            echo $erro;
+                                        }
+                                        ?>
+                                    </p>
+
                                     <!-- end form -->
                                 </div>
                             </div>
@@ -106,7 +116,7 @@
                         <!-- end card -->
 
                         <div class="mt-5 text-center">
-                            <p>Bạn chưa có tài khoản ? <a href="index.php?act=register"  style="color:#e4d804"> Đăng ký ngay </a> </p>
+                            <p>Bạn chưa có tài khoản ? <a href="index.php?act=register" style="color:#e4d804"> Đăng ký ngay </a> </p>
                         </div>
                     </div>
                     <!-- end col -->
@@ -115,5 +125,5 @@
             </div>
         </div>
     </div>
-
+   
     <!-- end -->

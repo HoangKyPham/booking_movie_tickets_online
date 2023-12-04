@@ -7,7 +7,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 */
 
     /*--reset--*/
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&amp;display=swap');
 
+    body {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 14px;
+	color: #bcbcbc;
+}
     html,
     body,
     div,
@@ -376,16 +384,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         margin: 2em 0;
     }
 
-    .screen {
+    .screen { 
         width: 100%;
-        background: #ff9800;
+        background: #fff;
+        opacity: 0.5;
         margin: 2em 0;
     }
-
+.wthree{
+    background: #12151e none repeat scroll 0 0;
+    border: 2px solid #e4d804;
+}
     h2.wthree {
         padding: 0.8em;
         font-size: 1.2em;
-        color: #000;
+        color: #ffffff;
         text-transform: uppercase;
         font-weight: 600;
         letter-spacing: 7px;
@@ -644,7 +656,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .btn_submit {
         margin-top: 60px;
     }
-
+    .input_chon{
+    background: #f5f5f5;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+.input_chon:hover{
+    background-color: #e4d804;
+}
     /*--//responsive--*/
 </style>
 <h1></h1>
@@ -707,7 +731,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <td>A</td>
                         <?php
                         foreach ($show_hang_ghe_A as $ghe_A) {
-
                         ?>
                             <td>
                                 <input type="checkbox" name="<?php echo $ghe_A['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_A['ten_ghe'] ?>">
@@ -733,9 +756,126 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         }
                         ?>
                     </tr>
+                    <tr>
+                        <td>C</td>
+                        <?php
+                        foreach ($show_hang_ghe_C as $ghe_C) {
+                        ?>
+                            <td>
+                                <input type="checkbox" name="<?php echo $ghe_C['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_C['ten_ghe'] ?>">
+                                <input type="hidden" name="gia_<?php echo $ghe_C['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_C['gia'] ?>">
+                                <input type="hidden" name="id_<?php echo $ghe_C['id_ghe'] ?>" class="seats" value="<?php echo $ghe_C['id_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <?php
+                        foreach ($show_hang_ghe_D as $ghe_D) {
+                        ?>
+                            <td>
+                                <input type="checkbox" name="<?php echo $ghe_D['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_D['ten_ghe'] ?>">
+                                <input type="hidden" name="gia_<?php echo $ghe_D['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_D['gia'] ?>">
+                                <input type="hidden" name="id_<?php echo $ghe_D['id_ghe'] ?>" class="seats" value="<?php echo $ghe_D['id_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                    <tr>
+                        <td>E</td>
+                        <?php
+                        foreach ($show_hang_ghe_E as $ghe_E) {
+                        ?>
+                            <td>
+                                <input type="checkbox" name="<?php echo $ghe_E['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_E['ten_ghe'] ?>">
+                                <input type="hidden" name="gia_<?php echo $ghe_E['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_E['gia'] ?>">
+                                <input type="hidden" name="id_<?php echo $ghe_E['id_ghe'] ?>" class="seats" value="<?php echo $ghe_E['id_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                    <tr class="seatVGap"></tr>
+                    <tr>
+                        <td>F</td>
+                        <?php
+                        foreach ($show_hang_ghe_F as $ghe_F) {
+                        ?>
+                            <td>
+                                <input type="checkbox" name="<?php echo $ghe_F['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_F['ten_ghe'] ?>">
+                                <input type="hidden" name="gia_<?php echo $ghe_F['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_F['gia'] ?>">
+                                <input type="hidden" name="id_<?php echo $ghe_F['id_ghe'] ?>" class="seats" value="<?php echo $ghe_F['id_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                    <tr>
+                        <td>G</td>
+                        <?php
+                        foreach ($show_hang_ghe_G as $ghe_G) {
+                        ?>
+                            <td>
+                                <input type="checkbox" name="<?php echo $ghe_G['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_G['ten_ghe'] ?>">
+                                <input type="hidden" name="gia_<?php echo $ghe_G['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_G['gia'] ?>">
+                                <input type="hidden" name="id_<?php echo $ghe_G['id_ghe'] ?>" class="seats" value="<?php echo $ghe_G['id_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                    <tr>
+                        <td>H</td>
+                        <?php
+                        foreach ($show_hang_ghe_H as $ghe_H) {
+                        ?>
+                            <td>
+                                <input type="checkbox" name="<?php echo $ghe_H['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_H['ten_ghe'] ?>">
+                                <input type="hidden" name="gia_<?php echo $ghe_H['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_H['gia'] ?>">
+                                <input type="hidden" name="id_<?php echo $ghe_H['id_ghe'] ?>" class="seats" value="<?php echo $ghe_H['id_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                    <tr>
+                        <td>I</td>
+                        <?php
+                        foreach ($show_hang_ghe_I as $ghe_I) {
+                        ?>
+                            <td>
+                                <input type="checkbox" name="<?php echo $ghe_I['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_I['ten_ghe'] ?>">
+                                <input type="hidden" name="gia_<?php echo $ghe_I['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_I['gia'] ?>">
+                                <input type="hidden" name="id_<?php echo $ghe_I['id_ghe'] ?>" class="seats" value="<?php echo $ghe_I['id_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                    <tr>
+                        <td>J</td>
+                        <?php
+                        foreach ($show_hang_ghe_J as $ghe_J) {
+                        ?>
+                            <td>
+                                <input type="checkbox" name="<?php echo $ghe_J['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_J['ten_ghe'] ?>">
+                                <input type="hidden" name="gia_<?php echo $ghe_J['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_J['gia'] ?>">
+                                <input type="hidden" name="id_<?php echo $ghe_J['id_ghe'] ?>" class="seats" value="<?php echo $ghe_J['id_ghe'] ?>">
+                            </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+
                 </table>
+                <div class="screen">
+                    <h2 class="wthree">Screen this way</h2>
+                </div>
             </div>
-            <input name="btn_dat_ghe" type="submit" value="Xác nhận" style="display: flex; width:100px; margin-top: 100px;; justify-content: center; padding-bottom: 50px;"></input>
+            <input class="input_chon" name="btn_dat_ghe" type="submit" value="Xác nhận"></input>
         </form>
 
     </div>

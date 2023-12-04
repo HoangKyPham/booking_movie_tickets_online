@@ -20,8 +20,8 @@
 
     <!-- Custom  Css -->
     <link rel="stylesheet" type="text/css" href="account/css-login/style.css" />
-   
- <!-- CSS here -->
+
+    <!-- CSS here -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -41,17 +41,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
     /> -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
     <!--  -->
     <script>
-        addEventListener("load", function () {
+        addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
         }, false);
 
@@ -65,7 +59,7 @@
     <!-- //Custom-Stylesheet-Links -->
     <!--fonts -->
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
-    
+
 </head>
 
 <body>
@@ -103,6 +97,8 @@
                                 <div class="navbar-wrap main-menu d-none d-lg-flex">
                                     <ul class="navigation">
                                         <li class="active menu-item-has-children"><a href="index.php">Home</a>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="index.php?act=movie-item">Phim của chúng tôi</a>
                                         </li>
                                         <li class="menu-item-has-children"><a href="index.php?act=movie_show_schedule">Lịch chiếu</a>
                                             <ul class="submenu">
@@ -153,9 +149,9 @@
                         <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <form>
-                                        <input type="text" placeholder="Search here...">
-                                        <button><i class="fas fa-search"></i></button>
+                                    <form action="index.php?act=search_Items" method="POST">
+                                        <input type="text" name="keyw" placeholder="Search here..." required>
+                                        <button type="submit"><i class="fas fa-search"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -167,4 +163,4 @@
             </div>
         </div>
     </header>
-    <!-- header-area-end -->    
+    <!-- header-area-end -->

@@ -651,94 +651,106 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         width: 300px;
         height: 30px;
     }
-
+    .input_chon{
+    background: #f5f5f5;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+.input_chon:hover{
+    background-color: #e4d804;
+}
     /*--//responsive--*/
 </style>
 <h1></h1>
 <div class="contaicon">
     <!-- Xác nhận -->
     <div class="formxacnhan">
-    <form action="index.php?act=thanh_toan" method="post">
-        <?php
-        if (isset($_SESSION['my_ticket']) && $_SESSION['my_seat'] && $_SESSION['my_bonus'] && $_SESSION['my_show']) {
-        ?>
-            <form action="index.php?act=thanh_toan" method="post">
-                <h2 style="text-align: center; font-size: 30px; font-weight: bold; color: #ffffff; padding: 30px 0; border-bottom: 1px solid #ccc;">Giỏ hàng của bạn</h2>
-                <div class="form_muc">
-                    <ul>
-                        <li style="position: relative; right: 200px;">
-                            <p style="color: #e4d804;">Phim/Title: <?php echo $phim_da_chon['ten_phim']; ?></p>
-                            <p>Rạp/Cinema: <?php echo $phim_da_chon['ten_rap']; ?> - <?php echo $phim_da_chon['dia_diem']; ?></p>
-                            <p>Ngày/Date: <?php echo $phim_da_chon['ngay_chieu']; ?></p>
-                            <p>Suất/Session: <?php echo $phim_da_chon['gio_chieu']; ?></p>
-                            <p>Ghế/Seat:
+        <!-- <form action="index.php?act=thanh_toan" method="post"> -->
+            <?php
+            if (isset($_SESSION['my_ticket']) && $_SESSION['my_seat'] && $_SESSION['my_bonus'] && $_SESSION['my_show']) {
+            ?>
+                <form action="index.php?act=thanh_toan" method="post" name = "myForm" onsubmit = "return(validate());">
+                    <h2 style="text-align: center; font-size: 30px; font-weight: bold; color: #ffffff; padding: 30px 0; border-bottom: 1px solid #ccc;">Giỏ hàng của bạn</h2>
+                    <div class="form_muc">
+                        <ul>
+                            <li style="position: relative; right: 200px;">
+                                <p style="color: #e4d804;">Phim/Title: <?php echo $phim_da_chon['ten_phim']; ?></p>
+                                <p>Rạp/Cinema: <?php echo $phim_da_chon['ten_rap']; ?> - <?php echo $phim_da_chon['dia_diem']; ?></p>
+                                <p>Ngày/Date: <?php echo $phim_da_chon['ngay_chieu']; ?></p>
+                                <p>Suất/Session: <?php echo $phim_da_chon['gio_chieu']; ?></p>
+                                <p>Ghế/Seat:
+                                    <?php
+                                    $tong_tien_ghe = 0;
+                                    foreach ($_SESSION['my_seat'] as $seat) {
+                                        echo $seat['ten_ghe'] . ' ';
+                                        $tong_tien_ghe = $tong_tien_ghe + $seat['gia'];
+                                    }
+                                    ?>
+                                </p>
+                                <p>Thành tiền/Toal:<?php echo $tong_tien_ghe; ?></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="margin-left: 12%; padding: 20px 0;">
+                        <p>Quý khách vui lòng kiểm tra lại thông tin trước khi thanh toán</p>
+                        <p style="color: red;">Vé mua sẽ không được đổi hoặc trả lại</p>
+                        <p>Please check the information before purchasing ticket</p>
+                        <p style="color: red;">Purchased ticket can not be changed or refunded</p>
+                    </div>
+
+                    <div class="noidung_muc">
+                        <div class="muccon">
+                            <p style="color: #e4d804;">Mục</p>
+                            <p style="color: #e4d804;">Số lượng</p>
+                            <p style="color: #e4d804;">Giá</p>
+                            <p style="color: #e4d804;">Cộng</p>
+                        </div>
+
+                        <div class="muccon">
+                            <?php
+                            $tong_tien_ve = 0;
+                            foreach ($_SESSION['my_ticket'] as $type => $ticket) : ?>
                                 <?php
-                                $tong_tien_ghe = 0;
-                                foreach ($_SESSION['my_seat'] as $seat) {
-                                    echo $seat['ten_ghe'] . ' ';
-                                    $tong_tien_ghe = $tong_tien_ghe + $seat['gia'];
-                                }
+                                if (isset($ticket['so_luong']) && $ticket['so_luong'] > 0) :
+                                    $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
                                 ?>
-                            </p>
-                            <p>Thành tiền/Toal:<?php echo $tong_tien_ghe; ?></p>
-                        </li>
-                    </ul>
-                </div>
-                <div style="margin-left: 12%; padding: 20px 0;">
-                    <p>Quý khách vui lòng kiểm tra lại thông tin trước khi thanh toán</p>
-                    <p style="color: red;">Vé mua sẽ không được đổi hoặc trả lại</p>
-                    <p>Please check the information before purchasing ticket</p>
-                    <p style="color: red;">Purchased ticket can not be changed or refunded</p>
-                </div>
+                                    <p><?php echo $ticket['ten_gia_ve'] ?></p>
+                                    <p><?php echo $ticket['so_luong'] ?></p>
+                                    <p><?php echo $ticket['gia_ve'] ?> VND</p>
 
-                <div class="noidung_muc">
-                    <div class="muccon">
-                        <p style="color: #e4d804;">Mục</p>
-                        <p style="color: #e4d804;">Số lượng</p>
-                        <p style="color: #e4d804;">Giá</p>
-                        <p style="color: #e4d804;">Cộng</p>
-                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
 
-                    <div class="muccon">
-                        <?php
-                        $tong_tien_ve = 0;
-                        foreach ($_SESSION['my_ticket'] as $type => $ticket) : ?>
+                        <div class="muccon">
                             <?php
-                            if (isset($ticket['so_luong']) && $ticket['so_luong'] > 0) :
-                                $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
-                            ?>
-                                <p><?php echo $ticket['ten_gia_ve'] ?></p>
-                                <p><?php echo $ticket['so_luong'] ?></p>
-                                <p><?php echo $ticket['gia_ve'] ?> VND</p>
+                            $tong_tien_bonus = 0;
+                            foreach ($_SESSION['my_bonus'] as $type => $bonus) : ?>
+                                <?php
+                                if (isset($bonus['so_luong']) && $bonus['so_luong'] > 0) :
+                                    $tong_tien_bonus += $bonus['so_luong'] * $bonus['gia_do_an'];
 
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                                ?>
+                                    <p><?php echo $bonus['ten_do_an'] ?></p>
+                                    <p><?php echo $bonus['so_luong'] ?></p>
+                                    <p><?php echo $bonus['gia_do_an'] ?> VND</p>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
-
-                    <div class="muccon">
-                        <?php
-                        $tong_tien_bonus = 0;
-                        foreach ($_SESSION['my_bonus'] as $type => $bonus) : ?>
-                            <?php
-                            if (isset($bonus['so_luong']) && $bonus['so_luong'] > 0) :
-                                $tong_tien_bonus += $bonus['so_luong'] * $bonus['gia_do_an'];
-
-                            ?>
-                                <p><?php echo $bonus['ten_do_an'] ?></p>
-                                <p><?php echo $bonus['so_luong'] ?></p>
-                                <p><?php echo $bonus['gia_do_an'] ?> VND</p>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                    <div class="tongtien">
+                        <ul>
+                            <li style="display: flex; margin-right: 390px;">
+                                <p style="font-size: 20px; font-weight: 600;">Tổng cộng:</p>
+                                <p style="position: relative; left: 420px; font-size: 20px; font-weight: 600;"><?php echo $_SESSION['my_total'][0]; ?></p>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div class="tongtien">
-                    <ul>
-                        <li style="display: flex; margin-right: 390px;">
-                            <p style="font-size: 20px; font-weight: 600;">Tổng cộng:</p>
-                            <p style="position: relative; left: 420px; font-size: 20px; font-weight: 600;"><?php echo $_SESSION['my_total'][0]; ?></p>
-                        </li>
-                    </ul>
-                </div>
     </div>
 </div>
 
@@ -748,30 +760,70 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <ul>
         <li>
             <label for="">Tên*</label>
-            <input type="text" require name="name">
+            <input type="text" name="name">
         </li>
         <li>
             <label for="">Email*</label>
-            <input type="text" require name="email">
+            <input type="text" name="email">
         </li>
         <li>
             <label for="">Điện thoại*</label>
-            <input type="text" require name="phone">
+            <input type="text" name="phone">
         </li>
         <li>
             <label for="">Địa chỉ*</label>
-            <input type="text" require name="address">
+            <input type="text" name="address">
         </li>
     </ul>
 </div>
 <div style="text-align: center;">
-    <input type="submit" name="redirect" value="Thanh toán">
+    <input style="margin-top: 50px;" class="input_chon" type="submit" name="redirect" value="Thanh toán">
 </div>
 </form>
-<a href="index.php?act=huy_dat_ve"><input type="submit" style="margin: 30px 15px;" value="Hủy đặt vé"></input></a>
+<a href="index.php?act=huy_dat_ve"><input class="input_chon" type="submit" style="margin-left: 70px;" value="Hủy đặt vé"></input></a>
 <?php
-        }
+            }
 ?>
+
+
+<script>
+    function validate() {
+      
+      if( document.myForm.name.value == "" ) {
+         alert( "Vui lòng điền họ tên!" );
+         document.myForm.name.focus() ;
+         return false;
+      }
+      if( document.myForm.email.value == "" ) {
+         alert( "Vui lòng điền Email!" );
+         document.myForm.email.focus() ;
+         return false;
+      }
+      if( document.myForm.phone.value == "" ) {
+         alert( "Vui lòng điền số điện thoại!" );
+         document.myForm.phone.focus() ;
+         return false;
+      }
+    //   if( document.myForm.address.value == "" ) {
+    //      alert( "Vui lòng điền địa chỉ!" );
+    //      document.myForm.address.focus() ;
+    //      return false;
+    //   }
+    //   if( document.myForm.Zip.value == "" || isNaN( document.myForm.Zip.value ) ||
+    //      document.myForm.Zip.value.length != 5 ) {
+         
+    //      alert( "Please provide a zip in the format #####." );
+    //      document.myForm.Zip.focus() ;
+    //      return false;
+    //   }
+    //   if( document.myForm.Country.value == "-1" ) {
+    //      alert( "Please provide your country!" );
+    //      return false;
+    //   }
+      return( true );
+   }
+
+</script>
 
 <style>
     .payment-form {

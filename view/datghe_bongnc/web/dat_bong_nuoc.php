@@ -641,7 +641,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .contaicon{
         display: flex ;
         flex-direction: column;
-        width: 80%;
     } 
     .formbongnuoc {
         display: flex;
@@ -669,6 +668,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         font-size: 1.3em;
         margin: 0px;
     }
+    .input_chon{
+    background: #f5f5f5;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
+    margin-left: 650px;
+    margin-top: 70px;
+}
+.input_chon:hover{
+    background-color: #e4d804;
+}
+
 </style>
 
 <body>
@@ -697,7 +712,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </li>
                         <li>
                             <div class="counter">
-                            <input type="number" id="Numseats" name="so_luong_<?php echo $doan_item['id_do_an']; ?>" min="1">
+                            <input style="width: 120px;" type="number" id="Numseats" name="so_luong_<?php echo $doan_item['id_do_an']; ?>" min="1">
                             </div>
                         </li>
                     </ul>
@@ -707,7 +722,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             ?>
             </section>
         </div>
-            <input name="btn_bong_nuoc" type="submit" value="Xác nhận" style="display: flex; justify-content: center; padding-bottom: 50px;"></input>
+            <input class="input_chon" name="btn_bong_nuoc" type="submit" value="Xác nhận"></input>
         </form>
     </div>
 </body>

@@ -100,13 +100,14 @@
       <div class="search-box">
         <form action="index.php?act=search" method="post">
           <input type="text" placeholder="Search..." name="keyw" style="height: 48px;" required>
-          <i class='bx bx-search'></i>
+          <button type="submit"><i class='bx bx-search'></i></button>
         </form>
       </div>
-      <div class="profile-details">
+      <!-- <div class="profile-details">
         <img src="../Assets/img/pro5.jpg" alt="">
         <span class="admin_name">Hoàng Kỳ</span>
         <i class='bx bx-chevron-down'></i>
-      </div>
+      </div> -->
+      <a href="index.php?act=logout_admin">log out</a>
     </nav>
     <div class="home-content">

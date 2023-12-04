@@ -324,7 +324,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .mr_agilemain {
         display: flex;
         justify-content: space-between;
-        width: 100%;
+        /* width: 100%; */
+        width: 590px;
     }
 
     .agileits-left {
@@ -643,15 +644,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .chonve p {
         padding: 5px 20px;
     }
-
+.input_chon{
+    background: #f5f5f5;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+.input_chon:hover{
+    background-color: #e4d804;
+}
     /*--//responsive--*/
 </style>
 
 <?php
 if (isset($_SESSION['my_show'])) {
-    echo '<pre>';
-    print_r($_SESSION['my_show']);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($_SESSION['my_show']);
+    // echo '</pre>';
 ?>
     <h1></h1>
     <div class="contaicon">
@@ -684,7 +697,7 @@ if (isset($_SESSION['my_show'])) {
                 <form action="index.php?act=dat_ve" method="post">
                     <?php foreach ($show_ve as $ve) : ?>
                         <div class="mr_agilemain" style="border-top: 1px solid #ccc; padding: 20px 0;">
-                            <div class="agileits-left">
+                            <div class="agileits-left" >
                                 <!-- Input hidden chứa id_suat_chieu -->
                                 <label>Loại vé</label>
                                 <p style="padding: 22px 0;"><?php echo $ve['ten_ve'] ?></p>
@@ -704,7 +717,7 @@ if (isset($_SESSION['my_show'])) {
                         </div>
                     <?php endforeach; ?>
 
-                    <input type="submit" name="btn_dat_ve" value="Chọn ghế">
+                    <input class="input_chon" type="submit" name="btn_dat_ve" value="Chọn ghế">
                 </form>
 
             </div>
