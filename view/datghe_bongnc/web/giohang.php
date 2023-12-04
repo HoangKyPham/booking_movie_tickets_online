@@ -682,7 +682,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 <?php
-if (isset($_SESSION['my_bonus']) && count($_SESSION['my_bonus']) != 0) {
+if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0) {
 ?>
     <h1></h1>
     <div class="contaicon">
