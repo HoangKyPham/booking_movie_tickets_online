@@ -426,8 +426,7 @@ if (isset($_GET['act'])) {
                 $email = $_POST['email'];
                 $pass = $_POST['pass'];
                 $check_user = sign_Users($email, $pass);
-                if (is_array($check_user)) {
-                    $_SESSION['user'] = $check_user;
+                if ($check_user) {
                     // if ($result['vai_tro']==0) {
                     //     $_SESSION['user'] = $result;
                     //     if ($_GET['act'] === 'admin') {
@@ -437,14 +436,14 @@ if (isset($_GET['act'])) {
                     //     }
                     // } else {
 
-                    // $_SESSION['my_user'] = [
-                    //     'id_user' => $result['id_user'],
-                    //     'email' => $result['email'],
-                    //     'phone' => $result['phone'],
-                    //     'ho_ten' => $result['ho_ten'],
-                    //     'dia_chi' => $result['dia_chi']
-                    // ];
-                    header('Location: http://localhost/movflx/index.php?act=thanh_vien');
+                    $_SESSION['my_user'] = [
+                        'id_user' => $result['id_user'],
+                        'email' => $result['email'],
+                        'phone' => $result['phone'],
+                        'ho_ten' => $result['ho_ten'],
+                        'dia_chi' => $result['dia_chi']
+                    ];
+                    header('Location:index.php?act=thanh_vien');
                     // }
 
                 } else {
@@ -497,10 +496,8 @@ if (isset($_GET['act'])) {
                 $result = query_insert_role_User();
                 insert_Role($result['id_user'],$mat_khau);
                 header('Location:index.php?act=login');
-                // echo "dk thanh cong";
             }
             include 'account/signup.php';
-            // echo "loi cai cc dcm";
             break;
         case 'register_insert_thong_tin':
             break;

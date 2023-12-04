@@ -101,12 +101,12 @@
                                         </li>
                                         <li class="menu-item-has-children"><a href="index.php?act=movie-item">Phim của chúng tôi</a>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="index.php?act=movie_show_schedule">Lịch chiếu</a>
+                                        <!-- <li class="menu-item-has-children"><a href="index.php?act=movie_show_schedule">Lịch chiếu</a>
                                             <ul class="submenu">
                                                 <li><a href="index.php?act=movie_show_schedule">Lịch chiếu theo phim</a></li>
                                                 <li><a href="index.php?act=movie_show_theater">Lịch chiếu theo rạp</a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                         <li><a href="index.php?act=theaters">Hệ thống rạp</a></li>
                                         <li class="menu-item-has-children"><a href="index.php?act=events">Khuyến mãi | Sự kiện</a>
                                         </li>
@@ -119,7 +119,7 @@
                                     ?>
                                         <ul>
                                             <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
-                                            <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;"><i class="fa-regular fa-user"></i><?php echo $_SESSION['my_user']['ho_ten']; ?></a></li>
+                                            <li class="header-btn"><a href="index.php?act=thanh_vien" class="btn" style="border-radius: 50px;"><i class="fa-regular fa-user"></i><?php echo $_SESSION['my_user']['ho_ten']; ?></a></li>
                                         </ul>
                                     <?php
                                     } else {

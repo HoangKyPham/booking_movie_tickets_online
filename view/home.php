@@ -53,9 +53,6 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="movies-tab" data-toggle="tab" href="#movies" role="tab" aria-controls="movies" aria-selected="false">PHIM SẮP CHIẾU</a>
                             </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="anime-tab" data-toggle="tab" href="#anime" role="tab" aria-controls="anime" aria-selected="false">VÉ BÁN TRƯỚC</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -122,43 +119,9 @@
                         <?php }
                         ?>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="anime" role="tabpanel" aria-labelledby="anime-tab">
-                    <div class="ucm-active owl-carousel">
-                        <?php
-                        foreach ($phim_vebantruoc as $row) {
-                            extract($row);
-                        ?>
-                        <div class="movie-item mb-50">
-                            <div class="movie-poster">
-                                <a href="index.php?act=movie_details&id_phim=<?php echo $row['id_phim']; ?>"><img style="width: 302.5px; height: 429.29px; object-fit: cover;" src="Assets/img/<?php echo $row['anh']; ?>" alt=""></a>
-                            </div>
-                            <div class="movie-content">
-                                <div class="top">
-                                    <h5 class="title"><a href="index.php?act=movie_details"><?php echo $row['ten_phim'] ?></a></h5>
-                                    <span class="date">2021</span>
-                                </div>
-                                <div class="bottom">
-                                    <ul>
-                                        <li><span class="quality">hd</span></li>
-                                        <li>
-                                            <span class="duration"><i class="far fa-clock"></i> 128 min</span>
-                                            <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
 
-                        </div>
-                        <?php 
-                            }
-                        ?>
-
-
-                    </div>
                 </div>
             </div>
-        </div>
     </section>
     <!-- up-coming-movie-area-end -->
 

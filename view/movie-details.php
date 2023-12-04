@@ -166,10 +166,8 @@
 
                     <?php
                     foreach ($ngay_suat_chieu as $row_ngay_chieu) {
-                        date_default_timezone_set('Asia/Ho_Chi_Minh');
                         $ngayHienTai = date("Y-m-d");
-                        if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai ) {
-                                    
+                        if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai ) {      
                     ?>              
                         <a href="index.php?act=movie_details&id_phim=<?php echo $id_phim; ?>&date=<?php echo $row_ngay_chieu['ngay_chieu']; ?>">
                             <div>
@@ -181,7 +179,6 @@
                    } }
                     ?>
                 </div>
-
                 <div class="slider slider-for">
                     <?php
                     extract($rap_va_gio_chieu);

@@ -24,7 +24,7 @@ function sign_Users($email, $pass) // them mat khau vao bang role
     $sql = "select user.*,role.*
             from user
             inner join role on user.id_user = role.id_user 
-            where email = '$email' and pass = '$pass' and vai_tro = 1";
+            where user.email = '$email' and role.mat_khau = '$pass' and role.vai_tro = 1";
 
     $result = pdo_query_one($sql);
     return $result;
