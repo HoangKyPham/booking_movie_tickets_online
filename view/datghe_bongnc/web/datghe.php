@@ -736,7 +736,6 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket'])!=0) {
                             <td>A</td>
                             <?php
                             foreach ($show_hang_ghe_A as $ghe_A) {
-
                             ?>
                                 <td>
                                     <input type="checkbox" name="<?php echo $ghe_A['ten_ghe'] ?>" <?php if ($ghe_A['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_A['ten_ghe'];

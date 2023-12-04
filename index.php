@@ -291,10 +291,7 @@ if (isset($_GET['act'])) {
                     "vnp_OrderType" => $vnp_OrderType,
                     "vnp_ReturnUrl" => $vnp_Returnurl,
                     "vnp_TxnRef" => $vnp_TxnRef,
-
-
                 );
-
                 if (isset($vnp_BankCode) && $vnp_BankCode != "") {
                     $inputData['vnp_BankCode'] = $vnp_BankCode;
                 }
@@ -425,7 +422,6 @@ if (isset($_GET['act'])) {
         case 'thanh_toan_that_bai':
             include 'view/datghe_bongnc/web/thong-bao/tt_that_bai.php';
             break;
-
         case 'contact':
             include 'view/lien-he/contact.php';
             break;
