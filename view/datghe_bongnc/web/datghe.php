@@ -679,7 +679,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 .input_chon:hover{
     background-color: #e4d804;
 }
-    /*--//responsive--*/
 </style>
 <?php
 if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket'])!=0) {

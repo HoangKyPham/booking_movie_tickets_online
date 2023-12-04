@@ -106,7 +106,6 @@
     <section class="movie-details-area" data-background="img/bg/movie_details_bg.jpg">
         <div class="container">
             <?php extract($movie_detail); ?>
-
             <div class="row align-items-center position-relative">
                 <div class="col-xl-3 col-lg-4">
                     <div class="movie-details-img">
@@ -152,6 +151,7 @@
                     <a href="img/poster/movie_details_img.jpg" class="download-btn" download="">Download <img src="fonts/download.svg" alt=""></a>
                 </div>
             </div>
+
         </div>
     </section>
     <!-- movie-details-area-end -->
@@ -161,15 +161,12 @@
 
             <!-- gio chieu -->
             <!--  -->
-            <div class="main" style="width: 750px;">
+            <br>
+            <div class="main" style="width: 750px; margin-left: 50px;">
                 <div class="slider slider-nav">
-
                     <?php
                     foreach ($ngay_suat_chieu as $row_ngay_chieu) {
-                        $ngayHienTai = date("Y-m-d");
-                        if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai ) {
-                                    
-                    ?>              
+                    ?>
                         <a href="index.php?act=movie_details&id_phim=<?php echo $id_phim; ?>&date=<?php echo $row_ngay_chieu['ngay_chieu']; ?>">
                             <div>
                                 <h1><?php echo $row_ngay_chieu['ngay_chieu']; ?><br>
@@ -177,10 +174,9 @@
                             </div>
                         </a>
                     <?php
-                   } }
+                    }
                     ?>
                 </div>
-
                 <div class="slider slider-for">
                     <?php
                     extract($rap_va_gio_chieu);
@@ -223,6 +219,7 @@
                                 </div>
                 </div>
             </div>
+
     </section>
     <!-- episode-area-end -->
 </main>

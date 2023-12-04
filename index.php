@@ -72,16 +72,16 @@ if (!isset($_SESSION['my_total'])) {
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
-        // case 'search_Items':
-        //     if (isset($_POST['keyw']) && ($_POST['keyw'] != "")) {
-        //         $keyw = $_POST['keyw'];
-        //         $result = show_Pro_Key($keyw);
-        //     } else {
-        //         $keyw = "";
-        //         $result = show_Pro_Key($keyw);
-        //     }
-        //     include 'view/search_phim.php';
-        //     break;
+        case 'search_Items':
+            if (isset($_POST['keyw']) && ($_POST['keyw'] != "")) {
+                $keyw = $_POST['keyw'];
+                $result = show_Pro_Key($keyw);
+            } else {
+                $keyw = "";
+                $result = show_Pro_Key($keyw);
+            }
+            include 'view/search_phim.php';
+            break;
         case 'movie-item':
                 include 'view/movie-item.php';
                 break;
@@ -116,18 +116,7 @@ if (isset($_GET['act'])) {
             $rap_va_gio_chieu = query_rap_gio_chieu($id_phim, $ngay);
             include 'view/movie-details.php';
             break;
-            // qua trinh dat ve
-
-            // case 'chon_ve': // doi ten thanh show dat ve 
-            //     // if(isset($_POST['btn_dat_ve']) && ($_POST['btn_dat_ve'])){
-            //     //     $so_luong_ve_thuong = $_POST['so_luong_phong_chieu_thuong'];
-            //     //     $so_luong_ve_vip = $_POST['so_luong_phong_chieu_vip'];
-            //     //     $add_ve = [$so_luong_ve_thuong,$so_luong_ve_vip];
-            //     //     array_push($_SESSION['mycart'],$add_ve);
-            //     //     header('index.php?act=datghe');
-            //     // }
-            //     include 'view/datghe_bongnc/web/chon_ve.php';
-            //     break;
+         
         case 'chon_rap_ca_chieu':
             if (isset($_POST['btn_rap_ca_chieu']) && ($_POST['btn_rap_ca_chieu'])) {
                 $id_phim = $_POST['id_phim'];
