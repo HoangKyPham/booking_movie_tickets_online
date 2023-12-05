@@ -158,69 +158,77 @@
     <!-- episode-area -->
     <section class="episode-area episode-bg" data-background="img/bg/episode_bg.jpg">
         <div class="container">
-
-            <!-- gio chieu -->
-            <!--  -->
-            <div class="main" style="width: 750px;">
-                <div class="slider slider-nav">
-
-                    <?php
-                    foreach ($ngay_suat_chieu as $row_ngay_chieu) {
-                        $ngayHienTai = date("Y-m-d");
-                        if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai ) {      
-                    ?>              
-                        <a href="index.php?act=movie_details&id_phim=<?php echo $id_phim; ?>&date=<?php echo $row_ngay_chieu['ngay_chieu']; ?>">
-                            <div>
-                                <h1><?php echo $row_ngay_chieu['ngay_chieu']; ?><br>
-                                    <p style="font-size: 14px; height: 10px;"><?php echo $row_ngay_chieu['ngay_chieu']; ?></p>
-                            </div>
-                        </a>
-                    <?php
-                   } }
-                    ?>
-                </div>
-                <div class="slider slider-for">
-                    <?php
-                    extract($rap_va_gio_chieu);
-                    $lastRap = null;
-                    foreach ($rap_va_gio_chieu as $row) {
-                        if ($row['ten_rap'] !== $lastRap) {
-                            $printedRapInfo = false;
-                            if (!$printedRapInfo) {
-                    ?>
-                                <div>
-                                    <div class="rowthoigian">
-                                        <div class="info">
-                                            <div class="inside">
-                                                <h4 style="color: #ffffff; padding: 10px; font-size: 20px;"><?php echo $row['ten_rap'] ?></h4>
-                                                <p style="padding: 0px 10px; color: #90a0ba;"><?php echo $row['dia_diem'] ?></p>
-                                            </div><br>
-                                        </div>
-                                <?php
-                                $printedRapInfo = true;
+            <?php
+            if (isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0) {
+            ?>
+                <div class="main" style="width: 750px;">
+                    <div class="slider slider-nav">
+                        <?php
+                        foreach ($ngay_suat_chieu as $row_ngay_chieu) {
+                            $ngayHienTai = date("Y-m-d");
+                            if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai) {
+                        ?>
+                                <a href="index.php?act=movie_details&id_phim=<?php echo $id_phim; ?>&date=<?php echo $row_ngay_chieu['ngay_chieu']; ?>">
+                                    <div>
+                                        <h1><?php echo $row_ngay_chieu['ngay_chieu']; ?><br>
+                                            <p style="font-size: 14px; height: 10px;"><?php echo $row_ngay_chieu['ngay_chieu']; ?></p>
+                                    </div>
+                                </a>
+                        <?php
                             }
                         }
-                                ?>
-                                <div class="thoigian">
-                                    <ul>
-                                        <form action="index.php?act=chon_rap_ca_chieu" method="post">
-                                            <input type="hidden" name="id_phim" value="<?php echo $movie_detail['id_phim']; ?>">
-                                            <input type="hidden" name="id_rap" value="<?php echo $row['id_rap']; ?>">
-                                            <li class="gio" style="padding: 0 50px; margin-right: -100px;">
-                                                <input type="hidden" name="id_suat_chieu" value="<?php echo $row['id_suat_chieu']; ?>">
-                                                <input type="submit" name="btn_rap_ca_chieu" value="<?php echo $row['gio_chieu']; ?>">
-                                            </li>
-                                        </form>
-                                    </ul>
-                                </div>
-                            <?php
-                            $lastRap = $row['ten_rap'];
-                        }
-                            ?>
+                        ?>
+                    </div>
+                    <div class="slider slider-for">
+                        <?php
+                        extract($rap_va_gio_chieu);
+                        $lastRap = null;
+                        foreach ($rap_va_gio_chieu as $row) {
+                            if ($row['ten_rap'] !== $lastRap) {
+                                $printedRapInfo = false;
+                                if (!$printedRapInfo) {
+                        ?>
+                                    <div>
+                                        <div class="rowthoigian">
+                                            <div class="info">
+                                                <div class="inside">
+                                                    <h4 style="color: #ffffff; padding: 10px; font-size: 20px;"><?php echo $row['ten_rap'] ?></h4>
+                                                    <p style="padding: 0px 10px; color: #90a0ba;"><?php echo $row['dia_diem'] ?></p>
+                                                </div><br>
+                                            </div>
+                                    <?php
+                                    $printedRapInfo = true;
+                                }
+                            }
+                                    ?>
+                                    <div class="thoigian">
+                                        <ul>
+                                            <form action="index.php?act=chon_rap_ca_chieu" method="post">
+                                                <input type="hidden" name="id_phim" value="<?php echo $movie_detail['id_phim']; ?>">
+                                                <input type="hidden" name="id_rap" value="<?php echo $row['id_rap']; ?>">
+                                                <li class="gio" style="padding: 0 50px; margin-right: -100px;">
+                                                    <input type="hidden" name="id_suat_chieu" value="<?php echo $row['id_suat_chieu']; ?>">
+                                                    <input type="submit" name="btn_rap_ca_chieu" value="<?php echo $row['gio_chieu']; ?>">
+                                                </li>
+                                            </form>
+                                        </ul>
                                     </div>
-                                </div>
+                                <?php
+                                $lastRap = $row['ten_rap'];
+                            }
+                                ?>
+                                        </div>
+                                    </div>
+                    </div>
                 </div>
-            </div>
+            <?php
+            } else {
+            ?>
+                <li class="watch"><a href="index.php?act=login" class="btn">Đăng nhập để đặt vé</a></li>
+            <?php
+            }
+            ?>
+
     </section>
     <!-- episode-area-end -->
 </main>

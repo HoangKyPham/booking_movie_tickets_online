@@ -8,11 +8,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb-content">
-                                <h2 class="title">Hệ thống <span>Rạp</span></h2>
+                                <h2 class="title">Thể loại <span>Phim</span></h2>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Hệ thống rạp</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Thể loại phim</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -29,7 +29,7 @@
                         <div class="col-lg-6">
                             <div class="section-title text-center text-lg-left">
                                 <span class="sub-title">ONLINE BOOKING</span>
-                                <h2 class="title">Hệ thống rạp</h2>
+                                <h2 class="title">Thể loại phim</h2>
                             </div>
                         </div>
                         <div class="col-lg-6">

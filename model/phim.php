@@ -1,6 +1,19 @@
 
 <?php
 
+function show_top_phim(){
+    $sql ="SELECT phim.*, COUNT(ve.id_ve) AS 'so_luong_dat', suat_chieu.*
+    FROM phim
+    INNER JOIN suat_chieu ON suat_chieu.id_phim = phim.id_phim
+    INNER JOIN ve ON ve.id_suat_chieu = suat_chieu.id_suat_chieu
+    WHERE phim.trang_thai_phim = 'Phim đang chiếu'
+    GROUP BY suat_chieu.id_suat_chieu
+    ORDER BY so_luong_dat DESC
+    LIMIT 4;    
+    ";
+    $result = pdo_query($sql);
+    return $result;
+}
 function loadone_phim($id_phim)
 {
     $sql = "select * 
@@ -215,7 +228,7 @@ function suat_chieu()
 function show_Pro_Key($keyw = "")
 {
     $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai
-    WHERE phim.ten_phim LIKE '%$keyw%'
+    WHERE phim.ten_phim LIKE '%$keyw%' AND phim.trang_thai_phim = 'Phim đang chiếu'
     ORDER BY id_phim DESC";
     $result = pdo_query($sql);
     return $result;

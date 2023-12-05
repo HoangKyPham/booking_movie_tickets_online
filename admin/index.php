@@ -48,41 +48,6 @@ include "header.php";
                 }   
                 break;
 
-                // case 'updateCate':
-                //     if (isset($_GET['id_cate']) && ($_GET['id_cate']) > 0) {
-                //         $cate_id = $_GET['id_cate'];
-                //         $result = query_CateUpdate($cate_id);
-                //     }
-                //     include 'danhmuc/cateUpdate.php';
-                //     break;
-
-                // case 'updateCategory':
-                //     if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
-                //         $cate_id = $_POST['cate_id'];
-                //         $cate_name = $_POST['cate_name'];
-                //         update_Cate($cate_id, $cate_name);
-                //     }
-                //     header('Location:index.php?act=show_list_cate');
-                //     include 'danhmuc/cateShowAdd.php';
-                //     break;
-
-                // case 'deleteCate':
-                //     if (isset($_GET['id_cate']) && ($_GET['id_cate']) > 0) {
-                //         $cate_id = $_GET['id_cate'];
-                //         delete_Cate($cate_id);
-                //         header('Location:index.php?act=show_list_cate');
-                //     }
-                //     include 'danhmuc/cateShowAdd.php';
-                //     break;
-
-                // case 'show_list_cate':
-                //     if (isset($_POST['btn_add']) && ($_POST['btn_add'])) {
-                //         $cate_name = $_POST['cate_name'];
-                //         insert_Cate($cate_name);
-                //     }
-                //     $list_statistical = show_list_cate();
-                //     include 'danhmuc/cateShowAdd.php';
-                //     break;
                 // case 'show_thong_ke':
                 //     $list_statistical = show_list_cate();
                 //     include 'home.php';

@@ -99,7 +99,7 @@
                                     <ul class="navigation">
                                         <li class="active menu-item-has-children"><a href="index.php">Home</a>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="index.php?act=movie-item">Phim của chúng tôi</a>
+                                        <li class="menu-item-has-children"><a href="index.php?act=movie-item">thể loại phim</a>
                                         </li>
                                         <!-- <li class="menu-item-has-children"><a href="index.php?act=movie_show_schedule">Lịch chiếu</a>
                                             <ul class="submenu">
@@ -110,7 +110,7 @@
                                         <li><a href="index.php?act=theaters">Hệ thống rạp</a></li>
                                         <li class="menu-item-has-children"><a href="index.php?act=events">Khuyến mãi | Sự kiện</a>
                                         </li>
-                                        <li><a href="index.php?act=contact">contacts</a></li>
+                                        <li><a href="index.php?act=contact">Liên hệ</a></li>
                                     </ul>
                                 </div>
                                 <div class="header-action d-none d-md-block">
@@ -126,7 +126,7 @@
                                     ?>
                                         <ul>
                                             <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
-                                            <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;">Sign In</a></li>
+                                            <li class="header-btn"><a href="index.php?act=login" class="btn" style="border-radius: 50px;">Đăng nhập</a></li>
                                         </ul>
                                     <?php
                                     }

@@ -15,6 +15,8 @@ include "model/thanh_vien.php";
 include "model/cinema.php";
 include "model/khuyenmai.php";
 
+$show_top_phim = show_top_phim();
+
 $show_rap = show_he_thong_rap();
 $show_promotion = show_khuyen_mai();
 
