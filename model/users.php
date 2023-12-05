@@ -123,11 +123,29 @@ function all_user()
 
 function check_tk_admin($email, $pass)
 {
-    $sql = "SELECT * FROM user INNER JOIN role on user.id_user = role.id_user where email='" . $email . "' and pass='" . $pass . "'";
+    $sql = "SELECT * FROM user INNER JOIN role on user.id_user = role.id_user where user.email='" . $email . "' and role.mat_khau='" . $pass . "'";
     $result = pdo_query($sql);
     if (count($result) >= 0) {
         return $result['0']['vai_tro'];
     } else {
         return 0;
     }
+}
+
+function query_transaction_user($id_user) {
+    $id_user = 33;
+    $sql = "SELECT user.*, vnpay.*, ve.*, suat_chieu.*, phim.*, gia_ve.*, rap.*, phong_chieu.*, ghe.* ,ve.trang_thai AS trang_thai_ve
+    FROM ve 
+    INNER JOIN suat_chieu ON suat_chieu.id_suat_chieu = ve.id_suat_chieu 
+    INNER JOIN ghe ON ghe.id_ghe = ve.id_ghe 
+    INNER JOIN phong_chieu ON phong_chieu.id_phong_chieu = ghe.id_phong_chieu 
+    INNER JOIN rap ON rap.id_rap = phong_chieu.id_rap 
+    INNER JOIN gia_ve ON gia_ve.id_gia_ve = ve.id_gia_ve 
+    INNER JOIN vnpay ON vnpay.id_pay = ve.id_pay 
+    INNER JOIN user ON user.id_user = vnpay.id_user 
+    INNER JOIN phim ON phim.id_phim = suat_chieu.id_phim 
+    WHERE user.id_user = $id_user
+    ";
+    $result = pdo_query($sql);
+    return $result;
 }

@@ -618,9 +618,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         padding: 10px 0;
     }
 
-    .noidung_muc {
+
+    .muccon {
         display: flex;
-        justify-content: center;
+        margin-left: 80px;
+        width: 80%;
+        justify-content: space-between;
+    }
+    .muccon:last-child p{
+        margin-left: 76%;
     }
 
     .muccon p {
@@ -686,6 +692,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php
 if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0 && isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0) {
+    $my_user = $_SESSION['my_user'];
 ?>
     <h1></h1>
     <div class="contaicon">
@@ -724,39 +731,50 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0 && isset($_S
                     <div class="muccon">
                         <p style="color: #e4d804;">Mục</p>
                         <p style="color: #e4d804;">Số lượng</p>
-                        <p style="color: #e4d804;">Giá</p>
                         <p style="color: #e4d804;">Cộng</p>
                     </div>
-                    <div class="muccon">
+                    <?php
+                    $tong_tien_ve = 0;
+                    foreach ($_SESSION['my_ticket'] as $type => $ticket) : ?>
                         <?php
-                        $tong_tien_ve = 0;
-                        foreach ($_SESSION['my_ticket'] as $type => $ticket) : ?>
-                            <?php
-                            if (isset($ticket['so_luong']) && $ticket['so_luong'] > 0) :
-                                $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
-                            ?>
+                        if (isset($ticket['so_luong']) && $ticket['so_luong'] > 0) :
+                            $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
+                        ?>
+                            <div class="muccon">
                                 <p><?php echo $ticket['ten_gia_ve'] ?></p>
                                 <p><?php echo $ticket['so_luong'] ?></p>
                                 <p><?php echo $ticket['gia_ve'] ?> VND</p>
-
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                    <div class="muccon">
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <?php
+                    $tong_tien_bonus = 0;
+                    foreach ($_SESSION['my_bonus'] as $type => $bonus) : ?>
                         <?php
-                        $tong_tien_bonus = 0;
-                        foreach ($_SESSION['my_bonus'] as $type => $bonus) : ?>
-                            <?php
-                            if (isset($bonus['so_luong']) && $bonus['so_luong'] > 0) :
-                                $tong_tien_bonus += $bonus['so_luong'] * $bonus['gia_do_an'];
+                        if (isset($bonus['so_luong']) && $bonus['so_luong'] > 0) :
+                            $tong_tien_bonus += $bonus['so_luong'] * $bonus['gia_do_an'];
 
-                            ?>
+                        ?>
+                            <div class="muccon">
                                 <p><?php echo $bonus['ten_do_an'] ?></p>
                                 <p><?php echo $bonus['so_luong'] ?></p>
                                 <p><?php echo $bonus['gia_do_an'] ?> VND</p>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <?php 
+                        foreach ($khuyen_mai as $km) {
+                            $date = date('Y-m-d');
+                            $ngay_ap_dung = $km['ngay_ap_dung'];
+                            if($date == $ngay_ap_dung){
+                                ?>
+                                 <div class="muccon">
+                                <p>-<?php echo $km['chiet_khau'] ?> %</p>
+                                </div>
+                            <?php
+                            }
+                        }
+                    ?>
                 </div>
                 <div class="tongtien">
                     <ul>
@@ -768,7 +786,7 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0 && isset($_S
                 </div>
 
         </div>
-       
+
     </div>
     </div>
 
@@ -778,19 +796,19 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0 && isset($_S
         <ul>
             <li>
                 <label for="">Tên*</label>
-                <input type="text" require name="name">
+                <input type="text" require name="name" value="<?php echo $my_user['ho_ten']; ?>"> 
             </li>
             <li>
                 <label for="">Email*</label>
-                <input type="text" require name="email">
+                <input type="text" require name="email" value="<?php echo $my_user['email']; ?>">
             </li>
             <li>
                 <label for="">Điện thoại*</label>
-                <input type="text" require name="phone">
+                <input type="text" require name="phone" value="<?php echo $my_user['phone']; ?>">
             </li>
             <li>
                 <label for="">Địa chỉ*</label>
-                <input type="text" require name="address">
+                <input type="text" require name="address" value="<?php echo $my_user['dia_chi']; ?>">
             </li>
         </ul>
     </div>
