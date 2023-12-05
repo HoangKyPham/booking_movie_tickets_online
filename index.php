@@ -11,9 +11,9 @@ include "model/ghe.php";
 include "model/suat-chieu.php";
 include "model/rap.php";
 include "model/thanh_vien.php";
-
 include "model/cinema.php";
 include "model/khuyenmai.php";
+include "model/validate.php";
 
 $show_top_phim = show_top_phim();
 
@@ -435,20 +435,26 @@ if (isset($_GET['act'])) {
             include 'view/lien-he/contact.php';
             break;
         case 'login':
+            $err = [];
             if (isset($_POST['btn_signin']) && ($_POST['btn_signin'])) {
                 $email = $_POST['email'];
                 $pass = $_POST['pass'];
                 $check_user = sign_Users($email, $pass);
-                if ($check_user) {
-                    // if ($result['vai_tro']==0) {
-                    //     $_SESSION['user'] = $result;
-                    //     if ($_GET['act'] === 'admin') {
-                    //         header("Location: admin/index.php?act=show_thong_ke");
-                    //     } else {
-                    //         header("Location: index.php");
-                    //     }
-                    // } else {
 
+                if (empty($email)) {
+                    $err['email'] = "*";
+                }else {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $err['email'] = " không đúng định dạng";
+                    }
+                }
+                if (empty($pass)) {
+                    $err['pass'] = "*";
+                }
+                if (empty($err)) {
+                    $erro = "Đăng nhập thất bại: Email hoặc mật khẩu bị sai";
+                }
+                if ($check_user) {
                     $_SESSION['my_user'] = [
                         'id_user' => $check_user['id_user'],
                         'email' => $check_user['email'],
@@ -459,10 +465,9 @@ if (isset($_GET['act'])) {
                     header('Location:index.php?act=thanh_vien');
                     // }
 
-                } else {
-                    $erro = "Đăng nhập thất bại: Email hoặc mật khẩu bị sai";
                 }
             }
+
             include 'account/signin.php';
             break;
         case 'thanh_vien':
@@ -472,9 +477,21 @@ if (isset($_GET['act'])) {
             include 'account/thanhvien.php';
             break;
         case 'quenmk':
+            $err = [];
             if (isset($_POST['btn_verify']) && $_POST['btn_verify']) {
                 $email = $_POST['email'];
                 $result = sign_change_pass($email);
+
+                if (empty($email)) {
+                    $err['email'] = "Email không được để trống";
+                } else {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $err['email'] = "Email không đúng định dạng";
+                    }
+                }
+                if (empty($err)) {
+                    $erro = "Email không tồn tại";
+                }
                 if ($result) {
                     $_SESSION['change_password'] = $result;
                     header('Location:index.php?act=doimk');
@@ -485,12 +502,27 @@ if (isset($_GET['act'])) {
             include 'account/quenmk.php';
             break;
         case 'doimk':
+            $err = [];
             if (isset($_POST['btn_restore']) && ($_POST['btn_restore'])) {
                 $old_pass = $_POST['old_pass'];
                 $new_pass_1 = $_POST['new_pass_1'];
                 $new_pass_2 = $_POST['new_pass_2'];
                 $user_id = $_POST['id_user'];
                 $result = edit_query_user($user_id, $old_pass);
+
+                if (empty($old_pass)) {
+                    $err['old_pass'] = "*";
+                }
+                if (empty($new_pass_1)) {
+                    $err['new_pass_1'] = "*";
+                }
+                if (empty($new_pass_2)) {
+                    $err['new_pass_2'] = "*";
+                }
+                if ($new_pass_1 != $new_pass_2) {
+                    $err['new_pass_2'] = "Password nhập lại không đúng";
+                }
+                
                 if ($result && $new_pass_1 == $new_pass_2) {
                     restore_Pass($user_id, $new_pass_2);
                     header('Location:index.php?act=login');
@@ -501,19 +533,65 @@ if (isset($_GET['act'])) {
             include 'account/doimk.php';
             break;
         case 'register':
+            $err = [];
+            $phone = "";
             if (isset($_POST['btn_register']) && ($_POST['btn_register'])) {
-                $pass = $_POST['pass'];
-                $email = $_POST['email'];
                 $ho_ten = $_POST['ho_ten'];
                 $so_dien_thoai = $_POST['so_dien_thoai'];
+                $email = $_POST['email'];
+                $pass = $_POST['pass'];
+                $r_pass = $_POST['r_pass'];
                 $dia_chi = $_POST['dia_chi'];
-                insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai);
-                $result = query_insert_role_User();
-                insert_Role($result['id_user'], $mat_khau);
-                header('Location:index.php?act=login');
+                $justNums = preg_replace("/[^0-9]/", '', $so_dien_thoai);
+
+                if (empty($ho_ten)) {
+                    $err['ho_ten'] = "*";
+                }
+                if (empty($dia_chi)) {
+                    $err['dia_chi'] = "*";
+                }
+                if (empty($email)) {
+                    $err['email'] = "*";
+                } else {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $err['email'] = " không đúng định dạng";
+                    }
+                }
+                if (empty($so_dien_thoai)) {
+                    $err['so_dien_thoai'] = "*";
+                } else {
+
+                    if (strlen($justNums) == 10) {
+                        $isPhoneNum = true;
+                    } else {
+                        $err['so_dien_thoai'] = " không đúng định dạng";
+                    }
+                }
+                if (empty($pass)) {
+                    $err['pass'] = "*";
+                }
+                if (empty($r_pass)) {
+                    $err['r_pass'] = "*";
+                }
+                // if (empty($checkbox)) {
+                //     $err['checkbox'] = "*";
+                // }
+                if ($pass != $r_pass) {
+                    $err['r_pass'] = "Password nhập lại không đúng";
+                }
+                if (empty($err)) {
+                    insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai);
+                    $result = query_insert_role_User();
+                    insert_Role($result['id_user'], $mat_khau);
+                    header('Location:index.php?act=login');
+                }
             }
             include 'account/signup.php';
             break;
+        case 'logout':
+           session_unset();
+            header('location: index.php');
+                break;
         case 'register_insert_thong_tin':
             break;
         default:

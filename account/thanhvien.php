@@ -7,7 +7,7 @@
         margin-top: 200px;
         border: 2px solid #ccc;
         width: 550px;
-        height: 700px;
+        height: 600px;
         margin-left: 460px;
         background: #1c262f;
     }
@@ -40,6 +40,7 @@
     .thong_tin_user input {
         width: 350px;
         height: 40px;
+        border: 1px solid #bfc9d2;
     }
 
     .giao_dich {
@@ -70,6 +71,20 @@
         padding-left: 25px;
         padding-bottom: 15px;
     }
+.thong_tin_user button{
+    border: 1px solid #bfc9d2;
+    height: 40px; 
+    margin: 0 10px;
+    background: #6b7379;
+    color: #fff;
+}
+.thong_tin_user button:hover{
+    background-color: #e4d804;
+    transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+}
 </style>
 <?php
 if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
@@ -98,6 +113,7 @@ if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
                 <li>
                     <label for="">Địa chỉ</label>
                 </li>
+
             </ul>
 
             <ul>
@@ -105,7 +121,8 @@ if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
                     <input type="text" placeholder="" value="<?php echo $user['email']; ?>">
                 </li>
                 <li>
-                    <input type="text" placeholder="" value="<?php echo $user['phone']; ?>">
+                    <input style="width: 234px;" type="text" placeholder="" value="<?php echo $user['phone']; ?>">
+                    <a href="#"><button>Đổi mật khẩu</button></a>
                 </li>
                 <li>
                     <input type="text" placeholder="" value="<?php echo $user['ho_ten']; ?>">
@@ -117,11 +134,11 @@ if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
             </ul>
 
         </div>
-
+       
 
     </div>
     <br>
-   
+
 
     <div class="giao_dich">
         <h3>TRANSACTIONS</h3>
@@ -156,8 +173,8 @@ if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
 
         </ul>
         <?php
-            foreach ($result as $value) {
-            ?>
+        foreach ($result as $value) {
+        ?>
             <ul>
                 <li>
                     <p><?php echo $value['id_ve']; ?></p>
@@ -186,10 +203,10 @@ if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
                 <li>
                     <p><?php echo $value['trang_thai_ve']; ?></p>
                 </li>
-                </ul>
-            <?php
-            }
-            ?>
+            </ul>
+        <?php
+        }
+        ?>
     </div>
 
 <?php
