@@ -5,6 +5,11 @@ function show_km() {
     return $result_khuyen_mai;
 
 }
+function khuyen_mai(){
+    $sql = "select * from khuyen_mai";
+    $result = pdo_query($sql);
+    return $result;
+}
 
 
 function show_khuyen_mai(){

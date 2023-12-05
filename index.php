@@ -15,6 +15,8 @@ include "model/thanh_vien.php";
 include "model/cinema.php";
 include "model/khuyenmai.php";
 
+$show_top_phim = show_top_phim();
+
 $show_rap = show_he_thong_rap();
 $show_promotion = show_khuyen_mai();
 
@@ -38,6 +40,8 @@ $list_ghe = list_ghe();
 $all_user = all_user();
 // $show_thongtin_user = show_thongtin_user();
 // $ls_giaodich = ls_giaodich();
+
+$khuyen_mai = khuyen_mai();
 
 $show_hang_ghe_A = show_hang_ghe_A();
 $show_hang_ghe_B = show_hang_ghe_B();
@@ -83,8 +87,8 @@ if (isset($_GET['act'])) {
             include 'view/search_phim.php';
             break;
         case 'movie-item':
-                include 'view/movie-item.php';
-                break;
+            include 'view/movie-item.php';
+            break;
         case 'movie_show_schedule':
             include 'view/lich-chieu/movie-show-schedule.php';
             break;
@@ -238,6 +242,16 @@ if (isset($_GET['act'])) {
                 $tong_tien_ghe = $tong_tien_ghe + $seat['gia'];
             }
             $tong_tien = $tong_tien_ve + $tong_tien_bonus + $tong_tien_ghe;
+            foreach ($khuyen_mai as $km) {
+                $date = date('Y-m-d');
+                $ngay_ap_dung = $km['ngay_ap_dung'];
+                if ($date == $ngay_ap_dung) {
+                    $var = $km['chiet_khau'];
+                    $giam_gia = ($tong_tien_ve + $tong_tien_bonus + $tong_tien_ghe) * $var / 100;
+                    $tong_tien -= $giam_gia;
+                    break;
+                }
+            }
             $_SESSION['my_total'] = [$tong_tien];
             $id_phim = $_SESSION['my_show'][0][0];
             $id_suat_chieu = $_SESSION['my_show'][0][1];
@@ -246,7 +260,7 @@ if (isset($_GET['act'])) {
             include 'view/datghe_bongnc/web/giohang.php';
             break;
         case 'thanh_toan':
-            
+
             if (isset($_POST['redirect'])) {
                 $name = $_POST['name'];
                 $phone = $_POST['phone'];
@@ -265,7 +279,7 @@ if (isset($_GET['act'])) {
                 $vnp_Returnurl = "http://localhost/duan1/movflx/index.php?act=xac_minh_thanh_toan";
                 $vnp_TmnCode = "5NC5P2K0";
                 $vnp_HashSecret = "BDMOPKKCZTPNRAMDSHDXRVUMEPOAZSMV";
-                $vnp_TxnRef = rand(00, 9999); 
+                $vnp_TxnRef = rand(00, 9999);
                 $vnp_OrderInfo = "Thanh toán vé xem phim";
                 $vnp_OrderType = "billpayment";
                 $vnp_Amount = $_SESSION['my_total'][0] * 100;
@@ -321,7 +335,6 @@ if (isset($_GET['act'])) {
                 } else {
                     echo json_encode($returnData);
                 }
-                
             }
             include 'view/datghe_bongnc/web/giohang.php';
             break;
@@ -426,8 +439,7 @@ if (isset($_GET['act'])) {
                 $email = $_POST['email'];
                 $pass = $_POST['pass'];
                 $check_user = sign_Users($email, $pass);
-                if (is_array($check_user)) {
-                    $_SESSION['user'] = $check_user;
+                if ($check_user) {
                     // if ($result['vai_tro']==0) {
                     //     $_SESSION['user'] = $result;
                     //     if ($_GET['act'] === 'admin') {
@@ -437,24 +449,26 @@ if (isset($_GET['act'])) {
                     //     }
                     // } else {
 
-                    // $_SESSION['my_user'] = [
-                    //     'id_user' => $result['id_user'],
-                    //     'email' => $result['email'],
-                    //     'phone' => $result['phone'],
-                    //     'ho_ten' => $result['ho_ten'],
-                    //     'dia_chi' => $result['dia_chi']
-                    // ];
-                    header('Location: http://localhost/movflx/index.php?act=thanh_vien');
+                    $_SESSION['my_user'] = [
+                        'id_user' => $check_user['id_user'],
+                        'email' => $check_user['email'],
+                        'phone' => $check_user['phone'],
+                        'ho_ten' => $check_user['ho_ten'],
+                        'dia_chi' => $check_user['dia_chi']
+                    ];
+                    header('Location:index.php?act=thanh_vien');
                     // }
 
                 } else {
                     $erro = "Đăng nhập thất bại: Email hoặc mật khẩu bị sai";
-                   
                 }
             }
             include 'account/signin.php';
             break;
         case 'thanh_vien':
+            $user = $_SESSION['my_user'];
+            $id_user = $user['id_user'];
+            $result = query_transaction_user($id_user);
             include 'account/thanhvien.php';
             break;
         case 'quenmk':
@@ -495,12 +509,10 @@ if (isset($_GET['act'])) {
                 $dia_chi = $_POST['dia_chi'];
                 insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai);
                 $result = query_insert_role_User();
-                insert_Role($result['id_user'],$mat_khau);
+                insert_Role($result['id_user'], $mat_khau);
                 header('Location:index.php?act=login');
-                // echo "dk thanh cong";
             }
             include 'account/signup.php';
-            // echo "loi cai cc dcm";
             break;
         case 'register_insert_thong_tin':
             break;

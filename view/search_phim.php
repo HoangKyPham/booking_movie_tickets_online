@@ -3,21 +3,19 @@ if (is_array($result)) {
     extract($result);
 }
 ?>
-
         <!-- main-area -->
         <main>
-
             <!-- breadcrumb-area -->
             <section class="breadcrumb-area breadcrumb-bg" data-background="img/bg/breadcrumb_bg.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb-content">
-                                <h2 class="title">Hệ thống <span>Rạp</span></h2>
+                                <h2 class="title">Kết quả <span>Tìm kiếm</span></h2>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Hệ thống rạp</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Tìm kiếm</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -34,24 +32,11 @@ if (is_array($result)) {
                         <div class="col-lg-6">
                             <div class="section-title text-center text-lg-left">
                                 <span class="sub-title">ONLINE BOOKING</span>
-                                <h2 class="title">Hệ thống rạp</h2>
+                                <h2 class="title">Kết quả tìm kiếm</h2>
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6">
-                            <div class="movie-page-meta">
-                                <div class="tr-movie-menu-active text-center">
-                                    <button class="active" data-filter="*">Tất cả</button>   
-                                    <button class="" data-filter=".bom_tan">Bom tấn</button>
-                                    <button class="" data-filter=".hoat_hinh">Hoạt hình</button>
-                                    <button class="" data-filter=".tam_ly">Tâm lý</button>
-                                    <button class="" data-filter=".kinh_di">Kinh dị</button>
-                                    
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="row tr-movie-active">
-                       
                         <?php 
                         foreach ($result as $row) {
                             
@@ -96,13 +81,7 @@ if (is_array($result)) {
                         </div>
                         <?php 
                         }
-                        ?>
-                
-                        
+                        ?>        
                     </div>
             </section>
-            <!-- movie-area-end -->
-
-
         </main>
-        <!-- main-area-end -->
