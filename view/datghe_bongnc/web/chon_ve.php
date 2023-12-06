@@ -8,13 +8,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     /*--reset--*/
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&amp;display=swap');
- body {
-	font-family: 'Poppins', sans-serif;
-	font-weight: 500;
-	font-style: normal;
-	font-size: 14px;
-	color: #bcbcbc;
-}
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 14px;
+        color: #bcbcbc;
+    }
+
     html,
     body,
     div,
@@ -644,25 +646,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .chonve p {
         padding: 5px 20px;
     }
-.input_chon{
-    background: #f5f5f5;
-    border: none;
-    color: #000;
-    font-weight: 600;
-    padding: 8px 20px;
-    border-radius: 10px;
-    font-size: 1em;
-    letter-spacing: 1px;
-}
-.input_chon:hover{
-    background-color: #e4d804;
-}
+
+    .input_chon {
+        background: #f5f5f5;
+        border: none;
+        color: #000;
+        font-weight: 600;
+        padding: 8px 20px;
+        border-radius: 10px;
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
+
+    .input_chon:hover {
+        background-color: #e4d804;
+    }
+
     /*--//responsive--*/
+    /* input[type="checkbox"] {
+            display: none;
+        } */
 </style>
 
 <?php
 
-if (isset($_SESSION['my_show']) && count($_SESSION['my_show'])!=0) {
+if (isset($_SESSION['my_show']) && count($_SESSION['my_show']) != 0) {
+    print_r($_SESSION['my_show']);
+    print_r($_SESSION['my_ticket']);
 ?>
     <h1></h1>
     <div class="contaicon">
@@ -694,8 +704,9 @@ if (isset($_SESSION['my_show']) && count($_SESSION['my_show'])!=0) {
                 <br>
                 <form action="index.php?act=dat_ve" method="post">
                     <?php foreach ($show_ve as $ve) : ?>
+                        <span id="selected-ticket-count" style="display: none;">1</span>
                         <div class="mr_agilemain" style="border-top: 1px solid #ccc; padding: 20px 0;">
-                            <div class="agileits-left" >
+                            <div class="agileits-left">
                                 <!-- Input hidden chứa id_suat_chieu -->
                                 <label>Loại vé</label>
                                 <p style="padding: 22px 0;"><?php echo $ve['ten_ve'] ?></p>
@@ -710,7 +721,7 @@ if (isset($_SESSION['my_show']) && count($_SESSION['my_show'])!=0) {
                             <div class="agileits-right">
                                 <label>Số lượng</label>
                                 <!-- Input số lượng -->
-                                <input type="number" id="Numseats" name="so_luong_<?php echo $ve['id_gia_ve']; ?>" min="1">
+                                <input type="checkbox" class="seats" id="Numseats" name="<?php echo $ve['id_phong_chieu']; ?>" value="<?php echo $ve['id_phong_chieu']; ?>">
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -721,7 +732,38 @@ if (isset($_SESSION['my_show']) && count($_SESSION['my_show'])!=0) {
             </div>
         </div>
     </div>
+    <script>
+        function checkSeatLimit() {
+            var selectedSeats = document.querySelectorAll('.seats:checked');
+            var maxSelectedSeats = parseInt(document.getElementById('selected-ticket-count').innerText);
+
+            if (selectedSeats.length >= maxSelectedSeats) {
+                var checkboxes = document.querySelectorAll('.seats:not(:checked)');
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.disabled = true;
+                });
+            } else {
+                // Nếu số lượng ghế chưa đạt tới giới hạn, mở khóa tất cả checkbox
+                var checkboxes = document.querySelectorAll('.seats');
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.disabled = false;
+                });
+            }
+        }
+
+        // Gọi hàm khi trang được load
+        window.onload = function() {
+            checkSeatLimit();
+
+            // Thêm sự kiện change cho tất cả các checkbox để kiểm tra giới hạn khi người dùng chọn hoặc bỏ chọn
+            var checkboxes = document.querySelectorAll('.seats');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', checkSeatLimit);
+            });
+        };
+    </script>
 <?php
+
 } else {
     header('Location:index.php');
 }

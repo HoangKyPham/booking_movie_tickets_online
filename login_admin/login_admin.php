@@ -12,7 +12,7 @@ if ((isset($_POST['dangnhap']))) {
 	$_SESSION['vai_tro'] = $role;
 
 	if ($role == 0) {
-		header('location: ../admin/index.php');
+		header('location: ../admin/index.php?act=show_thong_ke');
 	} else {
 		$erro = "Đăng nhập thất bại: Email hoặc mật khẩu bị sai";
 	}

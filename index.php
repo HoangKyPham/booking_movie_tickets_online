@@ -34,7 +34,6 @@ $show_phim_tamly = show_phim_tamly();
 $show_phim_kinhdi = show_phim_kinhdi();
 
 $show_do_an = show_do_an();
-$show_ve = show_ve();
 $list_ghe = list_ghe();
 
 $all_user = all_user();
@@ -42,18 +41,6 @@ $all_user = all_user();
 // $ls_giaodich = ls_giaodich();
 
 $khuyen_mai = khuyen_mai();
-
-$show_hang_ghe_A = show_hang_ghe_A();
-$show_hang_ghe_B = show_hang_ghe_B();
-$show_hang_ghe_C = show_hang_ghe_C();
-$show_hang_ghe_D = show_hang_ghe_D();
-$show_hang_ghe_E = show_hang_ghe_E();
-$show_hang_ghe_F = show_hang_ghe_F();
-$show_hang_ghe_G = show_hang_ghe_G();
-$show_hang_ghe_H = show_hang_ghe_H();
-$show_hang_ghe_I = show_hang_ghe_I();
-$show_hang_ghe_J = show_hang_ghe_J();
-
 if (!isset($_SESSION['my_show']) || count($_SESSION['my_show']) === 0) {
     $_SESSION['my_show'] = []; // Khởi tạo mảng nếu chưa có
 }
@@ -134,21 +121,33 @@ if (isset($_GET['act'])) {
             include 'view/movie-details.php';
             break;
         case 'dat_ve':
+            $my_show = $_SESSION['my_show'];
+            $id_rap = $my_show[0][2];
+            $show_ve = show_ve_phong_chieu($id_rap);
             if (isset($_POST['btn_dat_ve']) && ($_POST['btn_dat_ve'])) {
                 $my_ticket = [];
                 foreach ($show_ve as $ve_item) {
                     $id_gia_ve = $ve_item['id_gia_ve'];
-                    $so_luong = $_POST['so_luong_' . $id_gia_ve];
+                    $id_phong_chieu = $ve_item['id_phong_chieu'];
                     $ten_ve = $_POST['ten_' . $id_gia_ve];
                     $gia_ve = $_POST['gia_' . $id_gia_ve];
-                    if ($so_luong > 0) {
+                    $id_phong_chieu_select = $_POST[$id_phong_chieu];
+                    if (isset($id_phong_chieu_select) && $id_phong_chieu_select == $id_phong_chieu) {
                         $my_ticket[] = [
+                            'id_phong_chieu' => $id_phong_chieu,
                             'id_gia_ve' => $id_gia_ve,
                             'ten_gia_ve' => $ten_ve,
                             'gia_ve' => $gia_ve,
-                            'so_luong' => $so_luong,
                         ];
                     }
+                    // if ($so_luong > 0) {
+                    //     $my_ticket[] = [
+                    //         'id_gia_ve' => $id_gia_ve,
+                    //         'ten_gia_ve' => $ten_ve,
+                    //         'gia_ve' => $gia_ve,
+                    //         'so_luong' => $so_luong,
+                    //     ];
+                    // }
                 }
                 $_SESSION['my_ticket'] = $my_ticket;
 
@@ -163,6 +162,18 @@ if (isset($_GET['act'])) {
 
             break;
         case 'dat_ghe':
+            $id_phong_chieu = $_SESSION['my_ticket'][0]['id_phong_chieu'];
+            $show_hang_ghe_A = show_hang_ghe_A($id_phong_chieu);
+            $show_hang_ghe_B = show_hang_ghe_B($id_phong_chieu);
+            $show_hang_ghe_C = show_hang_ghe_C($id_phong_chieu);
+            $show_hang_ghe_D = show_hang_ghe_D($id_phong_chieu);
+            $show_hang_ghe_E = show_hang_ghe_E($id_phong_chieu);
+            $show_hang_ghe_F = show_hang_ghe_F($id_phong_chieu);
+            $show_hang_ghe_G = show_hang_ghe_G($id_phong_chieu);
+            $show_hang_ghe_H = show_hang_ghe_H($id_phong_chieu);
+            $show_hang_ghe_I = show_hang_ghe_I($id_phong_chieu);
+            $show_hang_ghe_J = show_hang_ghe_J($id_phong_chieu);
+
             if (isset($_POST['btn_dat_ghe']) && ($_POST['btn_dat_ghe'])) {
                 $selected_seats = [];
                 foreach ($show_hang_ghe_A as $ghe_A) {
@@ -233,7 +244,7 @@ if (isset($_GET['act'])) {
             $tong_tien_ghe = 0;
             $tong_tien_ve = 0;
             foreach ($_SESSION['my_ticket'] as $type => $ticket) {
-                $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
+                $tong_tien_ve =  $ticket['gia_ve'];
             }
             foreach ($_SESSION['my_bonus'] as $type => $bonus) {
                 $tong_tien_bonus += $bonus['so_luong'] * $bonus['gia_do_an'];
@@ -355,9 +366,8 @@ if (isset($_GET['act'])) {
                 $vnp_SecureHash = $_GET['vnp_SecureHash'];
 
                 //tao ve va user truoc sau do moi them duoc bang vnpay
-                // insert user 
+                $info_user = $_SESSION['my_user'];
                 if (isset($_SESSION['my_user'])) {
-                    $info_user = $_SESSION['my_user'];
                     if (isset($info_user['id_user'], $info_user['ho_ten'], $info_user['email'], $info_user['phone'], $info_user['dia_chi'])) {
                         $info = $_SESSION['my_info'];
                         if (
@@ -374,17 +384,10 @@ if (isset($_GET['act'])) {
                             update_info_payment($id_user, $name, $phone, $email, $address);
                         }
                     }
-                } else {
-                    $info = $_SESSION['my_info'];
-                    $name = $info['name'];
-                    $phone = $info['phone'];
-                    $email = $info['email'];
-                    $address = $info['address'];
-                    insert_info_payment($name, $phone, $email, $address);
-                }
-
+                } 
                 //insert vnpay
-                $user = query_user_payment($email);
+                $id_user = $info_user['id_user'];
+                $user = query_user_payment($id_user);
                 $list_do_an = $_SESSION['my_bonus'];
                 foreach ($list_do_an as $do_an_item) {
                     $id_user = $user['id_user'];
@@ -406,7 +409,7 @@ if (isset($_GET['act'])) {
                         $vnp_SecureHash
                     );
                 }
-                $payment = query_payment($email);
+                $payment = query_payment($id_user);
                 //insert ve
                 $id_suat_chieu = $_SESSION['my_show'][0][1];
                 $trang_thai = 'còn hạn';
@@ -452,7 +455,7 @@ if (isset($_GET['act'])) {
                     $_SESSION['my_user'] = [
                         'id_user' => $check_user['id_user'],
                         'email' => $check_user['email'],
-                        'phone' => $check_user['phone'],
+                        'phone' => $check_user['so_dien_thoai'],
                         'ho_ten' => $check_user['ho_ten'],
                         'dia_chi' => $check_user['dia_chi']
                     ];

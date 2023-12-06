@@ -54,12 +54,10 @@
     <div class="thong_bao">
     <img class="img" src="Assets/img/tich.jpg" alt="">
         <div class="title"> 
-            <h2>Quý khách đã đặt hàng thành công !</h2>
-            <p>Chúng tôi sẽ liên hệ Quý khách để xác nhận đơn hàng trong thời gian sớm nhất.</p>
+            <h2>Quý khách đã đặt vé thành công !</h2>
         </div>
         <div class="input">
-            <input class="input1" type="button" value="Chi tiết đơn hàng">
-            <input class="input2" type="button" value="Tiếp tục mua hàng">
+            <a href="index.php">Về trang chủ</a>
         </div>
     </div>
    

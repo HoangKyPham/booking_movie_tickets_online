@@ -1,6 +1,10 @@
 <?php
 function show_Loai_phim() {
-    $sql = "select * from the_loai_phim";
+    $sql = "select the_loai_phim.*,count(phim.id_the_loai) 'so_luong'
+    from the_loai_phim
+    inner join phim on phim.id_the_loai = the_loai_phim.id_the_loai
+    group by phim.id_the_loai
+    ";
     $result_the_loai = pdo_query($sql);
     return $result_the_loai;
 
