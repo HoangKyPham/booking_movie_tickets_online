@@ -60,20 +60,15 @@ if (is_array($result)) {
                                 <div class="movie-content">
                                     <div class="top">
                                         <h5 class="title"><a href="movie-details.html"><?php echo $row['ten_phim'] ?></a></h5>
-                                        
+                                        <span class="date">2023</span>
                                     </div>
                                     <div class="bottom">
                                         <ul>
+                                            <li><span class="quality">hd</span></li>
                                             <li>
+                                                <span class="duration"><i class="far fa-clock"></i><?php echo $row['thoi_luong'] ?></span>
                                                 <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                             </li>
-                                            <div class="banner-meta" style="height: 10px;">
-                                        <ul>
-                                            <li class="quality">
-                                                <span>Chia sẻ</span>
-                                            </li>
-                                        </ul>
-                                    </div>
                                         </ul>
                                     </div>
                                 </div>

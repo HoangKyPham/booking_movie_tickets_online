@@ -126,12 +126,12 @@
                                     <span>hd</span>
                                 </li>
                                 <li class="category">
-                                    <a href="#">Romance,</a>
-                                    <a href="#">Drama</a>
+                                    <a href="#">Thể loại:</a>
+                                    <a href="#"><?php echo $movie_detail['ten_the_loai'] ?></a>
                                 </li>
                                 <li class="release-time">
-                                    <span><i class="far fa-calendar-alt"></i> 2021</span>
-                                    <span><i class="far fa-clock"></i> 128 min</span>
+                                    <span><i class="far fa-calendar-alt"></i><?php echo $movie_detail['ngay_phat_hanh'] ?></span>
+                                    <span><i class="far fa-clock"></i><?php echo $movie_detail['thoi_luong'] ?></span>
                                 </li>
                             </ul>
                         </div>
@@ -224,7 +224,7 @@
             <?php
             } else {
             ?>
-                <li class="watch"><a href="index.php?act=login" class="btn">Đăng nhập để đặt vé</a></li>
+                <li style="display: flex; justify-content: center;" class="watch"><a style="max-width: 230px;" href="index.php?act=login" class="btn">Đăng nhập để đặt vé</a></li>
             <?php
             }
             ?>

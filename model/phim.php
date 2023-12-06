@@ -17,7 +17,7 @@ function show_top_phim(){
 function loadone_phim($id_phim)
 {
     $sql = "select * 
-    from phim
+    from phim inner join the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai
     where id_phim=$id_phim";
     $result = pdo_query_one($sql);
     return $result;
@@ -252,28 +252,28 @@ function show_movie()
 
 function show_phim_bomtan()
 {
-    $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai WHERE ten_the_loai = 'Bom tấn'";
+    $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai WHERE ten_the_loai = 'Bom tấn' order by id_phim desc";
     $result = pdo_query($sql);
     return $result;
 }
 
 function show_phim_hoathinh()
 {
-    $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai WHERE ten_the_loai = 'Hoạt hình'";
+    $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai WHERE ten_the_loai = 'Hoạt hình' order by id_phim desc";
     $result = pdo_query($sql);
     return $result;
 }
 
 function show_phim_tamly()
 {
-    $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai WHERE ten_the_loai = 'Tâm lý'";
+    $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai WHERE ten_the_loai = 'Tâm lý' order by id_phim desc";
     $result = pdo_query($sql);
     return $result;
 }
 
 function show_phim_kinhdi()
 {
-    $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai WHERE ten_the_loai = 'Kinh dị'";
+    $sql = "SELECT * FROM phim INNER JOIN the_loai_phim on the_loai_phim.id_the_loai = phim.id_the_loai WHERE ten_the_loai = 'Kinh dị' order by id_phim desc";
     $result = pdo_query($sql);
     return $result;
 }

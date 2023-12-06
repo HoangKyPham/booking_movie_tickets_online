@@ -32,18 +32,22 @@
                                     <h5 class="title">Contact Form</h5>
                                 </div>
                                 <div class="contact-form">
-                                    <form action="#">
+                                    <form action="index.php?act=contact" method="POST">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input type="text" placeholder="You Name *">
+                                            <span style="color: red;"><?php echo (isset($err['ho_ten']))? $err['ho_ten']: '' ?></span> 
+                                                <input type="text" name="ho_ten" placeholder="You Name *">
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="email" placeholder="You  Email *">
+                                            <span style="color: red;"><?php echo (isset($err['email']))? $err['email']: '' ?></span>  
+                                                <input type="email" name="email" placeholder="You  Email *">
                                             </div>
                                         </div>
-                                        <input type="text" placeholder="Subject *">
-                                        <textarea name="message" placeholder="Type Your Message..."></textarea>
-                                        <button class="btn">Send Message</button>
+                                        <span style="color: red;"><?php echo (isset($err['chu_de']))? $err['chu_de']: '' ?></span> 
+                                        <input type="text" name="chu_de" placeholder="Subject *">
+                                        <span style="color: red;"><?php echo (isset($err['noi_dung']))? $err['noi_dung']: '' ?></span> 
+                                        <textarea name="noi_dung" placeholder="Type Your Message..."></textarea>
+                                        <input style="border: 2px solid #e4d804; border-radius: 30px; font-weight: 700;" class="btn" name="btn_contact" type="submit" value="Send Message">
                                     </form>
                                 </div>
                             </div>

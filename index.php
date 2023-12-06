@@ -432,6 +432,41 @@ if (isset($_GET['act'])) {
             include 'view/datghe_bongnc/web/thong-bao/tt_that_bai.php';
             break;
         case 'contact':
+            $err = [];
+            if (isset($_POST['btn_contact']) && ($_POST['btn_contact'])) {
+                $email = $_POST['email'];
+                $ho_ten = $_POST['ho_ten'];
+                $chu_de = $_POST['chu_de'];
+                $noi_dung = $_POST['noi_dung'];
+
+                if (empty($email)) {
+                    $err['email'] = "* Email không được để trống";
+                }else {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $err['email'] = " không đúng định dạng";
+                    }
+                }
+                if (empty($ho_ten)) {
+                    $err['ho_ten'] = "* Họ tên không được để trống";
+                }
+                if (empty($chu_de)) {
+                    $err['chu_de'] = "* Chủ đề không được để trống";
+                }
+                if (empty($noi_dung)) {
+                    $err['noi_dung'] = "* Nội dung không được để trống";
+                }
+                if (empty($err)) {
+                    insert_contact($email, $chu_de, $ho_ten, $noi_dung);
+                   echo " <script>
+                   Swal.fire({
+                       title: 'Good job!',
+                       text: 'Bạn đã gửi thành công',
+                       icon: 'success',
+                       confirmButtonText: 'Cool'
+                     })</script>";
+                }
+            }
+
             include 'view/lien-he/contact.php';
             break;
         case 'login':
@@ -522,7 +557,9 @@ if (isset($_GET['act'])) {
                 if ($new_pass_1 != $new_pass_2) {
                     $err['new_pass_2'] = "Password nhập lại không đúng";
                 }
-                
+                if (empty($err)) {
+                    $erro = "Nhập sai mật khẩu cũ";
+                }
                 if ($result && $new_pass_1 == $new_pass_2) {
                     restore_Pass($user_id, $new_pass_2);
                     header('Location:index.php?act=login');
