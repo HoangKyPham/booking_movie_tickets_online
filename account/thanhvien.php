@@ -139,7 +139,6 @@ if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
     </div>
     <br>
 
-
     <div class="giao_dich">
         <h3>TRANSACTIONS</h3>
         <ul>
