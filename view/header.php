@@ -17,6 +17,7 @@
 
     <!--Material Icon -->
     <link rel="stylesheet" type="text/css" href="account/css-login/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <!-- Custom  Css -->
     <link rel="stylesheet" type="text/css" href="account/css-login/style.css" />
@@ -44,6 +45,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
     <!--  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
@@ -60,8 +63,17 @@
     <!--fonts -->
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
 
-<script src="https://kit.fontawesome.com/530a13a970.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/530a13a970.js" crossorigin="anonymous"></script>
 </head>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+    }
+</style>
 
 <body>
 
@@ -120,6 +132,10 @@
                                         <ul>
                                             <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
                                             <li class="header-btn"><a href="index.php?act=thanh_vien" class="btn" style="border-radius: 50px;"><i class="fa-regular fa-user"></i><?php echo $_SESSION['my_user']['ho_ten']; ?></a></li>
+                                            <li class="header-btn" style="margin-left: 10px"><a href="index.php?act=logout" class="btn" style="border-radius: 50px; height: 44.2px; width: 20px;"> <span class="material-symbols-outlined" style="display: flex; justify-content: center;">
+                                                logout
+                                            </span></a></li>
+                                           
                                         </ul>
                                     <?php
                                     } else {

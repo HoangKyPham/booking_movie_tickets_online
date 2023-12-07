@@ -70,20 +70,15 @@
                                 <div class="movie-content">
                                     <div class="top">
                                         <h5 class="title"><a href="movie-details.html"><?php echo $phim_bomtan['ten_phim'] ?></a></h5>
-                                        
+                                        <span class="date">2023</span>
                                     </div>
                                     <div class="bottom">
                                         <ul>
+                                            <li><span class="quality">hd</span></li>
                                             <li>
+                                                <span class="duration"><i class="far fa-clock"></i><?php echo $phim_bomtan['thoi_luong'] ?></span>
                                                 <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                             </li>
-                                            <div class="banner-meta" style="height: 10px;">
-                                        <ul>
-                                            <li class="quality">
-                                                <span>Chia sẻ</span>
-                                            </li>
-                                        </ul>
-                                    </div>
                                         </ul>
                                     </div>
                                 </div>
@@ -115,20 +110,15 @@
                                 <div class="movie-content">
                                     <div class="top">
                                         <h5 class="title"><a href="movie-details.html"><?php echo $phim_hoathinh['ten_phim'] ?></a></h5>
-                                        
+                                        <span class="date">2023</span>
                                     </div>
                                     <div class="bottom">
                                         <ul>
+                                            <li><span class="quality">hd</span></li>
                                             <li>
+                                                <span class="duration"><i class="far fa-clock"></i><?php echo $phim_hoathinh['thoi_luong'] ?></span>
                                                 <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                             </li>
-                                            <div class="banner-meta" style="height: 10px;">
-                                        <ul>
-                                            <li class="quality">
-                                                <span>Chia sẻ</span>
-                                            </li>
-                                        </ul>
-                                    </div>
                                         </ul>
                                     </div>
                                 </div>
@@ -160,20 +150,15 @@
                                 <div class="movie-content">
                                     <div class="top">
                                         <h5 class="title"><a href="movie-details.html"><?php echo $phim_tamly['ten_phim'] ?></a></h5>
-                                        
+                                        <span class="date">2023</span>
                                     </div>
                                     <div class="bottom">
                                         <ul>
+                                            <li><span class="quality">hd</span></li>
                                             <li>
+                                                <span class="duration"><i class="far fa-clock"></i><?php echo $phim_tamly['thoi_luong'] ?></span>
                                                 <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                             </li>
-                                            <div class="banner-meta" style="height: 10px;">
-                                        <ul>
-                                            <li class="quality">
-                                                <span>Chia sẻ</span>
-                                            </li>
-                                        </ul>
-                                    </div>
                                         </ul>
                                     </div>
                                 </div>
@@ -205,20 +190,15 @@
                                 <div class="movie-content">
                                     <div class="top">
                                         <h5 class="title"><a href="movie-details.html"><?php echo $phim_kinhdi['ten_phim'] ?></a></h5>
-                                        
+                                        <span class="date">2023</span>
                                     </div>
                                     <div class="bottom">
                                         <ul>
+                                            <li><span class="quality">hd</span></li>
                                             <li>
+                                                <span class="duration"><i class="far fa-clock"></i><?php echo $phim_kinhdi['thoi_luong'] ?></span>
                                                 <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                             </li>
-                                            <div class="banner-meta" style="height: 10px;">
-                                        <ul>
-                                            <li class="quality">
-                                                <span>Chia sẻ</span>
-                                            </li>
-                                        </ul>
-                                    </div>
                                         </ul>
                                     </div>
                                 </div>
