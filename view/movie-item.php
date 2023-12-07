@@ -63,7 +63,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </li>
-                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video btn">Xem ngay</a></li>
+                                        <li><a href="<?php echo $phim_bomtan['trailer'] ?>" class="popup-video btn">Xem ngay</a></li>
                                         <li><a href="index.php?act=movie_details&id_phim=<?php echo $phim_bomtan['id_phim']; ?>" class="btn">Đặt vé</a></li>
                                     </ul>
                                 </div>
@@ -103,7 +103,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </li>
-                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video btn">Xem ngay</a></li>
+                                        <li><a href="<?php echo $phim_hoathinh['trailer'] ?>" class="popup-video btn">Xem ngay</a></li>
                                         <li><a href="index.php?act=movie_details&id_phim=<?php echo $phim_hoathinh['id_phim']; ?>" class="btn">Đặt vé</a></li>
                                     </ul>
                                 </div>
@@ -143,7 +143,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </li>
-                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video btn">Xem ngay</a></li>
+                                        <li><a href="<?php echo $phim_tamly['trailer'] ?>" class="popup-video btn">Xem ngay</a></li>
                                         <li><a href="index.php?act=movie_details&id_phim=<?php echo $phim_tamly['id_phim']; ?>" class="btn">Đặt vé</a></li>
                                     </ul>
                                 </div>
@@ -183,7 +183,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </li>
-                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video btn">Xem ngay</a></li>
+                                        <li><a href="<?php echo $phim_kinhdi['trailer'] ?>" class="popup-video btn">Xem ngay</a></li>
                                         <li><a href="index.php?act=movie_details&id_phim=<?php echo $phim_kinhdi['id_phim']; ?>" class="btn">Đặt vé</a></li>
                                     </ul>
                                 </div>

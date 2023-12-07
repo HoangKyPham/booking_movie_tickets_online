@@ -21,20 +21,15 @@ function insert_Role($id_user,$mat_khau)
 
 function sign_Users($email, $pass) // them mat khau vao bang role
 {
-    $sql = "select user.*,role.*
-            from user
-            inner join role on user.id_user = role.id_user 
-            where user.email = '$email' and role.mat_khau = '$pass' and role.vai_tro = 1";
-
+    $sql = "SELECT * FROM user INNER JOIN role on role.id_role = user.id_role 
+    where user.email = '$email' and role.mat_khau = '$pass' and role.vai_tro = 1";
     $result = pdo_query_one($sql);
     return $result;
 }
 function sign_change_pass($email)
 {
-    $sql = "select user.*,role.*
-            from user
-            inner join role on user.id_user = role.id_user 
-            where user.email = '$email' and role.vai_tro = 1";
+    $sql = "SELECT * FROM user INNER JOIN role on role.id_role = user.id_role
+     where user.email = '$email' and role.vai_tro = 1";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -76,15 +71,13 @@ function check_info(){
 
 function restore_Pass($user_id, $new_pass)
 {
-    $sql = "update role set mat_khau= '$new_pass' WHERE id_user = '$user_id'";
+    $sql = "update role INNER JOIN user on role.id_role = user.id_role set mat_khau= '$new_pass' WHERE id_user = '$user_id'";
     pdo_execute($sql);
 }
 
-function edit_query_user($user_id, $old_pass)
+function edit_query_user($user_id, $old_pass)   
 {
-    $sql = "select user.*,role.* 
-    from user 
-    inner join role on user.id_user = role.id_user
+    $sql = "SELECT * FROM user INNER JOIN role on role.id_role = user.id_role
     where user.id_user = $user_id and role.mat_khau = $old_pass";
     $result = pdo_query_one($sql);
     return $result;
@@ -113,7 +106,7 @@ function show_list_users()
 
 function delete_User($user_id)
 {
-    $sql = "delete from users where user_id = $user_id";
+    $sql = "delete from user where id_user = $user_id";
     pdo_execute($sql);
 }
 
@@ -127,7 +120,7 @@ function all_user()
 
 function check_tk_admin($email, $pass)
 {
-    $sql = "SELECT * FROM user INNER JOIN role on user.id_user = role.id_user where user.email='" . $email . "' and role.mat_khau='" . $pass . "'";
+    $sql = "SELECT * FROM user INNER JOIN role on user.id_role = role.id_role where user.email='" . $email . "' and role.mat_khau='" . $pass . "'";
     $result = pdo_query($sql);
     if (count($result) >= 0) {
         return $result['0']['vai_tro'];

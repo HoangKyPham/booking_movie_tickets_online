@@ -184,7 +184,7 @@
                         extract($rap_va_gio_chieu);
                         $lastRap = null;
                         foreach ($rap_va_gio_chieu as $row) {
-                            if ($row['ten_rap'] !== $lastRa) {
+                            if ($row['ten_rap'] !== $lastRap) {
                                 $printedRapInfo = false;
                                 if (!$printedRapInfo) {
                         ?>

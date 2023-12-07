@@ -13,7 +13,7 @@ include "model/rap.php";
 include "model/thanh_vien.php";
 include "model/cinema.php";
 include "model/khuyenmai.php";
-include "model/validate.php";
+include "model/contact.php";
 
 $show_top_phim = show_top_phim();
 
@@ -441,6 +441,9 @@ if (isset($_GET['act'])) {
                 $ho_ten = $_POST['ho_ten'];
                 $chu_de = $_POST['chu_de'];
                 $noi_dung = $_POST['noi_dung'];
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                $ngayHienTai = date("Y-m-d");
+                $ngay_gui = $ngayHienTai;
 
                 if (empty($email)) {
                     $err['email'] = "* Email không được để trống";
@@ -459,7 +462,7 @@ if (isset($_GET['act'])) {
                     $err['noi_dung'] = "* Nội dung không được để trống";
                 }
                 if (empty($err)) {
-                    insert_contact($email, $chu_de, $ho_ten, $noi_dung);
+                    insert_contact($email, $chu_de, $ho_ten, $noi_dung, $ngay_gui);
                    echo " <script>
                    Swal.fire({
                        title: 'Good job!',
@@ -533,10 +536,8 @@ if (isset($_GET['act'])) {
                 if ($result) {
                     $_SESSION['change_password'] = $result;
                     header('Location:index.php?act=doimk');
-                } else {
-                    echo "Nhap sai thong tin tai khoan hoac mat khau";
-                }
-            };
+                } 
+            }
             include 'account/quenmk.php';
             break;
         case 'doimk':
@@ -566,9 +567,7 @@ if (isset($_GET['act'])) {
                 if ($result && $new_pass_1 == $new_pass_2) {
                     restore_Pass($user_id, $new_pass_2);
                     header('Location:index.php?act=login');
-                } else {
-                    echo 'Nhap sai mat khau';
-                }
+                } 
             }
             include 'account/doimk.php';
             break;
