@@ -3,6 +3,8 @@ function show_ve() {
     $sql = "SELECT * FROM ve 
     INNER JOIN suat_chieu on suat_chieu.id_suat_chieu = ve.id_suat_chieu 
     INNER JOIN ghe on ghe.id_ghe = ve.id_ghe 
+    INNER JOIN phong_chieu on phong_chieu.id_phong_chieu = ghe.id_phong_chieu
+    INNER JOIN rap on rap.id_rap = phong_chieu.id_rap
     INNER JOIN gia_ve on gia_ve.id_gia_ve = ve.id_gia_ve 
     INNER JOIN vnpay on vnpay.id_pay = ve.id_pay";
     $result = pdo_query($sql);

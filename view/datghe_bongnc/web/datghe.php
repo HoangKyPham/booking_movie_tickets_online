@@ -10,12 +10,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&amp;display=swap');
 
     body {
-	font-family: 'Poppins', sans-serif;
-	font-weight: 500;
-	font-style: normal;
-	font-size: 14px;
-	color: #bcbcbc;
-}
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 14px;
+        color: #bcbcbc;
+    }
+
     html,
     body,
     div,
@@ -384,16 +385,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         margin: 2em 0;
     }
 
-    .screen { 
+    .screen {
         width: 100%;
         background: #fff;
         opacity: 0.5;
         margin: 2em 0;
     }
-.wthree{
-    background: #12151e none repeat scroll 0 0;
-    border: 2px solid #e4d804;
-}
+
+    .wthree {
+        background: #12151e none repeat scroll 0 0;
+        border: 2px solid #e4d804;
+    }
+
     h2.wthree {
         padding: 0.8em;
         font-size: 1.2em;
@@ -666,40 +669,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .btn_submit {
         margin-top: 60px;
     }
-    .input_chon{
-    background: #f5f5f5;
-    border: none;
-    color: #000;
-    font-weight: 600;
-    padding: 8px 20px;
-    border-radius: 10px;
-    font-size: 1em;
-    letter-spacing: 1px;
-}
-.input_chon:hover{
-    background-color: #e4d804;
-}
+
+    .input_chon {
+        background: #f5f5f5;
+        border: none;
+        color: #000;
+        font-weight: 600;
+        padding: 8px 20px;
+        border-radius: 10px;
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
+
+    .input_chon:hover {
+        background-color: #e4d804;
+    }
+
     /*--//responsive--*/
 </style>
 
 <?php
-if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket'])!=0) {
+if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket']) != 0) {
+    print_r($_SESSION['my_ticket']);
 ?>
     <h1></h1>
     <div class="contaicon">
         <div class="muccon">
-            <?php
-            $tong_tien_ve = 0;
-            $tong_ve = 0;
-            foreach ($_SESSION['my_ticket'] as $type => $ticket) : ?>
-                <?php
-                if (isset($ticket['so_luong']) && $ticket['so_luong'] > 0) :
-                    $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
-                    $tong_ve += $ticket['so_luong'];
-                ?>
-                <?php endif; ?>
-            <?php endforeach; ?>
-            <span id="selected-ticket-count" style="display: none;"><?php echo $tong_ve; ?></span>
         </div>
         <div class="w3ls-reg">
             <h2 style="text-align: center; font-size: 30px; font-weight: bold; height: 50px; color: #ffffff;">Chọn ghế</h2>
@@ -764,6 +759,126 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket'])!=0) {
                             }
                             ?>
                         </tr>
+                        <tr>
+                            <td>C</td>
+                            <?php
+                            foreach ($show_hang_ghe_C as $ghe_C) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_C['ten_ghe'] ?>" <?php if ($ghe_C['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_C['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_C['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_C['ten_ghe'] ?>" value="<?php echo $ghe_C['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_C['id_ghe'] ?>" value="<?php echo $ghe_C['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>D</td>
+                            <?php
+                            foreach ($show_hang_ghe_D as $ghe_D) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_D['ten_ghe'] ?>" <?php if ($ghe_D['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_D['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_D['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_D['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_D['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_D['id_ghe'] ?>" class="seats" value="<?php echo $ghe_D['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>E</td>
+                            <?php
+                            foreach ($show_hang_ghe_E as $ghe_E) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_E['ten_ghe'] ?>" <?php if ($ghe_E['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_E['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_E['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_E['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_E['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_E['id_ghe'] ?>" class="seats" value="<?php echo $ghe_E['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>F</td>
+                            <?php
+                            foreach ($show_hang_ghe_F as $ghe_F) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_F['ten_ghe'] ?>" <?php if ($ghe_F['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_F['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_F['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_F['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_F['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_F['id_ghe'] ?>" class="seats" value="<?php echo $ghe_F['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>G</td>
+                            <?php
+                            foreach ($show_hang_ghe_G as $ghe_G) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_G['ten_ghe'] ?>" <?php if ($ghe_G['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_G['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_G['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_G['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_G['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_G['id_ghe'] ?>" class="seats" value="<?php echo $ghe_G['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>H</td>
+                            <?php
+                            foreach ($show_hang_ghe_H as $ghe_H) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_H['ten_ghe'] ?>" <?php if ($ghe_H['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_H['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_H['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_H['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_H['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_H['id_ghe'] ?>" class="seats" value="<?php echo $ghe_H['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>I</td>
+                            <?php
+                            foreach ($show_hang_ghe_I as $ghe_I) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_I['ten_ghe'] ?>" <?php if ($ghe_I['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_I['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_I['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_I['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_I['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_I['id_ghe'] ?>" class="seats" value="<?php echo $ghe_I['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>J</td>
+                            <?php
+                            foreach ($show_hang_ghe_J as $ghe_J) {
+                            ?>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $ghe_J['ten_ghe'] ?>" <?php if ($ghe_J['trang_thai'] == 1) echo 'style="pointer-events: none;" checked class=seats_' . $ghe_J['ten_ghe'];
+                                                                                                    else echo 'class=seats' ?> value="<?php echo $ghe_J['ten_ghe'] ?>">
+                                    <input type="hidden" name="gia_<?php echo $ghe_J['ten_ghe'] ?>" class="seats" value="<?php echo $ghe_J['gia'] ?>">
+                                    <input type="hidden" name="id_<?php echo $ghe_J['id_ghe'] ?>" class="seats" value="<?php echo $ghe_J['id_ghe'] ?>">
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
                     </table>
                 </div>
                 <input name="btn_dat_ghe" type="submit" value="Xác nhận" style="display: flex; width:100px; margin-top: 100px;; justify-content: center; padding-bottom: 50px;"></input>
@@ -772,36 +887,6 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket'])!=0) {
 
         </div>
     </div>
-    <script>
-        function checkSeatLimit() {
-            var selectedSeats = document.querySelectorAll('.seats:checked');
-            var maxSelectedSeats = parseInt(document.getElementById('selected-ticket-count').innerText);
-
-            if (selectedSeats.length >= maxSelectedSeats) {
-                var checkboxes = document.querySelectorAll('.seats:not(:checked)');
-                checkboxes.forEach(function(checkbox) {
-                    checkbox.disabled = true;
-                });
-            } else {
-                // Nếu số lượng ghế chưa đạt tới giới hạn, mở khóa tất cả checkbox
-                var checkboxes = document.querySelectorAll('.seats');
-                checkboxes.forEach(function(checkbox) {
-                    checkbox.disabled = false;
-                });
-            }
-        }
-
-        // Gọi hàm khi trang được load
-        window.onload = function() {
-            checkSeatLimit();
-
-            // Thêm sự kiện change cho tất cả các checkbox để kiểm tra giới hạn khi người dùng chọn hoặc bỏ chọn
-            var checkboxes = document.querySelectorAll('.seats');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', checkSeatLimit);
-            });
-        };
-    </script>
 
 <?php
 } else {

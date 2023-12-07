@@ -58,9 +58,9 @@ function insert_info_payment($name, $phone, $email, $address)
     pdo_execute($sql);
 }
 
-function query_user_payment($email)
+function query_user_payment($id_user)
 {
-    $sql = "select * from user where email = '$email'";
+    $sql = "select * from user where id_user = $id_user";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -102,7 +102,11 @@ function update_Users($user_id, $user_name, $pass, $email)
 
 function show_list_users()
 {
-    $sql = "select * from users";
+    $sql = "select user.*,role.*
+    from user
+    inner join role on user.id_role = role.id_role
+    where role.vai_tro = 1 
+    ";
     $result = pdo_query($sql);
     return $result;
 }
@@ -133,7 +137,6 @@ function check_tk_admin($email, $pass)
 }
 
 function query_transaction_user($id_user) {
-    $id_user = 33;
     $sql = "SELECT user.*, vnpay.*, ve.*, suat_chieu.*, phim.*, gia_ve.*, rap.*, phong_chieu.*, ghe.* ,ve.trang_thai AS trang_thai_ve
     FROM ve 
     INNER JOIN suat_chieu ON suat_chieu.id_suat_chieu = ve.id_suat_chieu 

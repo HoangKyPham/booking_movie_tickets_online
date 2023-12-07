@@ -11,9 +11,9 @@ include "model/ghe.php";
 include "model/suat-chieu.php";
 include "model/rap.php";
 include "model/thanh_vien.php";
-
 include "model/cinema.php";
 include "model/khuyenmai.php";
+include "model/validate.php";
 
 $show_top_phim = show_top_phim();
 
@@ -34,7 +34,6 @@ $show_phim_tamly = show_phim_tamly();
 $show_phim_kinhdi = show_phim_kinhdi();
 
 $show_do_an = show_do_an();
-$show_ve = show_ve();
 $list_ghe = list_ghe();
 
 $all_user = all_user();
@@ -42,18 +41,6 @@ $all_user = all_user();
 // $ls_giaodich = ls_giaodich();
 
 $khuyen_mai = khuyen_mai();
-
-$show_hang_ghe_A = show_hang_ghe_A();
-$show_hang_ghe_B = show_hang_ghe_B();
-$show_hang_ghe_C = show_hang_ghe_C();
-$show_hang_ghe_D = show_hang_ghe_D();
-$show_hang_ghe_E = show_hang_ghe_E();
-$show_hang_ghe_F = show_hang_ghe_F();
-$show_hang_ghe_G = show_hang_ghe_G();
-$show_hang_ghe_H = show_hang_ghe_H();
-$show_hang_ghe_I = show_hang_ghe_I();
-$show_hang_ghe_J = show_hang_ghe_J();
-
 if (!isset($_SESSION['my_show']) || count($_SESSION['my_show']) === 0) {
     $_SESSION['my_show'] = []; // Khởi tạo mảng nếu chưa có
 }
@@ -134,21 +121,33 @@ if (isset($_GET['act'])) {
             include 'view/movie-details.php';
             break;
         case 'dat_ve':
+            $my_show = $_SESSION['my_show'];
+            $id_rap = $my_show[0][2];
+            $show_ve = show_ve_phong_chieu($id_rap);
             if (isset($_POST['btn_dat_ve']) && ($_POST['btn_dat_ve'])) {
                 $my_ticket = [];
                 foreach ($show_ve as $ve_item) {
                     $id_gia_ve = $ve_item['id_gia_ve'];
-                    $so_luong = $_POST['so_luong_' . $id_gia_ve];
+                    $id_phong_chieu = $ve_item['id_phong_chieu'];
                     $ten_ve = $_POST['ten_' . $id_gia_ve];
                     $gia_ve = $_POST['gia_' . $id_gia_ve];
-                    if ($so_luong > 0) {
+                    $id_phong_chieu_select = $_POST[$id_phong_chieu];
+                    if (isset($id_phong_chieu_select) && $id_phong_chieu_select == $id_phong_chieu) {
                         $my_ticket[] = [
+                            'id_phong_chieu' => $id_phong_chieu,
                             'id_gia_ve' => $id_gia_ve,
                             'ten_gia_ve' => $ten_ve,
                             'gia_ve' => $gia_ve,
-                            'so_luong' => $so_luong,
                         ];
                     }
+                    // if ($so_luong > 0) {
+                    //     $my_ticket[] = [
+                    //         'id_gia_ve' => $id_gia_ve,
+                    //         'ten_gia_ve' => $ten_ve,
+                    //         'gia_ve' => $gia_ve,
+                    //         'so_luong' => $so_luong,
+                    //     ];
+                    // }
                 }
                 $_SESSION['my_ticket'] = $my_ticket;
 
@@ -163,6 +162,18 @@ if (isset($_GET['act'])) {
 
             break;
         case 'dat_ghe':
+            $id_phong_chieu = $_SESSION['my_ticket'][0]['id_phong_chieu'];
+            $show_hang_ghe_A = show_hang_ghe_A($id_phong_chieu);
+            $show_hang_ghe_B = show_hang_ghe_B($id_phong_chieu);
+            $show_hang_ghe_C = show_hang_ghe_C($id_phong_chieu);
+            $show_hang_ghe_D = show_hang_ghe_D($id_phong_chieu);
+            $show_hang_ghe_E = show_hang_ghe_E($id_phong_chieu);
+            $show_hang_ghe_F = show_hang_ghe_F($id_phong_chieu);
+            $show_hang_ghe_G = show_hang_ghe_G($id_phong_chieu);
+            $show_hang_ghe_H = show_hang_ghe_H($id_phong_chieu);
+            $show_hang_ghe_I = show_hang_ghe_I($id_phong_chieu);
+            $show_hang_ghe_J = show_hang_ghe_J($id_phong_chieu);
+
             if (isset($_POST['btn_dat_ghe']) && ($_POST['btn_dat_ghe'])) {
                 $selected_seats = [];
                 foreach ($show_hang_ghe_A as $ghe_A) {
@@ -233,7 +244,7 @@ if (isset($_GET['act'])) {
             $tong_tien_ghe = 0;
             $tong_tien_ve = 0;
             foreach ($_SESSION['my_ticket'] as $type => $ticket) {
-                $tong_tien_ve += $ticket['so_luong'] * $ticket['gia_ve'];
+                $tong_tien_ve =  $ticket['gia_ve'];
             }
             foreach ($_SESSION['my_bonus'] as $type => $bonus) {
                 $tong_tien_bonus += $bonus['so_luong'] * $bonus['gia_do_an'];
@@ -355,9 +366,8 @@ if (isset($_GET['act'])) {
                 $vnp_SecureHash = $_GET['vnp_SecureHash'];
 
                 //tao ve va user truoc sau do moi them duoc bang vnpay
-                // insert user 
+                $info_user = $_SESSION['my_user'];
                 if (isset($_SESSION['my_user'])) {
-                    $info_user = $_SESSION['my_user'];
                     if (isset($info_user['id_user'], $info_user['ho_ten'], $info_user['email'], $info_user['phone'], $info_user['dia_chi'])) {
                         $info = $_SESSION['my_info'];
                         if (
@@ -374,17 +384,10 @@ if (isset($_GET['act'])) {
                             update_info_payment($id_user, $name, $phone, $email, $address);
                         }
                     }
-                } else {
-                    $info = $_SESSION['my_info'];
-                    $name = $info['name'];
-                    $phone = $info['phone'];
-                    $email = $info['email'];
-                    $address = $info['address'];
-                    insert_info_payment($name, $phone, $email, $address);
-                }
-
+                } 
                 //insert vnpay
-                $user = query_user_payment($email);
+                $id_user = $info_user['id_user'];
+                $user = query_user_payment($id_user);
                 $list_do_an = $_SESSION['my_bonus'];
                 foreach ($list_do_an as $do_an_item) {
                     $id_user = $user['id_user'];
@@ -406,7 +409,7 @@ if (isset($_GET['act'])) {
                         $vnp_SecureHash
                     );
                 }
-                $payment = query_payment($email);
+                $payment = query_payment($id_user);
                 //insert ve
                 $id_suat_chieu = $_SESSION['my_show'][0][1];
                 $trang_thai = 'còn hạn';
@@ -432,37 +435,77 @@ if (isset($_GET['act'])) {
             include 'view/datghe_bongnc/web/thong-bao/tt_that_bai.php';
             break;
         case 'contact':
+            $err = [];
+            if (isset($_POST['btn_contact']) && ($_POST['btn_contact'])) {
+                $email = $_POST['email'];
+                $ho_ten = $_POST['ho_ten'];
+                $chu_de = $_POST['chu_de'];
+                $noi_dung = $_POST['noi_dung'];
+
+                if (empty($email)) {
+                    $err['email'] = "* Email không được để trống";
+                }else {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $err['email'] = " không đúng định dạng";
+                    }
+                }
+                if (empty($ho_ten)) {
+                    $err['ho_ten'] = "* Họ tên không được để trống";
+                }
+                if (empty($chu_de)) {
+                    $err['chu_de'] = "* Chủ đề không được để trống";
+                }
+                if (empty($noi_dung)) {
+                    $err['noi_dung'] = "* Nội dung không được để trống";
+                }
+                if (empty($err)) {
+                    insert_contact($email, $chu_de, $ho_ten, $noi_dung);
+                   echo " <script>
+                   Swal.fire({
+                       title: 'Good job!',
+                       text: 'Bạn đã gửi thành công',
+                       icon: 'success',
+                       confirmButtonText: 'Cool'
+                     })</script>";
+                }
+            }
+
             include 'view/lien-he/contact.php';
             break;
         case 'login':
+            $err = [];
             if (isset($_POST['btn_signin']) && ($_POST['btn_signin'])) {
                 $email = $_POST['email'];
                 $pass = $_POST['pass'];
                 $check_user = sign_Users($email, $pass);
-                if ($check_user) {
-                    // if ($result['vai_tro']==0) {
-                    //     $_SESSION['user'] = $result;
-                    //     if ($_GET['act'] === 'admin') {
-                    //         header("Location: admin/index.php?act=show_thong_ke");
-                    //     } else {
-                    //         header("Location: index.php");
-                    //     }
-                    // } else {
 
+                if (empty($email)) {
+                    $err['email'] = "*";
+                }else {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $err['email'] = " không đúng định dạng";
+                    }
+                }
+                if (empty($pass)) {
+                    $err['pass'] = "*";
+                }
+                if (empty($err)) {
+                    $erro = "Đăng nhập thất bại: Email hoặc mật khẩu bị sai";
+                }
+                if ($check_user) {
                     $_SESSION['my_user'] = [
                         'id_user' => $check_user['id_user'],
                         'email' => $check_user['email'],
-                        'phone' => $check_user['phone'],
+                        'phone' => $check_user['so_dien_thoai'],
                         'ho_ten' => $check_user['ho_ten'],
                         'dia_chi' => $check_user['dia_chi']
                     ];
                     header('Location:index.php?act=thanh_vien');
                     // }
 
-                } else {
-                    $erro = "Đăng nhập thất bại: Email hoặc mật khẩu bị sai";
                 }
             }
+
             include 'account/signin.php';
             break;
         case 'thanh_vien':
@@ -472,9 +515,21 @@ if (isset($_GET['act'])) {
             include 'account/thanhvien.php';
             break;
         case 'quenmk':
+            $err = [];
             if (isset($_POST['btn_verify']) && $_POST['btn_verify']) {
                 $email = $_POST['email'];
                 $result = sign_change_pass($email);
+
+                if (empty($email)) {
+                    $err['email'] = "Email không được để trống";
+                } else {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $err['email'] = "Email không đúng định dạng";
+                    }
+                }
+                if (empty($err)) {
+                    $erro = "Email không tồn tại";
+                }
                 if ($result) {
                     $_SESSION['change_password'] = $result;
                     header('Location:index.php?act=doimk');
@@ -485,12 +540,29 @@ if (isset($_GET['act'])) {
             include 'account/quenmk.php';
             break;
         case 'doimk':
+            $err = [];
             if (isset($_POST['btn_restore']) && ($_POST['btn_restore'])) {
                 $old_pass = $_POST['old_pass'];
                 $new_pass_1 = $_POST['new_pass_1'];
                 $new_pass_2 = $_POST['new_pass_2'];
                 $user_id = $_POST['id_user'];
                 $result = edit_query_user($user_id, $old_pass);
+
+                if (empty($old_pass)) {
+                    $err['old_pass'] = "*";
+                }
+                if (empty($new_pass_1)) {
+                    $err['new_pass_1'] = "*";
+                }
+                if (empty($new_pass_2)) {
+                    $err['new_pass_2'] = "*";
+                }
+                if ($new_pass_1 != $new_pass_2) {
+                    $err['new_pass_2'] = "Password nhập lại không đúng";
+                }
+                if (empty($err)) {
+                    $erro = "Nhập sai mật khẩu cũ";
+                }
                 if ($result && $new_pass_1 == $new_pass_2) {
                     restore_Pass($user_id, $new_pass_2);
                     header('Location:index.php?act=login');
@@ -501,19 +573,65 @@ if (isset($_GET['act'])) {
             include 'account/doimk.php';
             break;
         case 'register':
+            $err = [];
+            $phone = "";
             if (isset($_POST['btn_register']) && ($_POST['btn_register'])) {
-                $pass = $_POST['pass'];
-                $email = $_POST['email'];
                 $ho_ten = $_POST['ho_ten'];
                 $so_dien_thoai = $_POST['so_dien_thoai'];
+                $email = $_POST['email'];
+                $pass = $_POST['pass'];
+                $r_pass = $_POST['r_pass'];
                 $dia_chi = $_POST['dia_chi'];
-                insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai);
-                $result = query_insert_role_User();
-                insert_Role($result['id_user'], $mat_khau);
-                header('Location:index.php?act=login');
+                $justNums = preg_replace("/[^0-9]/", '', $so_dien_thoai);
+
+                if (empty($ho_ten)) {
+                    $err['ho_ten'] = "*";
+                }
+                if (empty($dia_chi)) {
+                    $err['dia_chi'] = "*";
+                }
+                if (empty($email)) {
+                    $err['email'] = "*";
+                } else {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $err['email'] = " không đúng định dạng";
+                    }
+                }
+                if (empty($so_dien_thoai)) {
+                    $err['so_dien_thoai'] = "*";
+                } else {
+
+                    if (strlen($justNums) == 10) {
+                        $isPhoneNum = true;
+                    } else {
+                        $err['so_dien_thoai'] = " không đúng định dạng";
+                    }
+                }
+                if (empty($pass)) {
+                    $err['pass'] = "*";
+                }
+                if (empty($r_pass)) {
+                    $err['r_pass'] = "*";
+                }
+                // if (empty($checkbox)) {
+                //     $err['checkbox'] = "*";
+                // }
+                if ($pass != $r_pass) {
+                    $err['r_pass'] = "Password nhập lại không đúng";
+                }
+                if (empty($err)) {
+                    insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai);
+                    $result = query_insert_role_User();
+                    insert_Role($result['id_user'], $mat_khau);
+                    header('Location:index.php?act=login');
+                }
             }
             include 'account/signup.php';
             break;
+        case 'logout':
+           session_unset();
+            header('location: index.php');
+                break;
         case 'register_insert_thong_tin':
             break;
         default:

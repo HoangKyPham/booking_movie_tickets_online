@@ -17,9 +17,12 @@
     
 // show 
 
-function show_ve(){
-
-    $sql = "SELECT * FROM gia_ve";
+function show_ve_phong_chieu($id_rap){
+    $sql = "SELECT phong_chieu.*,gia_ve.* 
+    FROM phong_chieu
+    INNER JOIN gia_ve on gia_ve.id_gia_ve = phong_chieu.id_gia_ve
+    WHERE phong_chieu.id_rap = $id_rap
+    ";
     $result = pdo_query($sql);
     return $result;
     
@@ -49,11 +52,11 @@ function insert_vnpay(
         $sql = "INSERT INTO vnpay VALUES (null,'$id_user','$id_do_an', '$vnp_Amount', '$vnp_BankCode', '$vnp_BankTranNo', '$vnp_CardType', '$vnp_Orderinfo', '$vnp_PayDate', '$vnp_ResponseCode', '$vnp_TmnCode', '$vnp_TransactionNo', '$vnp_TransactionStatus', '$vnp_TxnRef', '$vnp_SecureHash')";
         pdo_execute($sql);
     }
-function query_payment($email){
+function query_payment($id_user){
     $sql = "select user.*,vnpay.*
     from user
     inner join vnpay on user.id_user = vnpay.id_user
-    where user.email = '$email' ORDER BY vnpay.id_pay DESC LIMIT 1      
+    where user.id_user = $id_user ORDER BY vnpay.id_pay DESC LIMIT 1      
     ";
     $result = pdo_query_one($sql);
     return $result;

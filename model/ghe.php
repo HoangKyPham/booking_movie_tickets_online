@@ -6,71 +6,71 @@ function list_ghe(){
     return $result;
 }
 
-function show_hang_ghe_A(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'A%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_A($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'A%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_B(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'B%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_B($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'B%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_C(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'C%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_C($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'C%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_D(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'D%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_D($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'D%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_E(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'E%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_E($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'E%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_F(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'F%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_F($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'F%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_G(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'G%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_G($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'G%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_H(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'H%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_H($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'H%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_I(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'I%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_I($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'I%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     
 }
 
-function show_hang_ghe_J(){
-    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'J%' ORDER BY id_ghe ASC limit 12";
+function show_hang_ghe_J($id_phong_chieu){
+    $sql = "SELECT * FROM ghe WHERE ten_ghe LIKE 'J%' AND id_phong_chieu = $id_phong_chieu ORDER BY id_ghe ASC limit 12";
     $result = pdo_query($sql);
     return $result;
     

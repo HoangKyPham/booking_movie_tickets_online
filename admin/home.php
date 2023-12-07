@@ -18,7 +18,7 @@
           <?php 
               foreach ($list_statistical as $value) {
                 extract($value);
-                echo"['$cate_name',    $soluong ],";
+                echo"['$ten_the_loai',    $so_luong ],";
               }
             ?>
         ]);

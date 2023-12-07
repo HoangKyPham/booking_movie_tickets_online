@@ -48,10 +48,10 @@ if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
                 }
                 break;
 
-                // case 'show_thong_ke':
-                //     $list_statistical = show_list_cate();
-                //     include 'home.php';
-                //     break;
+                case 'show_thong_ke':
+                    $list_statistical = show_Loai_phim();
+                    include 'home.php';
+                    break;
                 // San pham 
 
             case 'showPro':
@@ -571,35 +571,35 @@ if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
                 //     session_unset();
                 //     header('Location:../index.php');
                 //     break;
-                // case 'show_list_users':
-                //     $list_users = show_list_users();
-                //     include 'nguoidung/show_taikhoan.php';
-                //     break;
+                case 'show_list_users':
+                    $list_users = show_list_users();
+                    include 'nguoidung/show_taikhoan.php';
+                    break;
                 // case 'edit_query_user':
                 //     if (isset($_GET['id_user'])) {
                 //         $user_id = $_GET['id_user'];
-                //         $result = edit_query_user($user_id);
+                //         $result = edit_query_user();
                 //     }
                 //     include 'nguoidung/update_taikhoan.php';
                 //     break;
-                // case 'update_User':
-                //     if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
-                //         $user_id = $_POST['user_id'];
-                //         $user_name = $_POST['user_name'];
-                //         $pass = $_POST['pass'];
-                //         $email = $_POST['email'];
-                //         update_Users($user_id, $user_name, $pass, $email);
-                //         header('Location:index.php?act=show_list_users');
-                //     }
-                //     include 'nguoidung/update_taikhoan.php';
-                //     break;
-                // case 'delete_User';
-                //     if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {
-                //         $user_id = $_GET['id_user'];
-                //         delete_User($user_id);
-                //     }
-                //     header('Location:index.php?act=show_list_users');
-                //     break;
+                case 'update_User':
+                    if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                        $user_id = $_POST['user_id'];
+                        $user_name = $_POST['user_name'];
+                        $pass = $_POST['pass'];
+                        $email = $_POST['email'];
+                        update_Users($user_id, $user_name, $pass, $email);
+                        header('Location:index.php?act=show_list_users');
+                    }
+                    include 'nguoidung/update_taikhoan.php';
+                    break;
+                case 'delete_User';
+                    if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {
+                        $user_id = $_GET['id_user'];
+                        delete_User($user_id);
+                    }
+                    header('Location:index.php?act=show_list_users');
+                    break;
 
                 //comment 
 

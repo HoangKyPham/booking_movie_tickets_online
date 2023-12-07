@@ -59,7 +59,7 @@
     </section>
     <!-- breadcrumb-area-end -->
     <div class="wrap">
-        <div class="account-pages">
+        <div class="account-pages" style="padding: 50px 0;">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
@@ -79,12 +79,14 @@
 
                                         <div class="mb-3">
                                             <label class="form-label" for="username">Email</label>
-                                            <input type="email" id="username" placeholder="Enter username" name="email" required>
+                                            <span style="color: red;"><?php echo (isset($err['email']))? $err['email']: '' ?></span>    
+                                            <input type="text" id="username" placeholder="Enter username" name="email">
                                         </div>
                                         <div class="form-password mb-3 auth-pass-inputgroup">
                                             <label class="form-label" for="userpassword">Password</label>
+                                            <span style="color: red;"><?php echo (isset($err['pass']))? $err['pass']: '' ?></span>     
                                             <div class="position-relative">
-                                                <input type="password" id="password-input" placeholder="Enter password" name="pass" required maxlength="15">
+                                                <input type="password" id="password-input" placeholder="Enter password" name="pass" maxlength="15">
                                                 <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">
                                                     <i class="mdi mdi-eye-outline f-16 text-muted"></i>
                                                 </button>
@@ -116,7 +118,7 @@
                             </div>
                             <!-- end card -->
 
-                        <div class="mt-5 text-center">
+                        <div class="text-center" style="background-color: #000;">
                             <p>Bạn chưa có tài khoản ? <a href="index.php?act=register" style="color:#e4d804"> Đăng ký ngay </a> </p>
                         </div>
                         <!-- end col -->

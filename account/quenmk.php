@@ -53,7 +53,7 @@ if (!(isset($_SESSION['my_user']))) {
     </section>
     <!-- breadcrumb-area-end -->
     <div class="wrap">
-        <div class="account-pages">
+        <div class="account-pages" style="padding: 50px 0;">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
@@ -73,7 +73,14 @@ if (!(isset($_SESSION['my_user']))) {
                                             <label class="form-label" for="username">Bạn vui lòng nhập email vào form dưới đây, chúng tôi sẽ gửi mật khẩu về email bạn.</label>
                                             <input type="text" id="username" placeholder="Email*" name="email">
                                         </div>
-
+                                        <span style="color: red;"><?php echo (isset($err['email']))? $err['email']: '' ?></span>
+                                        <p style="color: red; font-size: 14px;">
+                                        <?php
+                                        if (isset($erro) && ($erro != "")) {
+                                            echo $erro;
+                                        }
+                                        ?>
+                                    </p>
                                         <div class="mt-3">
                                             <input class="btn rounded-3 w-100" type="submit" value="Lấy lại mật khẩu" name="btn_verify"></input>
                                             <a href="index.php?act=login"><button type="button" class="btn rounded-3" style="margin: 0 20px">Hủy bỏ</button></a>
@@ -82,6 +89,7 @@ if (!(isset($_SESSION['my_user']))) {
                                     <a href="index.php?act=login">huy</a>
                                 </div> -->
                                     </form>
+                                   
                                     <!-- end form -->
                                 </div>
                             </div>
@@ -99,7 +107,6 @@ if (!(isset($_SESSION['my_user']))) {
             </div>
         </div>
     </div>
-    ?>
 <?php
 } else {
     header('Location:index.php');

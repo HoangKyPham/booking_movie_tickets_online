@@ -71,13 +71,13 @@
                                 <div class="movie-content">
                                     <div class="top">
                                         <h5 class="title"><a href="index.php?act=movie_details"><?php echo $row['ten_phim']; ?></a></h5>
-                                        <span class="date">2021</span>
+                                        <span class="date">2023</span>
                                     </div>
                                     <div class="bottom">
                                         <ul>
                                             <li><span class="quality">hd</span></li>
                                             <li>
-                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="duration"><i class="far fa-clock"></i><?php echo $row['thoi_luong'] ?></span>
                                                 <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                             </li>
                                         </ul>
@@ -95,20 +95,20 @@
                         foreach ($phim_sapchieu as $row) {
                             extract($row);
                         ?>
-                            <div class="movie-item mb-50" style="pointer-events: none;">
+                            <div class="movie-item mb-50">
                                 <div class="movie-poster">
                                     <a href="index.php?act=movie_details&id_phim=<?php echo $row['id_phim']; ?>"><img style="width: 302.5px; height: 429.29px; object-fit: cover;" src="Assets/img/<?php echo $row['anh']; ?>" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
                                         <h5 class="title"><a href="index.php?act=movie_details"><?php echo $row['ten_phim'] ?></a></h5>
-                                        <span class="date">2021</span>
+                                        <span class="date">2023</span>
                                     </div>
                                     <div class="bottom">
                                         <ul>
                                             <li><span class="quality">hd</span></li>
                                             <li>
-                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="duration"><i class="far fa-clock"></i></i><?php echo $row['thoi_luong'] ?></span>
                                                 <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                             </li>
                                         </ul>

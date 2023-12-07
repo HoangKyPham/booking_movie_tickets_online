@@ -126,12 +126,12 @@
                                     <span>hd</span>
                                 </li>
                                 <li class="category">
-                                    <a href="#">Romance,</a>
-                                    <a href="#">Drama</a>
+                                    <a href="#">Thể loại:</a>
+                                    <a href="#"><?php echo $movie_detail['ten_the_loai'] ?></a>
                                 </li>
                                 <li class="release-time">
-                                    <span><i class="far fa-calendar-alt"></i> 2021</span>
-                                    <span><i class="far fa-clock"></i> 128 min</span>
+                                    <span><i class="far fa-calendar-alt"></i><?php echo $movie_detail['ngay_phat_hanh'] ?></span>
+                                    <span><i class="far fa-clock"></i><?php echo $movie_detail['thoi_luong'] ?></span>
                                 </li>
                             </ul>
                         </div>
@@ -166,7 +166,7 @@
                         <?php
                         foreach ($ngay_suat_chieu as $row_ngay_chieu) {
                             $ngayHienTai = date("Y-m-d");
-                            if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai) {
+                            if ($row_ngay_chieu['ngay_chieu'] >= $ngayHienTai && !($movie_detail['trang_thai_phim'] == 'Phim sắp chiếu')) {
                         ?>
                                 <a href="index.php?act=movie_details&id_phim=<?php echo $id_phim; ?>&date=<?php echo $row_ngay_chieu['ngay_chieu']; ?>">
                                     <div>
@@ -175,7 +175,7 @@
                                     </div>
                                 </a>
                         <?php
-                            }
+                            } 
                         }
                         ?>
                     </div>
@@ -184,7 +184,7 @@
                         extract($rap_va_gio_chieu);
                         $lastRap = null;
                         foreach ($rap_va_gio_chieu as $row) {
-                            if ($row['ten_rap'] !== $lastRap) {
+                            if ($row['ten_rap'] !== $lastRa) {
                                 $printedRapInfo = false;
                                 if (!$printedRapInfo) {
                         ?>
@@ -224,7 +224,7 @@
             <?php
             } else {
             ?>
-                <li class="watch"><a href="index.php?act=login" class="btn">Đăng nhập để đặt vé</a></li>
+                <li style="display: flex; justify-content: center;" class="watch"><a style="max-width: 230px;" href="index.php?act=login" class="btn">Đăng nhập để đặt vé</a></li>
             <?php
             }
             ?>

@@ -53,7 +53,7 @@ if (isset($_SESSION['change_password']) && !(isset($_SESSION['my_user']))) {
 <!-- breadcrumb-area-end -->
 
 <div class="wrap">
-    <div class="account-pages">
+    <div class="account-pages" style="padding: 50px 0;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
@@ -74,6 +74,12 @@ if (isset($_SESSION['change_password']) && !(isset($_SESSION['my_user']))) {
                                     </div>
                                     <div class="form-password mb-3 auth-pass-inputgroup">
                                         <label class="form-label" for="userpassword">Mật khẩu cũ</label>
+                                        <span style="color: red;"><?php echo (isset($err['old_pass']))? $err['old_pass']: '' ?></span> 
+                                        <span style="color: red;" ><?php
+                                        if (isset($erro) && ($erro != "")) {
+                                            echo $erro;
+                                        }
+                                        ?></span> 
                                         <div class="position-relative">
                                             <input type="password" id="password-input" placeholder="Enter password" name="old_pass">
                                             <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">
@@ -83,6 +89,7 @@ if (isset($_SESSION['change_password']) && !(isset($_SESSION['my_user']))) {
                                     </div>
                                     <div class="form-password mb-3 auth-pass-inputgroup">
                                         <label class="form-label" for="userpassword">Mật khẩu mới</label>
+                                        <span style="color: red;"><?php echo (isset($err['new_pass_1']))? $err['new_pass_1']: '' ?></span> 
                                         <div class="position-relative">
                                             <input type="password" id="password-input" placeholder="Enter password" name="new_pass_1">
                                             <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">
@@ -92,6 +99,7 @@ if (isset($_SESSION['change_password']) && !(isset($_SESSION['my_user']))) {
                                     </div>
                                     <div class="form-password mb-3 auth-pass-inputgroup">
                                         <label class="form-label" for="userpassword">Nhập lại mật khẩu mới</label>
+                                        <span style="color: red;"><?php echo (isset($err['new_pass_2']))? $err['new_pass_2']: '' ?></span> 
                                         <div class="position-relative">
                                             <input type="password" id="password-input" placeholder="Enter password" name="new_pass_2">
                                             <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">

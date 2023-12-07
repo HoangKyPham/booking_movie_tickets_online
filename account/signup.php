@@ -52,7 +52,7 @@ if (!(isset($_SESSION['my_user']))) {
     <!-- breadcrumb-area-end -->
 
     <div class="wrap">
-        <div class="account-pages">
+        <div class="account-pages" style="padding: 50px 0;">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
@@ -70,22 +70,27 @@ if (!(isset($_SESSION['my_user']))) {
                                     <form class="custom-form" action="index.php?act=register" method="post">
                                         <div class="mb-3">
                                             <label class="form-label" for="username">Họ và tên</label>
+                                            <span style="color: red;"><?php echo (isset($err['ho_ten']))? $err['ho_ten']: '' ?></span>     
                                             <input type="text" id="username" name="ho_ten" placeholder="Họ và tên">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="username">Địa chỉ</label>
+                                            <span style="color: red;"><?php echo (isset($err['dia_chi']))? $err['dia_chi']: '' ?></span>  
                                             <input type="text" id="username" name="dia_chi" placeholder="Địa chỉ">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="username">Email</label>
+                                            <span style="color: red;"><?php echo (isset($err['email']))? $err['email']: '' ?></span> 
                                             <input type="text" id="username" name="email" placeholder="Email">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="username">Điện thoại</label>
+                                            <span style="color: red;"><?php echo (isset($err['so_dien_thoai']))? $err['so_dien_thoai']: '' ?></span>   
                                             <input type="text" id="username" name="so_dien_thoai" placeholder="Số điện thoại">
                                         </div>
                                         <div class="form-password mb-3 auth-pass-inputgroup">
                                             <label class="form-label" for="userpassword">Password</label>
+                                            <span style="color: red;"><?php echo (isset($err['pass']))? $err['pass']: '' ?></span>   
                                             <div class="position-relative">
                                                 <input type="password" id="password-input" name="pass" placeholder="Enter password">
                                                 <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">
@@ -93,8 +98,18 @@ if (!(isset($_SESSION['my_user']))) {
                                                 </button>
                                             </div>
                                         </div>
+                                        <div class="form-password mb-3 auth-pass-inputgroup">
+                                            <label class="form-label" for="userpassword">Nhập lại pass</label>
+                                            <span style="color: red;"><?php echo (isset($err['r_pass']))? $err['r_pass']: '' ?></span> 
+                                            <div class="position-relative">
+                                                <input type="password" id="password-input" name="r_pass" placeholder="Enter password">        
+                                                <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none" id="password-addon">
+                                                    <i class="mdi mdi-eye-outline f-16 text-muted"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="customControlInline">
+                                            <input type="checkbox" class="form-check-input" id="customControlInline" name="checkbox">
                                             <label class="form-check-label" for="customControlInline">Tôi đồng ý tất cả điều khoản.</label>
                                         </div>
                                         <div class="mt-3">
