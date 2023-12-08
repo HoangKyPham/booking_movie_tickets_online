@@ -53,7 +53,7 @@ if (is_array($result)) {
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </li>
-                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video btn">Xem ngay</a></li>
+                                        <li><a href="<?php echo $row['trailer'] ?>" class="popup-video btn">Xem ngay</a></li>
                                         <li><a href="index.php?act=movie_details&id_phim=<?php echo $row['id_phim']; ?>" class="btn">Đặt vé</a></li>
                                     </ul>
                                 </div>
