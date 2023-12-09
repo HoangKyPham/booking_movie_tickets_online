@@ -1,21 +1,21 @@
 <?php
 
-function insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai)
+function insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai,$id_role)
 {
-    $sql_user = "INSERT INTO user VALUE(null,'$email','$ho_ten','$so_dien_thoai','$dia_chi')";
+    $sql_user = "INSERT INTO user VALUE(null,'$email','$ho_ten','$so_dien_thoai','$dia_chi','$id_role')";
     pdo_execute($sql_user);
 }
 
 function query_insert_role_User()
 {
-    $sql = "select * from user order by id_user desc limit 1";
+    $sql = "select * from role order by id_role desc limit 1";
     $result = pdo_query_one($sql);
     return $result;
 }
 
-function insert_Role($id_user,$mat_khau)
+function insert_Role($mat_khau)
 {
-    $sql_thong_tin = "insert into role value(null,1,$id_user,$mat_khau)";
+    $sql_thong_tin = "insert into role value(null,1,$mat_khau)";
     pdo_execute($sql_thong_tin);
 }
 

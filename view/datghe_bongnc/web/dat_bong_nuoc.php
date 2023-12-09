@@ -689,6 +689,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php
 if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat'])!=0) {
+    print_r($_SESSION['my_seat']);
+
 ?>
     <body>
         <h1></h1>

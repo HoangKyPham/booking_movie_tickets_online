@@ -691,6 +691,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php
 if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket']) != 0) {
     print_r($_SESSION['my_ticket']);
+    print_r($_SESSION['my_seat']);
 ?>
     <h1></h1>
     <div class="contaicon">
