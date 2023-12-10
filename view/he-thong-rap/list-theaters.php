@@ -49,7 +49,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </li>
-                                        <li><a href="movie-details.html" class="btn">Details</a></li>
+                                        <li><a href="index.php?act=theater_details&id_rap=<?php echo $row['id_rap']; ?>" class="btn">Details</a></li>
                                     </ul>
                                 </div>
                                 <div class="movie-content">

@@ -38,7 +38,7 @@ function query_rap_gio_chieu($id_phim, $ngay)
     FROM suat_chieu
     JOIN rap ON suat_chieu.id_rap = rap.id_rap
     JOIN phim ON suat_chieu.id_phim = phim.id_phim
-    WHERE phim.id_phim = $id_phim AND suat_chieu.ngay_chieu = '$ngay'";
+    WHERE phim.id_phim = $id_phim AND suat_chieu.ngay_chieu = '$ngay' order by gio_chieu ASC";
     $result = pdo_query($sql);
     return $result;
 }

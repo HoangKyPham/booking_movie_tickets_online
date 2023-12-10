@@ -7,7 +7,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 */
 
     /*--reset--*/
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&amp;display=swap');
 
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: #bcbcbc;
+}
     html,
     body,
     div,
@@ -93,7 +101,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         border: 0;
         font-size: 100%;
         font: inherit;
-        vertical-align: baseline;
+        /* vertical-align: baseline; */
     }
 
     article,
@@ -258,7 +266,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         -o-background-size: cover;
         -ms-background-size: cover;
         background-attachment: fixed;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
 
     .mr_agilemain span {
@@ -302,7 +310,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         letter-spacing: 2px;
         text-align: center;
         margin: 0.8em 1vw .9em;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
 
     h2 {
@@ -353,7 +361,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         width: 80%;
         background: transparent;
         border: 1px solid #888686;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 1em;
         margin-top: 10px;
         color: #fff;
@@ -368,7 +376,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         border-radius: 10px;
         font-size: 1em;
         letter-spacing: 1px;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Poppins', sans-serif;
         cursor: pointer;
     }
 
@@ -646,6 +654,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .formbongnuoc {
         display: flex;
         justify-content: center;
+        max-width: 1200px;
     }
 
     .combo-bongnc {
@@ -669,27 +678,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         font-size: 1.3em;
         margin: 0px;
     }
-    .input_chon{
-    background: #f5f5f5;
-    border: none;
-    color: #000;
-    font-weight: 600;
-    padding: 8px 20px;
-    border-radius: 10px;
-    font-size: 1em;
-    letter-spacing: 1px;
-    margin-left: 650px;
-    margin-top: 70px;
+    .input_chon {
+        background: #f5f5f5;
+        border: none;
+        color: #000;
+        font-weight: 600;
+        padding: 8px 20px;
+        border-radius: 10px;
+        font-size: 1em;
+        letter-spacing: 1px;
+        margin-top: 50px;
+    }
+    .input_chon:hover {
+        background-color: #e4d804;
+        transition: all 0.3s ease 0s;
+    }
+.counter input{
+width: 130px;
+height: 45px;
 }
-.input_chon:hover{
-    background-color: #e4d804;
-}
-
 </style>
 
 <?php
 if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat'])!=0) {
-    print_r($_SESSION['my_seat']);
+    // print_r($_SESSION['my_seat']);
 
 ?>
     <body>
@@ -728,7 +740,7 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat'])!=0) {
                     ?>
                     </section>
                 </div>
-                <input name="btn_bong_nuoc" type="submit" value="Xác nhận" style="display: flex; justify-content: center; padding-bottom: 50px;"></input>
+                <input class="input_chon" name="btn_bong_nuoc" type="submit" value="Xác nhận"></input>
             </form>
         </div>
     </body>

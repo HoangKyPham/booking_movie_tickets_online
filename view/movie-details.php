@@ -73,32 +73,24 @@
         padding: 0px 10px;
     }
 
-    .thoigian a {
-        padding: 10px 15px;
-        background-color: #10171e;
-        border: 2px solid #121c26;
-        color: #97a5be;
-        font-size: 20px;
-        font-weight: 600;
+    .thoigian {
+        margin-left: 10px;
+        margin-bottom: 70px;
+        line-height: 38px;
     }
 
-    .thoigian a:hover {
-        padding: 10px 15px;
-        background-color: #e4d804;
-        border: 2px solid #121c26;
-        color: #040406;
-        font-size: 20px;
-        font-weight: 600;
+    .gio_chieu {
+        background: #f0f0f0;
+        border: 2px solid #e4d804;
+        color: #000;
     }
 
-    .gio {
-        line-height: 50px;
-        height: 110px;
+    .gio_chieu:hover {
+        transition: all 0.3s ease 0s;
+        color: #000;
+        background: #e4d804;
     }
 
-    .gio a {
-        margin: 5px;
-    }
 </style>
 <!-- main-area -->
 <main>
@@ -175,7 +167,7 @@
                                     </div>
                                 </a>
                         <?php
-                            } 
+                            }
                         }
                         ?>
                     </div>
@@ -190,7 +182,7 @@
                         ?>
                                     <div>
                                         <div class="rowthoigian">
-                                            <div class="info">
+                                            <div class="info" style="padding: 0 20px;">
                                                 <div class="inside">
                                                     <h4 style="color: #ffffff; padding: 10px; font-size: 20px;"><?php echo $row['ten_rap'] ?></h4>
                                                     <p style="padding: 0px 10px; color: #90a0ba;"><?php echo $row['dia_diem'] ?></p>
@@ -206,10 +198,8 @@
                                             <form action="index.php?act=chon_rap_ca_chieu" method="post">
                                                 <input type="hidden" name="id_phim" value="<?php echo $movie_detail['id_phim']; ?>">
                                                 <input type="hidden" name="id_rap" value="<?php echo $row['id_rap']; ?>">
-                                                <li class="gio" style="padding: 0 50px; margin-right: -100px;">
-                                                    <input type="hidden" name="id_suat_chieu" value="<?php echo $row['id_suat_chieu']; ?>">
-                                                    <input type="submit" name="btn_rap_ca_chieu" value="<?php echo $row['gio_chieu']; ?>">
-                                                </li>
+                                                <input type="hidden" name="id_suat_chieu" value="<?php echo $row['id_suat_chieu']; ?>">
+                                                <input class="gio_chieu" type="submit" name="btn_rap_ca_chieu" value="<?php echo $row['gio_chieu']; ?>">
                                             </form>
                                         </ul>
                                     </div>

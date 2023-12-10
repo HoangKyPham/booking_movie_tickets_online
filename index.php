@@ -37,8 +37,6 @@ $show_do_an = show_do_an();
 $list_ghe = list_ghe();
 
 $all_user = all_user();
-// $show_thongtin_user = show_thongtin_user();
-// $ls_giaodich = ls_giaodich();
 
 $khuyen_mai = khuyen_mai();
 if (!isset($_SESSION['my_show']) || count($_SESSION['my_show']) === 0) {
@@ -84,6 +82,14 @@ if (isset($_GET['act'])) {
             break;
         case 'theaters':
             include 'view/he-thong-rap/list-theaters.php';
+            break;
+        case 'theater_details':
+            if (isset($_GET['id_rap']) && ($_GET['id_rap'] > 0)) {
+                $theater_detail = loadone_rap($_GET['id_rap']) ;
+                include 'view/he-thong-rap/theater_details.php';
+            } else {
+                include 'view/he-thong-rap/list-theaters.php';
+            }
             break;
         case 'events':
             include 'view/khuyen-mai-va-su-kien/sale-events.php';
@@ -698,7 +704,7 @@ if (isset($_GET['act'])) {
                 } else {
                     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                         $err['email'] = " không đúng định dạng";
-                    }else{
+                    } else {
                         $isEmail = false;
                         foreach ($query_insert_user as $user) {
                             $email_db = $user['email'];

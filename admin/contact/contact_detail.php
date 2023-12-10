@@ -12,7 +12,7 @@ extract($contact_detail);
             <th scope="col">Họ tên</th>
             <th scope="col">Chủ đề</th>
             <th scope="col">Nội dung</th>
-            <th scope="col">Acction</th>
+            <!-- <th scope="col">Acction</th> -->
               </tr>
             </thead>
             <tbody>
@@ -24,10 +24,6 @@ extract($contact_detail);
             <td><?php echo $contact_detail['ho_ten']; ?></td>
             <td><?php echo $contact_detail['chu_de']; ?></td>
             <td><?php echo $contact_detail['noi_dung']; ?></td>
-            <td>
-            <a href="index.php?act=delete_contact&id_lien_he=<?php echo $contact_detail['id_lien_he']; ?>"><button onclick="return confirm('Ban muon xoa khong?')" class="btn btn-danger">Delete</button></a>
-            </td>
-          
         </tr>
 
           </table>

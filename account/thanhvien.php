@@ -41,6 +41,8 @@
         width: 350px;
         height: 40px;
         border: 1px solid #bfc9d2;
+        color: #70808e;
+        font-weight: 600;
     }
 
     .giao_dich {
@@ -73,12 +75,14 @@
     }
 .thong_tin_user button{
     border: 1px solid #bfc9d2;
+    font-weight: 600;
     height: 40px; 
     margin: 0 10px;
     background: #6b7379;
     color: #fff;
 }
 .thong_tin_user button:hover{
+    color: #000;
     background-color: #e4d804;
     transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
@@ -141,67 +145,69 @@ if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
     <div class="giao_dich">
         <h3>TRANSACTIONS</h3>
         <ul>
-            <li>
+            <li style="min-width: 68px; max-width: 68px;">
                 <p>No</p>
             </li>
-            <li>
+            <li style="min-width: 98px; max-width: 98px;">
                 <p>Tên vé</p>
             </li>
-            <li>
+            <li style="min-width: 158px; max-width: 158px;">
                 <p>Tên Phim</p>
             </li>
-            <li>
+            <li style="min-width: 108px; max-width: 108px;">
                 <p>Tên Rạp</p>
             </li>
-            <li>
+            <li style="min-width: 170px; max-width: 170px;">
                 <p>Tên phòng chiếu</p>
             </li>
-            <li>
+            <li style="min-width: 104px; max-width: 104px;">
                 <p>Mã ghế</p>
             </li>
-            <li>
+            <li style="min-width: 132px; max-width: 132px;">
                 <p>Ngày chiếu</p>
             </li>
-            <li>
+            <li style="min-width: 118px; max-width: 118px;">
                 <p>Giờ chiếu</p>
             </li>
-            <li>
+            <li style="min-width: 144px; max-width: 144px;">
                 <p>Trạng thái vé</p>
             </li>
-
         </ul>
+        
         <?php
         foreach ($result as $value) {
         ?>
-            <ul>
-                <li>
-                    <p><?php echo $value['id_ve']; ?></p>
-                </li>
-                <li>
-                    <p><?php echo $value['ten_ve']; ?></p>
-                </li>
-                <li>
-                    <p><?php echo $value['ten_phim']; ?></p>
-                </li>
-                <li>
-                    <p><?php echo $value['ten_rap']; ?></p>
-                </li>
-                <li>
-                    <p><?php echo $value['ten_phong_chieu']; ?></p>
-                </li>
-                <li>
-                    <p><?php echo $value['ten_ghe']; ?></p>
-                </li>
-                <li>
-                    <p><?php echo $value['ngay_chieu']; ?></p>
-                </li>
-                <li>
-                    <p><?php echo $value['gio_chieu']; ?></p>
-                </li>
-                <li>
-                    <p><?php echo $value['trang_thai_ve']; ?></p>
-                </li>
-            </ul>
+        <ul>
+            <li style="min-width: 68px; max-width: 68px;">
+                <p><?php echo $value['id_ve']; ?></p>
+            </li>
+            <li style="min-width: 98px; max-width: 98px;">
+                <p><?php echo $value['ten_ve']; ?></p>
+            </li>
+            <li style="min-width: 158px; max-width: 158px;">
+                <p><?php echo $value['ten_phim']; ?></p>
+            </li>
+            <li style="min-width: 108px; max-width: 108px;">
+                <p><?php echo $value['ten_rap']; ?></p>
+            </li>
+            <li style="min-width: 170px; max-width: 170px;">
+                <p><?php echo $value['ten_phong_chieu']; ?></p>
+            </li>
+            <li style="min-width: 104px; max-width: 104px;">
+                <p><?php echo $value['ten_ghe']; ?></p>
+            </li>
+            <li style="min-width: 132px; max-width: 132px;">
+                <p><?php echo $value['ngay_chieu']; ?></p>
+            </li>
+            <li style="min-width: 118px; max-width: 118px;">
+                <p><?php echo $value['gio_chieu']; ?></p>
+            </li>
+            <li style="min-width: 144px; max-width: 144px;">
+                <p><?php echo $value['trang_thai_ve']; ?></p>
+            </li>
+
+        </ul>
+       
         <?php
         }
         ?>
