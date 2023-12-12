@@ -58,8 +58,8 @@
             <p>Chúng tôi sẽ liên hệ Quý khách để xác nhận đơn hàng trong thời gian sớm nhất.</p>
         </div>
         <div class="input">
-            <input class="input1" type="button" value="Chi tiết đơn hàng">
-            <input class="input2" type="button" value="Tiếp tục mua hàng">
+            <!-- <input class="input1" type="button" value="Chi tiết đơn hàng"> -->
+           <a href="index.php"><input class="input2" type="button" value="Quay về trang chủ"></a> 
         </div>
     </div>
    

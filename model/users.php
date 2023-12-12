@@ -87,10 +87,18 @@ function edit_query_user($user_id, $old_pass)
 
 ///
 
-function update_Users($user_id, $user_name, $pass, $email)
+function update_Users($id_user, $email, $pass, $full_name, $phone, $dia_chi)
 {
-    $sql = "update users set user_name='$user_name',pass='$pass',email='$email' where user_id='$user_id'";
+    $sql = "update user inner join role on role.id_role = user.id_role 
+    set email='$email',mat_khau='$pass',ho_ten='$full_name',so_dien_thoai='$phone', dia_chi='$dia_chi' where id_user=$id_user";
     pdo_execute($sql);
+}
+
+
+function query_update_user($id_user) {
+    $sql = "select * from user inner join role on role.id_role = user.id_role where id_user = ".$id_user;
+    $result=pdo_query_one($sql);
+    return $result;
 }
 
 function show_list_users()

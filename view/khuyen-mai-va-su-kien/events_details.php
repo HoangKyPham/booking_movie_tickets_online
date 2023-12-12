@@ -41,7 +41,7 @@
                                     <div class="banner-meta" style="height: 10px;">
                                         <ul>
                                             <li class="release-time">
-                                                <span><i class="far fa-calendar-alt"></i>Áp dụng từ 20/11/2023 - 30/11/2023</span>
+                                                <span><i class="far fa-calendar-alt"></i>Áp dụng từ : <?php echo $events_detail['ngay_ap_dung'] ?></span>
                                             </li>
                                             <li class="quality">
                                                 <span style="margin-left: 400px;">Chia sẻ</span>
@@ -49,18 +49,8 @@
                                         </ul>
                                     </div>
                                     <h2 class="title"><?php echo $events_detail['ten_khuyen_mai'] ?></h2>
-                                    <p style="font-weight: bold; color: #e4d804;">– Chương trình: ƯU ĐÃI SUẤT CHIẾU KHUYA</p>
-                                <p><span style="color: #fff;">– Hình thức áp dụng:</span> Giá vé 2D đặc biệt cho khách hàng xem phim vào các suất
-                                    chiếu sau 22:00</p>
-                                <p><span style="color: #fff;">– Đối tượng áp dụng:</span> Tất cả đối tượng khách hàng</p>
-                                <p><span style="color: #fff;">– Chính sách giá vé:</span> Thay đổi tuỳ vào các cụm rạp (Vui lòng tham khảo bảng giá vé tại các rạp)</p>
-                                <p><span style="color: #fff;">– Điều kiện áp dụng:</span></p>
-                                <p>+ Áp dụng cho mọi suất chiếu phim 2D sau 22:00</p>
-                                <p>+ Áp dụng phụ thu ghế đôi, ghế Sofa, ghế Premium.</p>
-                                <p>+ Không áp dụng phòng First Class.</p>
-                                <p>+ Không áp dụng kèm các chương trình giảm giá vé khác.</p>
-                                <p>+ Áp dụng phụ thu đối với phim 3D, phim bom tấn.</p>
-                                <p>Ban Quản Lý Rạp có thể thay đổi hoặc dừng chương trình mà không thông báo trước.</p>
+                                    <!-- <p style="font-weight: bold; color: #e4d804;">– Chương trình: ƯU ĐÃI SUẤT CHIẾU KHUYA</p> -->           
+                                <p><span style="color: #fff;">– <?php echo $events_detail['chi_tiet'] ?></span></p>         
                                     <blockquote>
                                         <i class="fas fa-quote-right"></i>
                                         <p>Watch Mobflx movies & TV shows online or stream rights to your smart TV, game console, PC, mobile more.</p>
@@ -88,37 +78,28 @@
                                     <div class="widget-title mb-30">
                                         <h5 class="title">Khuyến mãi khác</h5>
                                     </div>
+                                    <?php 
+                                    foreach ($show_promotion as $item_events) {
+                                    
+                                    ?>
                                     <div class="rc-post">
                                         <ul>
                                             <li class="rc-post-item">
                                                 <div class="thumb">
-                                                    <a href="blog-details.html"><img src="img/blog/rc_post_thumb01.jpg" alt=""></a>
+                                                <a href="index.php?act=events_details&id_khuyen_mai=<?php echo $item_events['id_khuyen_mai']; ?>"><img src="Assets/img/<?php echo $item_events['img']; ?>" alt="img" style="width: 100px; height: 80px; object-fit: cover;" ></a>
                                                 </div>
                                                 <div class="content">
-                                                    <h5 class="title"><a href="blog-details.html">Express Management Effective</a></h5>
-                                                    <span class="date"><i class="far fa-clock"></i> 10 Mar 2021</span>
+                                                    <h5 class="title"><a href="blog-details.html"><?php echo $item_events['ten_khuyen_mai'] ?></a></h5>
+                                                    <span class="date"><i class="far fa-clock"></i><?php echo $item_events['ngay_ap_dung'] ?></span>
+                                                    <br><br>
                                                 </div>
                                             </li>
-                                            <li class="rc-post-item">
-                                                <div class="thumb">
-                                                    <a href="blog-details.html"><img src="img/blog/rc_post_thumb02.jpg" alt=""></a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title"><a href="blog-details.html">Where watch English movies free?</a></h5>
-                                                    <span class="date"><i class="far fa-clock"></i> 10 Mar 2021</span>
-                                                </div>
-                                            </li>
-                                            <li class="rc-post-item">
-                                                <div class="thumb">
-                                                    <a href="blog-details.html"><img src="img/blog/rc_post_thumb03.jpg" alt=""></a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title"><a href="blog-details.html">House movie streaming website</a></h5>
-                                                    <span class="date"><i class="far fa-clock"></i> 10 Mar 2021</span>
-                                                </div>
-                                            </li>
+                                           
                                         </ul>
                                     </div>
+                                    <?php 
+                                    }
+                                    ?>
                                 </div>
                                 
                             </aside>

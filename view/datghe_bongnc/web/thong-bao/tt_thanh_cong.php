@@ -55,10 +55,9 @@
     <img class="img" src="Assets/img/tich.jpg" alt="">
         <div class="title"> 
             <h2>Quý khách đã đặt vé thành công !</h2>
+            <p>Chúng tôi sẽ liên hệ Quý khách để xác nhận đơn hàng trong thời gian sớm nhất.</p>
         </div>
-        <div class="input">
-            <a href="index.php">Về trang chủ</a>
-        </div>
+        <a href="index.php"><input class="input2" type="button" value="Quay về trang chủ"></a> 
     </div>
    
 </body>

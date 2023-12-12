@@ -102,7 +102,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         border: 0;
         font-size: 100%;
         font: inherit;
-        vertical-align: baseline;
+        /* vertical-align: baseline; */
     }
 
     article,
@@ -484,7 +484,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         /* Firefox 1-3.6 */
         -moz-border-radius: 5px;
         display: inline-block;
-        vertical-align: middle;
+        /* vertical-align: middle; */
         text-align: center;
         border: 3px solid #ff9800;
         box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
@@ -660,6 +660,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     .input_chon:hover {
         background-color: #e4d804;
+        transition: all 0.3s ease 0s;
     }
 
     /*--//responsive--*/
@@ -671,9 +672,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php
 
 if (isset($_SESSION['my_show']) && count($_SESSION['my_show']) != 0) {
-    print_r($_SESSION['my_show']);
-    print_r($_SESSION['my_ticket']);
-    print_r($_SESSION['my_seat']);
+    // print_r($_SESSION['my_show']);
+    // print_r($_SESSION['my_ticket']);
+    // print_r($_SESSION['my_seat']);
 ?>
     <h1></h1>
     <div class="contaicon">
@@ -686,7 +687,6 @@ if (isset($_SESSION['my_show']) && count($_SESSION['my_show']) != 0) {
                     <ul>
                         <li>
                             <p style="font-size: 20px; color: #e4d804; font-weight: 600;"><?php echo $phim_da_chon['ten_phim']; ?></p>
-
                         </li>
                         <li>
                             <p><?php echo  $phim_da_chon['ngay_chieu']; ?> / <?php echo $phim_da_chon['gio_chieu']; ?></p>
@@ -720,7 +720,7 @@ if (isset($_SESSION['my_show']) && count($_SESSION['my_show']) != 0) {
                             </div>
 
                             <div class="agileits-right">
-                                <label>Số lượng</label>
+                                <label>Chọn vé</label>
                                 <!-- Input số lượng -->
                                 <input type="checkbox" class="seats" id="Numseats" name="<?php echo $ve['id_phong_chieu']; ?>" value="<?php echo $ve['id_phong_chieu']; ?>">
                             </div>

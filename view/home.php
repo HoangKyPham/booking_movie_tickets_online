@@ -174,7 +174,7 @@
                     <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two" >
                         <div class="movie-item mb-60">
                             <div class="movie-poster">
-                                <a href="index.php?act=movie_details"><img src="Assets/img/<?php echo $top_phim['anh']; ?>" alt=""></a>
+                                <a href="index.php?act=movie_details&id_phim=<?php echo $top_phim['id_phim']; ?>"><img src="Assets/img/<?php echo $top_phim['anh']; ?>" alt=""></a>
                             </div>
                             <div class="movie-content">
                                 <div class="top">

@@ -584,16 +584,26 @@ if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
                 //     }
                 //     include 'nguoidung/update_taikhoan.php';
                 //     break;
-            case 'update_User':
-                if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
-                    $user_id = $_POST['user_id'];
-                    $user_name = $_POST['user_name'];
-                    $pass = $_POST['pass'];
-                    $email = $_POST['email'];
-                    update_Users($user_id, $user_name, $pass, $email);
-                    header('Location:index.php?act=show_list_users');
+
+                case 'user_update';
+                if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {
+                    $id_user = $_GET['id_user'];
+                    $result = query_update_user($id_user);
                 }
                 include 'nguoidung/update_taikhoan.php';
+                break;
+            case 'update_User':
+                if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                    $id_user = $_POST['id_user'];
+                    $email = $_POST['email'];
+                    $full_name = $_POST['full_name'];
+                    $pass = $_POST['pass'];
+                    $dia_chi = $_POST['dia_chi'];
+                    $phone = $_POST['phone'];
+                    update_Users($id_user, $email, $pass, $full_name, $phone, $dia_chi);
+                }
+                header('Location:index.php?act=show_list_users');
+                // include 'nguoidung/update_taikhoan.php';
                 break;
             case 'delete_User';
                 if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {

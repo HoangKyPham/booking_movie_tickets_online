@@ -45,7 +45,7 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
-                                    <a href="index.php?act=events_details&id_khuyen_mai=<?php echo $row['id_khuyen_mai']; ?>"><img style="width:302.5px; height:429.29px; object-fit:cover;" src="Assets/img/<?php echo $row['img']; ?>" alt=""></a>
+                                    <a href="index.php?act=events_details&id_khuyen_mai=<?php echo $row['id_khuyen_mai']; ?>"><img style="width:302.5px; height:200px; object-fit: cover;" src="Assets/img/<?php echo $row['img']; ?>" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">

@@ -107,7 +107,7 @@
                                         <img src="img/logo/logo.png" alt="Logo">
                                     </a>
                                 </div>
-                                <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                <div class="navbar-wrap main-menu d-none d-lg-flex" style="margin-left: 150px;">
                                     <ul class="navigation">
                                         <li class="active menu-item-has-children"><a href="index.php">Home</a>
                                         </li>
@@ -132,7 +132,7 @@
                                         <ul>
                                             <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
                                             <li class="header-btn"><a href="index.php?act=thanh_vien" class="btn" style="border-radius: 50px;"><i class="fa-regular fa-user"></i><?php echo $_SESSION['my_user']['ho_ten']; ?></a></li>
-                                            <li class="header-btn" style="margin-left: 10px"><a href="index.php?act=logout" class="btn" style="border-radius: 50px; height: 44.2px; width: 20px;"> <span class="material-symbols-outlined" style="display: flex; justify-content: center;">
+                                            <li class="header-btn" style="margin-left: 10px"><a href="index.php?act=logout" class="btn" style="border-radius: 50px; height: 44.2px; width: 20px;" onclick="return confirm('Bạn muốn đăng xuất ?')"> <span class="material-symbols-outlined" style="display: flex; justify-content: center;">
                                                 logout
                                             </span></a></li>
                                            
