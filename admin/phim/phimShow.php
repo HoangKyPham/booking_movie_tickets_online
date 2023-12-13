@@ -30,7 +30,7 @@ if (is_array($result)) {
         <tr>
             <td><?php echo $row['id_phim']; ?></td>
             <td><?php echo $row['ten_phim']; ?></td>
-            <td><img src="../Assets/img/<?php echo $row['anh']; ?>" alt="" srcset="" width="100px" height="150px"></td>
+            <td><img src="../Assets/img/<?php echo $row['anh']; ?>" alt="" srcset="" width="100px" height="150px" style="object-fit: cover;"></td>
             <td><?php echo $row['ngon_ngu']; ?></td>
             <td><?php echo $row['thoi_luong']; ?></td>
             <td><?php echo $row['ngay_phat_hanh']; ?></td>

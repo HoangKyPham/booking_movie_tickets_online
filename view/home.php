@@ -40,7 +40,7 @@
             <div class="row align-items-end mb-55">
                 <div class="col-lg-6">
                     <div class="section-title text-center text-lg-left">
-                        <span class="sub-title">ONLINE BOOKING</span>
+                        <span class="sub-title">Book movie tickets online</span>
                         <h2 class="title">Danh sách phim</h2>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="section-title text-center mb-50">
-                        <span class="sub-title">ONLINE BOOKING</span>
+                        <span class="sub-title">Top Favorite Movies</span>
                         <h2 class="title">Top Phim Yêu Thích</h2>
                     </div>
                 </div>

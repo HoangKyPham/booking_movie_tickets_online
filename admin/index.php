@@ -585,13 +585,91 @@ if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
                 //     include 'nguoidung/update_taikhoan.php';
                 //     break;
 
-                case 'user_update';
+            case 'user_update';
                 if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {
                     $id_user = $_GET['id_user'];
                     $result = query_update_user($id_user);
                 }
                 include 'nguoidung/update_taikhoan.php';
                 break;
+
+            case 'add_user':
+                $err = [];
+                $phone = "";
+                $query_insert_user = all_user();
+                extract($query_insert_user);
+                if (isset($_POST['btn_insert']) && ($_POST['btn_insert'])) {
+                    $ho_ten = $_POST['ho_ten'];
+                    $so_dien_thoai = $_POST['so_dien_thoai'];
+                    $email = $_POST['email'];
+                    $pass = $_POST['pass'];
+                    $r_pass = $_POST['r_pass'];
+                    $dia_chi = $_POST['dia_chi'];
+                    $justNums = preg_replace("/[^0-9]/", '', $so_dien_thoai);
+
+                    if (empty($ho_ten)) {
+                        $err['ho_ten'] = "*";
+                    }
+                    if (empty($dia_chi)) {
+                        $err['dia_chi'] = "*";
+                    }
+                    if (empty($email)) {
+                        $err['email'] = "*";
+                    } else {
+                        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                            $err['email'] = " không đúng định dạng";
+                        } else {
+                            $isEmail = false;
+                            foreach ($query_insert_user as $user) {
+                                $email_db = $user['email'];
+                                if ($email == $email_db) {
+                                    $err['email'] = " Email đã trùng";
+                                    $isEmail = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (empty($so_dien_thoai)) {
+                        $err['so_dien_thoai'] = "*";
+                    } else {
+                        if (strlen($justNums) == 10) {
+                            $isPhoneNum = false;
+                            foreach ($query_insert_user as $user) {
+                                $phone = $user['so_dien_thoai'];
+                                if ($so_dien_thoai == $phone) {
+                                    $err['so_dien_thoai'] = " Số điện thoại đã trùng";
+                                    $isPhoneNum = true;
+                                    break;
+                                }
+                            }
+                        } else {
+                            $err['so_dien_thoai'] = " không đúng định dạng";
+                        }
+                    }
+                    if (empty($pass)) {
+                        $err['pass'] = "*";
+                    }
+                    if (empty($r_pass)) {
+                        $err['r_pass'] = "*";
+                    }
+                    // if (empty($checkbox)) {
+                    //     $err['checkbox'] = "*";
+                    // }
+                    if ($pass != $r_pass) {
+                        $err['r_pass'] = "Password nhập lại không đúng";
+                    }
+                    if (empty($err)) {
+                        insert_Role($pass);
+                        $result = query_insert_role_User();
+                        insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai, $result['id_role']);
+                        header('Location:http://localhost/duan1/movflx/admin/index.php?act=show_list_users');
+                    }
+                }
+                include 'nguoidung/add_user.php';
+                break;
+
+
             case 'update_User':
                 if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
                     $id_user = $_POST['id_user'];
