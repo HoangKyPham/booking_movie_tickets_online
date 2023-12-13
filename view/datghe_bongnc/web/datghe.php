@@ -102,7 +102,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         border: 0;
         font-size: 100%;
         font: inherit;
-        vertical-align: baseline;
+        /* vertical-align: baseline; */
     }
 
     article,
@@ -267,7 +267,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         -o-background-size: cover;
         -ms-background-size: cover;
         background-attachment: fixed;
-        font-family: 'Source Sans Pro', sans-serif;
+        /* font-family: 'Source Sans Pro', sans-serif; */
+        font-family: 'Poppins', sans-serif;
     }
 
     .mr_agilemain span {
@@ -275,6 +276,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     }
 
     .w3ls-reg {
+         font-family: 'Source Sans Pro', sans-serif;
         width: 700px;
         margin: 0 5vw;
         background: rgba(128, 128, 128, 0.34);
@@ -311,7 +313,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         letter-spacing: 2px;
         text-align: center;
         margin: 0.8em 1vw .9em;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
 
     h2 {
@@ -362,7 +364,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         width: 80%;
         background: transparent;
         border: 1px solid #888686;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 1em;
         margin-top: 10px;
         color: #fff;
@@ -377,7 +379,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         border-radius: 10px;
         font-size: 1em;
         letter-spacing: 1px;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Poppins', sans-serif;
         cursor: pointer;
     }
 
@@ -388,8 +390,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     .screen {
         width: 100%;
         background: #fff;
-        opacity: 0.5;
-        margin: 2em 0;
+        /* opacity: 0.5; */
+        margin: 1em 6px;
     }
 
     .wthree {
@@ -683,6 +685,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     .input_chon:hover {
         background-color: #e4d804;
+        transition: all 0.3s ease 0s;
     }
 
     /*--//responsive--*/
@@ -690,7 +693,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php
 if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket']) != 0) {
-    print_r($_SESSION['my_ticket']);
+    // print_r($_SESSION['my_ticket']);
+    // print_r($_SESSION['my_seat']);
 ?>
     <h1></h1>
     <div class="contaicon">
@@ -702,15 +706,18 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket']) != 0) {
                 <p style="padding-top: 10px;">Vui lòng chọn ghế trong sơ đồ ghế phía dưới. Nếu bạn muốn chọn loại ghế khác hoặc thay đổi số lượng vé muốn mua vui lòng quay lại bước "Chọn Vé" ở thanh công cụ bên trên để quay trở lại màn hình chọn.</p>
                 <br>
             </div>
-            <ul class="seat_w3ls" style="margin-left: 15%;">
+            <ul class="seat_w3ls" style="margin-left: 18%;">
                 <li class="smallBox greenBox">Selected Seat</li>
 
                 <li class="smallBox redBox">Reserved Seat</li>
 
                 <li class="smallBox emptyBox">Empty Seat</li>
             </ul>
-            <form action="index.php?act=dat_ghe" method="post">
-                <div class="seatStructure txt-center" style="overflow-x:auto;">
+            <form action="index.php?act=dat_ghe" method="post">    
+                <div class="seatStructure txt-center" style="padding: 0 18px;">
+                <div class="screen">
+                    <h2 class="wthree">Screen this way</h2>
+                </div>
                     <table id="seatsBlock">
                         <p id="notification"></p>
                         <tr>
@@ -804,6 +811,7 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket']) != 0) {
                             }
                             ?>
                         </tr>
+                        <tr class="seatVGap"></tr>
                         <tr>
                             <td>F</td>
                             <?php
@@ -880,14 +888,14 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket']) != 0) {
                             ?>
                         </tr>
                     </table>
+                   
                 </div>
-                <input name="btn_dat_ghe" type="submit" value="Xác nhận" style="display: flex; width:100px; margin-top: 100px;; justify-content: center; padding-bottom: 50px;"></input>
+                <input class="input_chon" name="btn_dat_ghe" type="submit" value="Xác nhận" style="margin-top: 80px;"></input>
             </form>
-
 
         </div>
     </div>
-
+   
 <?php
 } else {
     header('Location:index.php');

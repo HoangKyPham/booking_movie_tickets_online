@@ -26,6 +26,8 @@ if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
     include "../model/jap.php";
     include "../model/users.php";
     include "header.php";
+    include "../model/contact.php";
+
     //controllers
     // if (isset($_SESSION['user'])) {
     if (isset($_GET['act'])) {
@@ -48,10 +50,10 @@ if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
                 }
                 break;
 
-                case 'show_thong_ke':
-                    $list_statistical = show_Loai_phim();
-                    include 'home.php';
-                    break;
+            case 'show_thong_ke':
+                $list_statistical = show_Loai_phim();
+                include 'home.php';
+                break;
                 // San pham 
 
             case 'showPro':
@@ -571,10 +573,10 @@ if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
                 //     session_unset();
                 //     header('Location:../index.php');
                 //     break;
-                case 'show_list_users':
-                    $list_users = show_list_users();
-                    include 'nguoidung/show_taikhoan.php';
-                    break;
+            case 'show_list_users':
+                $list_users = show_list_users();
+                include 'nguoidung/show_taikhoan.php';
+                break;
                 // case 'edit_query_user':
                 //     if (isset($_GET['id_user'])) {
                 //         $user_id = $_GET['id_user'];
@@ -582,25 +584,53 @@ if (isset($_SESSION['vai_tro']) && ($_SESSION['vai_tro'] == 0)) {
                 //     }
                 //     include 'nguoidung/update_taikhoan.php';
                 //     break;
-                case 'update_User':
-                    if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
-                        $user_id = $_POST['user_id'];
-                        $user_name = $_POST['user_name'];
-                        $pass = $_POST['pass'];
-                        $email = $_POST['email'];
-                        update_Users($user_id, $user_name, $pass, $email);
-                        header('Location:index.php?act=show_list_users');
-                    }
-                    include 'nguoidung/update_taikhoan.php';
-                    break;
-                case 'delete_User';
-                    if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {
-                        $user_id = $_GET['id_user'];
-                        delete_User($user_id);
-                    }
-                    header('Location:index.php?act=show_list_users');
-                    break;
 
+                case 'user_update';
+                if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {
+                    $id_user = $_GET['id_user'];
+                    $result = query_update_user($id_user);
+                }
+                include 'nguoidung/update_taikhoan.php';
+                break;
+            case 'update_User':
+                if (isset($_POST['btn_update']) && ($_POST['btn_update'])) {
+                    $id_user = $_POST['id_user'];
+                    $email = $_POST['email'];
+                    $full_name = $_POST['full_name'];
+                    $pass = $_POST['pass'];
+                    $dia_chi = $_POST['dia_chi'];
+                    $phone = $_POST['phone'];
+                    update_Users($id_user, $email, $pass, $full_name, $phone, $dia_chi);
+                }
+                header('Location:index.php?act=show_list_users');
+                // include 'nguoidung/update_taikhoan.php';
+                break;
+            case 'delete_User';
+                if (isset($_GET['id_user']) && ($_GET['id_user']) > 0) {
+                    $user_id = $_GET['id_user'];
+                    delete_User($user_id);
+                }
+                header('Location:index.php?act=show_list_users');
+                break;
+            case 'show_contact';
+                $result = show_contact();
+                include 'contact/show_contact.php';
+                // header('Location:index.php?act=show_list_users');
+                break;
+            case 'delete_contact':
+                if (isset($_GET['id_lien_he']) && ($_GET['id_lien_he']) > 0) {
+                    $id_lien_he = $_GET['id_lien_he'];
+                    delete_contact($id_lien_he);
+                }
+                header('Location:index.php?act=show_contact');
+                break;
+            case 'contact_detail':
+                if (isset($_GET['id_lien_he']) && ($_GET['id_lien_he'] > 0)) {
+                    $contact_detail = loadone_contact($_GET['id_lien_he']);
+                    include 'contact/contact_detail.php';
+                }
+
+                break;
                 //comment 
 
                 // case 'show_list_cmt':

@@ -1,40 +1,35 @@
 <?php
 
-function insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai)
+function insert_User($email, $ho_ten, $dia_chi, $so_dien_thoai,$id_role)
 {
-    $sql_user = "INSERT INTO user VALUE(null,'$email','$ho_ten','$so_dien_thoai','$dia_chi')";
+    $sql_user = "INSERT INTO user VALUE(null,'$email','$ho_ten','$so_dien_thoai','$dia_chi','$id_role')";
     pdo_execute($sql_user);
 }
 
 function query_insert_role_User()
 {
-    $sql = "select * from user order by id_user desc limit 1";
+    $sql = "select * from role order by id_role desc limit 1";
     $result = pdo_query_one($sql);
     return $result;
 }
 
-function insert_Role($id_user,$mat_khau)
+function insert_Role($mat_khau)
 {
-    $sql_thong_tin = "insert into role value(null,1,$id_user,$mat_khau)";
+    $sql_thong_tin = "insert into role value(null,1,$mat_khau)";
     pdo_execute($sql_thong_tin);
 }
 
 function sign_Users($email, $pass) // them mat khau vao bang role
 {
-    $sql = "select user.*,role.*
-            from user
-            inner join role on user.id_user = role.id_user 
-            where user.email = '$email' and role.mat_khau = '$pass' and role.vai_tro = 1";
-
+    $sql = "SELECT * FROM user INNER JOIN role on role.id_role = user.id_role 
+    where user.email = '$email' and role.mat_khau = '$pass' and role.vai_tro = 1";
     $result = pdo_query_one($sql);
     return $result;
 }
 function sign_change_pass($email)
 {
-    $sql = "select user.*,role.*
-            from user
-            inner join role on user.id_user = role.id_user 
-            where user.email = '$email' and role.vai_tro = 1";
+    $sql = "SELECT * FROM user INNER JOIN role on role.id_role = user.id_role
+     where user.email = '$email' and role.vai_tro = 1";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -76,15 +71,13 @@ function check_info(){
 
 function restore_Pass($user_id, $new_pass)
 {
-    $sql = "update role set mat_khau= '$new_pass' WHERE id_user = '$user_id'";
+    $sql = "update role INNER JOIN user on role.id_role = user.id_role set mat_khau= '$new_pass' WHERE id_user = '$user_id'";
     pdo_execute($sql);
 }
 
-function edit_query_user($user_id, $old_pass)
+function edit_query_user($user_id, $old_pass)   
 {
-    $sql = "select user.*,role.* 
-    from user 
-    inner join role on user.id_user = role.id_user
+    $sql = "SELECT * FROM user INNER JOIN role on role.id_role = user.id_role
     where user.id_user = $user_id and role.mat_khau = $old_pass";
     $result = pdo_query_one($sql);
     return $result;
@@ -94,10 +87,18 @@ function edit_query_user($user_id, $old_pass)
 
 ///
 
-function update_Users($user_id, $user_name, $pass, $email)
+function update_Users($id_user, $email, $pass, $full_name, $phone, $dia_chi)
 {
-    $sql = "update users set user_name='$user_name',pass='$pass',email='$email' where user_id='$user_id'";
+    $sql = "update user inner join role on role.id_role = user.id_role 
+    set email='$email',mat_khau='$pass',ho_ten='$full_name',so_dien_thoai='$phone', dia_chi='$dia_chi' where id_user=$id_user";
     pdo_execute($sql);
+}
+
+
+function query_update_user($id_user) {
+    $sql = "select * from user inner join role on role.id_role = user.id_role where id_user = ".$id_user;
+    $result=pdo_query_one($sql);
+    return $result;
 }
 
 function show_list_users()
@@ -113,7 +114,7 @@ function show_list_users()
 
 function delete_User($user_id)
 {
-    $sql = "delete from users where user_id = $user_id";
+    $sql = "delete from user where id_user = $user_id";
     pdo_execute($sql);
 }
 
@@ -127,7 +128,7 @@ function all_user()
 
 function check_tk_admin($email, $pass)
 {
-    $sql = "SELECT * FROM user INNER JOIN role on user.id_user = role.id_user where user.email='" . $email . "' and role.mat_khau='" . $pass . "'";
+    $sql = "SELECT * FROM user INNER JOIN role on user.id_role = role.id_role where user.email='" . $email . "' and role.mat_khau='" . $pass . "'";
     $result = pdo_query($sql);
     if (count($result) >= 0) {
         return $result['0']['vai_tro'];

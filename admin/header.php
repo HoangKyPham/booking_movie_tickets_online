@@ -114,6 +114,12 @@
         </a>
       </li> -->
       <li>
+        <a href="index.php?act=show_contact">
+          <i class='bx bx-list-ul'></i>
+          <span class="links_name">Contact</span>
+        </a>
+      </li>
+      <li>
         <a href="index.php?act=show_list_users">
           <i class='bx bx-book-alt'></i>
           <span class="links_name">Accounts</span>
