@@ -126,7 +126,7 @@ if ((isset($_SESSION['my_user']) && count($_SESSION['my_user']) != 0)) {
                 </li>
                 <li>
                     <input style="width: 234px;" type="text" placeholder="" value="<?php echo $user['phone']; ?>">
-                    <a href="#"><button>Đổi mật khẩu</button></a>
+                    <a href="index.php?act=doimk"><button>Đổi mật khẩu</button></a>
                 </li>
                 <li>
                     <input type="text" placeholder="" value="<?php echo $user['ho_ten']; ?>">

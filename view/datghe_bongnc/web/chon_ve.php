@@ -727,12 +727,21 @@ if (isset($_SESSION['my_show']) && count($_SESSION['my_show']) != 0) {
                         </div>
                     <?php endforeach; ?>
 
-                    <input class="input_chon" type="submit" name="btn_dat_ve" value="Chọn ghế">
+                    <input class="input_chon d-none" id="chon_ghe" type="submit" name="btn_dat_ve" value="Chọn ghế">
                 </form>
 
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            $('input[type=checkbox]').on('click', function() {
+                $('#chon_ghe').removeClass('d-none');
+            })
+        });
+    </script>
     <script>
         function checkSeatLimit() {
             var selectedSeats = document.querySelectorAll('.seats:checked');

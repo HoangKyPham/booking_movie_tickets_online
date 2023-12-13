@@ -109,9 +109,9 @@
                                 </div>
                                 <div class="navbar-wrap main-menu d-none d-lg-flex" style="margin-left: 150px;">
                                     <ul class="navigation">
-                                        <li class="active menu-item-has-children"><a href="index.php">Home</a>
+                                        <li class="active menu-item-has-children"><a href="index.php">Trang chủ</a>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="index.php?act=movie-item">thể loại phim</a>
+                                        <li class="menu-item-has-children"><a href="index.php?act=movie-item">Thể loại phim</a>
                                         </li>
                                         <!-- <li class="menu-item-has-children"><a href="index.php?act=movie_show_schedule">Lịch chiếu</a>
                                             <ul class="submenu">

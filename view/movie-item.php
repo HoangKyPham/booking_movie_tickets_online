@@ -28,7 +28,7 @@
                     <div class="row align-items-end mb-60">
                         <div class="col-lg-6">
                             <div class="section-title text-center text-lg-left">
-                                <span class="sub-title">ONLINE BOOKING</span>
+                                <span class="sub-title">Movie genre</span>
                                 <h2 class="title">Thể loại phim</h2>
                             </div>
                         </div>

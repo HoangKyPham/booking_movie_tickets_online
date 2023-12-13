@@ -31,7 +31,7 @@ if (is_array($result)) {
                     <div class="row align-items-end mb-60">
                         <div class="col-lg-6">
                             <div class="section-title text-center text-lg-left">
-                                <span class="sub-title">ONLINE BOOKING</span>
+                                <span class="sub-title">Search Results</span>
                                 <h2 class="title">Kết quả tìm kiếm</h2>
                             </div>
                         </div>

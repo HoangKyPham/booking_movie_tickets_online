@@ -726,10 +726,10 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0 && isset($_S
         <div class="formxacnhan">
             <form action="index.php?act=thanh_toan" method="post">
                 <h2 style="text-align: center; font-size: 30px; font-weight: bold; color: #ffffff; padding: 30px 0; border-bottom: 1px solid #ccc;">Giỏ hàng của bạn</h2>
-                <div class="form_muc">
+                <div class="form_muc" style="margin-left: 150px;">
                     <ul>
                         <li style="position: relative; right: 170px;">
-                            <p style="color: #e4d804;">Phim/Title: <?php echo $phim_da_chon['ten_phim']; ?></p>
+                            <p style="color: #e4d804; font-weight: bold;">Phim/Title: <?php echo $phim_da_chon['ten_phim']; ?></p>
                             <p>Rạp/Cinema: <?php echo $phim_da_chon['ten_rap']; ?> - <?php echo $phim_da_chon['dia_diem']; ?></p>
                             <p>Ngày/Date: <?php echo $phim_da_chon['ngay_chieu']; ?></p>
                             <p>Suất/Session: <?php echo $phim_da_chon['gio_chieu']; ?></p>
@@ -743,22 +743,22 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0 && isset($_S
                                 }
                                 ?>
                             </p>
-                            <p>Thành tiền/Toal:<?php echo $tong_tien_ghe += $my_ticket[0]['gia_ve']; ?></p>
+                            <p>Thành tiền/Toal: <?php echo $tong_tien_ghe += $my_ticket[0]['gia_ve']; ?></p>
                         </li>
                     </ul>
                 </div>
-                <div style="margin-left: 12%; padding: 20px 0;">
+                <div style="margin-left: 21%; padding: 40px 0;">
                     <p>Quý khách vui lòng kiểm tra lại thông tin trước khi thanh toán</p>
-                    <p style="color: red;">Vé mua sẽ không được đổi hoặc trả lại</p>
+                    <p style="color: red; font-weight: bold;">Vé mua sẽ không được đổi hoặc trả lại</p>
                     <p>Please check the information before purchasing ticket</p>
-                    <p style="color: red;">Purchased ticket can not be changed or refunded</p>
+                    <p style="color: red; font-weight: bold;">Purchased ticket can not be changed or refunded</p>
                 </div>
 
-                <div class="noidung_muc">
-                    <div class="muccon">
-                        <p style="color: #e4d804;">Mục</p>
-                        <p style="color: #e4d804;">Số lượng</p>
-                        <p style="color: #e4d804;">Cộng</p>
+                <div class="noidung_muc" style="background: #2a2a2a;">
+                    <div class="muccon" style="border: 1px solid #fff;">
+                        <p style="color: #e4d804; font-weight: bold;">Mục</p>
+                        <p style="color: #e4d804; margin-left: 84px; font-weight: bold;">Số lượng</p>
+                        <p style="color: #e4d804; font-weight: bold;">Cộng</p>
                     </div>
                     <?php
                     $tong_tien_bonus = 0;
@@ -769,9 +769,9 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0 && isset($_S
 
                         ?>
                             <div class="muccon">
-                                <p><?php echo $bonus['ten_do_an'] ?></p>
-                                <p><?php echo $bonus['so_luong'] ?></p>
-                                <p><?php echo $bonus['gia_do_an'] ?> VND</p>
+                                <p style="max-width: 272px; min-width: 272px;"><?php echo $bonus['ten_do_an'] ?></p>
+                                <p style="max-width: 110px; min-width: 110px;"><?php echo $bonus['so_luong'] ?></p>
+                                <p style="max-width: 194px; min-width: 194px;"><?php echo $bonus['gia_do_an'] ?> VND</p>
                             </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
@@ -793,7 +793,7 @@ if (isset($_SESSION['my_seat']) && count($_SESSION['my_seat']) != 0 && isset($_S
                     <ul>
                         <li style="display: flex; margin-right: 390px;">
                             <p style="font-size: 20px; font-weight: 600;">Tổng cộng:</p>
-                            <p style="position: relative; left: 420px; font-size: 20px; font-weight: 600;"><?php echo $_SESSION['my_total'][0]; ?></p>
+                            <p style="position: relative; left: 420px; font-size: 20px; font-weight: 600;"><?php echo $_SESSION['my_total'][0]; ?> VND</p>
                         </li>
                     </ul>
                 </div>

@@ -707,11 +707,11 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket']) != 0) {
                 <br>
             </div>
             <ul class="seat_w3ls" style="margin-left: 18%;">
-                <li class="smallBox greenBox">Selected Seat</li>
+                <li class="smallBox greenBox">Ghế đang chọn</li>
 
-                <li class="smallBox redBox">Reserved Seat</li>
+                <li class="smallBox redBox">Ghế đã bán</li>
 
-                <li class="smallBox emptyBox">Empty Seat</li>
+                <li class="smallBox emptyBox">Ghế trống</li>
             </ul>
             <form action="index.php?act=dat_ghe" method="post">    
                 <div class="seatStructure txt-center" style="padding: 0 18px;">
@@ -890,12 +890,20 @@ if (isset($_SESSION['my_ticket']) && count($_SESSION['my_ticket']) != 0) {
                     </table>
                    
                 </div>
-                <input class="input_chon" name="btn_dat_ghe" type="submit" value="Xác nhận" style="margin-top: 80px;"></input>
+                <input class="input_chon d-none" id="chon_ghe" name="btn_dat_ghe" type="submit" value="Xác nhận" style="margin-top: 80px;"></input>
             </form>
 
         </div>
     </div>
-   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            $('input[type=checkbox]').on('click', function() {
+                $('#chon_ghe').removeClass('d-none');
+            })
+        });
+    </script>
 <?php
 } else {
     header('Location:index.php');

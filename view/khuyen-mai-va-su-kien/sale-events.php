@@ -25,7 +25,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <div class="section-title text-center mb-50">
-                                <span class="sub-title">ONLINE BOOKING</span>
+                                <span class="sub-title">promotions and events</span>
                                 <h2 class="title">Top Event Movies</h2>
                             </div>
                         </div>

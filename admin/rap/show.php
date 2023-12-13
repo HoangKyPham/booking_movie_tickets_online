@@ -32,7 +32,7 @@ if (is_array($result)) {
             <td><?php echo $row['id_rap']; ?></td>
             <td><?php echo $row['ten_rap']; ?></td>
             <td><?php echo $row['dia_diem']; ?></td>
-            <td><img src="../Assets/img/<?php echo $row['img']; ?>" alt="" srcset="" width="100px" height="150px"></td>
+            <td><img src="../Assets/img/<?php echo $row['img']; ?>" alt="" srcset="" width="100px" height="150px" style="object-fit: cover;"></td>
             <td>
             <a href="index.php?act=update_rap&id_rap=<?php echo $row['id_rap']; ?>"><button class="btn btn-warning">Edit</button></a>
             <a href="index.php?act=delete_rap&id_rap=<?php echo $row['id_rap']; ?>"><button onclick="return confirm('Ban muon xoa khong?')" class="btn btn-danger">Delete</button></a>
