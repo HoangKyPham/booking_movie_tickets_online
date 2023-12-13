@@ -497,6 +497,13 @@ if (isset($_GET['act'])) {
                 //insert vnpay
                 $id_user = $info_user['id_user'];
                 $user = query_user_payment($id_user);
+                if(empty($_SESSION['my_bonus'])){
+                    $id_do_an = 0;
+                    $bong_nuoc[] = [
+                        'id_do_an' => $id_do_an
+                    ];
+                    $_SESSION['my_bonus'] = $bong_nuoc;
+                }
                 $list_do_an = $_SESSION['my_bonus'];
                 foreach ($list_do_an as $do_an_item) {
                     $id_user = $user['id_user'];
