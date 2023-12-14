@@ -528,7 +528,7 @@ if (isset($_GET['act'])) {
                 $payment = query_payment($id_user);
                 //insert ve
                 $id_suat_chieu = $_SESSION['my_show'][0][1];
-                $trang_thai = 'còn hạn';
+                $trang_thai = 'chưa lấy vé';
                 $id_pay = $payment['id_pay'];
                 $list_ghe = $_SESSION['my_seat'];
                 $id_gia_ve = $_SESSION['my_ticket']['0']['id_gia_ve'];
@@ -686,6 +686,37 @@ if (isset($_GET['act'])) {
             }
             include 'account/doimk.php';
             break;
+        // case 'user_change_password':
+        //     $err = [];
+        //     if (isset($_POST['btn_restore']) && ($_POST['btn_restore'])) {
+        //         $old_pass = $_POST['old_pass'];
+        //         $new_pass_1 = $_POST['new_pass_1'];
+        //         $new_pass_2 = $_POST['new_pass_2'];
+        //         $user_id = $_POST['id_user'];
+        //         $result = edit_query_user($user_id, $old_pass);
+
+        //         if (empty($old_pass)) {
+        //             $err['old_pass'] = "*";
+        //         }
+        //         if (empty($new_pass_1)) {
+        //             $err['new_pass_1'] = "*";
+        //         }
+        //         if (empty($new_pass_2)) {
+        //             $err['new_pass_2'] = "*";
+        //         }
+        //         if ($new_pass_1 != $new_pass_2) {
+        //             $err['new_pass_2'] = "Password nhập lại không đúng";
+        //         }
+        //         if (empty($err)) {
+        //             $erro = "Nhập sai mật khẩu cũ";
+        //         }
+        //         if ($result && $new_pass_1 == $new_pass_2) {
+        //             restore_Pass($user_id, $new_pass_2);
+        //             header('Location:index.php?act=thanh_vien');
+        //         }
+        //     }
+        //     include 'account/';
+        //     break;
         case 'register':
             $err = [];
             $phone = "";
